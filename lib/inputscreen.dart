@@ -169,14 +169,12 @@ class _InputScreenState extends State<InputScreen> {
                   child: SizedBox(
                     width: 700,
                     height: 100,
-                    child: Expanded(
-                      child: TextField(
-                        keyboardType: TextInputType.multiline,
-                        maxLines: 4,
-                        decoration: InputDecoration(
-                            border: OutlineInputBorder(),
-                            labelText: 'comentarios'),
-                      ),
+                    child: TextField(
+                      keyboardType: TextInputType.multiline,
+                      maxLines: 4,
+                      decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          labelText: 'comentarios'),
                     ),
                   ),
                 ),
