@@ -91,7 +91,7 @@ class _LandingScreenState extends State<LandingScreen> {
               padding: const EdgeInsets.fromLTRB(300, 10, 300, 0),
               child: ElevatedButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, '/inputdata');
+                  Navigator.pushNamed(context, '/main');
                 },
                 child: const Text('ingresar'),
               ),

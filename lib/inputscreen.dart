@@ -187,7 +187,7 @@ class _InputScreenState extends State<InputScreen> {
               children: [
                 ElevatedButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, '/main');
+                      Navigator.pushNamed(context, '/inputdata');
                     },
                     child: const Text('Guardar')),
                 const SizedBox(width: 10),
