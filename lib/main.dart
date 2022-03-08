@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:citas1/mainscreen.dart';
-import 'package:citas1/inputscreen.dart';
-import 'package:citas1/resumescree.dart';
+import 'package:citas1/planner.dart';
+import 'package:citas1/busqueda.dart';
+import 'package:citas1/agenda.dart';
+import 'package:citas1/resumen.dart';
 
 void main() {
   runApp(const MisCitas());
@@ -17,10 +18,10 @@ class MisCitas extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => const LandingScreen(),
-        '/main': (context) => const MainScreen(),
-        '/inputdata': (context) => const InputScreen(),
-        '/managerMatrix': (context) => const ResumeScreen(),
-        // '/managerTable':(context) => ManagerTScreen(),
+        '/planner': (context) => const Planner(),
+        '/agenda': (context) => const Agenda(),
+        '/busqueda': (context) => const Busqueda(),
+        '/resumen': (context) => const Resumen(),
       },
     );
   }
@@ -91,7 +92,7 @@ class _LandingScreenState extends State<LandingScreen> {
               padding: const EdgeInsets.fromLTRB(300, 10, 300, 0),
               child: ElevatedButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, '/main');
+                  Navigator.pushNamed(context, '/planner');
                 },
                 child: const Text('ingresar'),
               ),
