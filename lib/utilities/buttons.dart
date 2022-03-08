@@ -83,7 +83,9 @@ class CampodeComentario extends StatelessWidget {
   final double width;
   final double height;
 
-  const CampodeComentario({this.label = "", this.width = 10, this.height = 10});
+  const CampodeComentario(
+      {Key? key, this.label = "", this.width = 10, this.height = 10})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -97,6 +99,47 @@ class CampodeComentario extends StatelessWidget {
             maxLines: 4,
             decoration: InputDecoration(
                 border: const OutlineInputBorder(), labelText: label)),
+      ),
+    );
+  }
+}
+
+// desplegable
+class Desplegable extends StatefulWidget {
+  final List<String> opciones;
+  final String pista;
+  const Desplegable(
+      {Key? key, this.opciones = const ["vacio"], this.pista = "vacio"})
+      : super(key: key);
+
+  @override
+  State<Desplegable> createState() => _DesplegableState();
+}
+
+class _DesplegableState extends State<Desplegable> {
+  String? op;
+
+  @override
+  Widget build(BuildContext context) {
+    return Flexible(
+      child: Padding(
+        padding: const EdgeInsets.all(5),
+        child: DropdownButton(
+            focusColor: Colors.blue,
+            value: op,
+            style: const TextStyle(color: Colors.black),
+            items: widget.opciones
+                .map((e) => DropdownMenuItem(
+                      child: Text(e, style: const TextStyle(fontSize: 10)),
+                      value: e,
+                    ))
+                .toList(),
+            hint: Text(widget.pista),
+            onChanged: (value) {
+              setState(() {
+                op = value as String;
+              });
+            }),
       ),
     );
   }
