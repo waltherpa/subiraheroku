@@ -16,6 +16,7 @@ Future buscarrequest(String arg) async {
       for (final e in l) {
         results.add(Base1.fromJson(e));
       }
+      return l;
     }
   } else {
     throw Exception("error en la api");

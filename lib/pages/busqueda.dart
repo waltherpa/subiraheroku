@@ -23,7 +23,7 @@ class _BusquedaState extends State<Busqueda> {
       body: Column(
         children: [
           Row(
-            children: const [
+            children: [
               CampodeTexto(
                 label: "Quien Agenda",
                 width: 200,
@@ -52,7 +52,7 @@ class _BusquedaState extends State<Busqueda> {
             ],
           ),
           Row(
-            children: const [
+            children: [
               CampodeTexto(
                 label: "Placa",
                 width: 100,
@@ -68,7 +68,7 @@ class _BusquedaState extends State<Busqueda> {
                 width: 100,
                 height: 50,
               ),
-              Desplegable(
+              const Desplegable(
                 pista: "Tipo de Problema",
                 opciones: [
                   "MEC Garantía",
@@ -77,7 +77,7 @@ class _BusquedaState extends State<Busqueda> {
                   "MEC Reparaciones Generales"
                 ],
               ),
-              Desplegable(
+              const Desplegable(
                 pista: "Subtipo de problema",
                 opciones: [
                   "MEC Garantía",
@@ -91,7 +91,7 @@ class _BusquedaState extends State<Busqueda> {
                   "MEC Reparaciones Generales",
                 ],
               ),
-              Desplegable(
+              const Desplegable(
                 pista: "Tipo de llamada",
                 opciones: [
                   "MOT - SERV. -MANT 500",
@@ -126,7 +126,7 @@ class _BusquedaState extends State<Busqueda> {
             ],
           ),
           Row(
-            children: const [
+            children: [
               CampodeTexto(
                 label: "Nombre de Cliente",
                 width: 200,
@@ -150,7 +150,7 @@ class _BusquedaState extends State<Busqueda> {
             ],
           ),
           Row(
-            children: const [
+            children: [
               CampodeTexto(
                 label: "Asesor",
                 width: 200,

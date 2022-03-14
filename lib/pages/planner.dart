@@ -1,4 +1,3 @@
-import 'package:citas1/function/fbase1.dart';
 import 'package:flutter/material.dart';
 import 'package:citas1/utilities/buttons.dart';
 
@@ -34,10 +33,11 @@ class _PlannerState extends State<Planner> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   // Text Field Placa
-                  const CampodeTexto(
+                  CampodeTexto(
                     label: "placa",
                     width: 100,
                     height: 50,
+                    controller: placaController,
                   ),
                   // Botton Buscar por Paaca
                   Boton(
@@ -45,7 +45,8 @@ class _PlannerState extends State<Planner> {
                     width: 150,
                     height: 50,
                     ruta: "/busqueda",
-                    operacion: buscarrequest(placaController.text),
+                    operacion: "op1",
+                    informacion: placaController.text,
                   ),
                   // Boton Agendar
                   Boton(

@@ -6,7 +6,8 @@ class Boton extends StatefulWidget {
   final double width;
   final double height;
   final String ruta;
-  Future? operacion;
+  final String operacion;
+  final String informacion;
 
 // botones
   Boton({
@@ -15,7 +16,8 @@ class Boton extends StatefulWidget {
     this.width = 10,
     this.height = 10,
     this.ruta = "",
-    this.operacion,
+    this.operacion = "",
+    this.informacion = "",
   }) : super(key: key);
 
   @override
@@ -35,6 +37,11 @@ class _BotonState extends State<Boton> {
             onPressed: () {
               if (widget.ruta != "") {
                 Navigator.pushNamed(context, widget.ruta);
+
+                if (widget.operacion == "op1") {
+                  print(' -- ' * 10);
+                  print(buscarrequest(widget.informacion));
+                }
               }
             },
             child: Text(
@@ -59,9 +66,14 @@ class CampodeTexto extends StatelessWidget {
   final String label;
   final double width;
   final double height;
+  TextEditingController? controller;
 
-  const CampodeTexto(
-      {Key? key, this.label = "label", this.width = 10, this.height = 10})
+  CampodeTexto(
+      {Key? key,
+      this.label = "label",
+      this.width = 10,
+      this.height = 10,
+      this.controller})
       : super(key: key);
 
   @override
@@ -73,7 +85,10 @@ class CampodeTexto extends StatelessWidget {
         height: height,
         child: TextField(
           decoration: InputDecoration(
-              border: const OutlineInputBorder(), labelText: label),
+            border: const OutlineInputBorder(),
+            labelText: label,
+          ),
+          controller: controller,
         ),
       ),
     );
