@@ -170,7 +170,7 @@ class _BusquedaState extends State<Busqueda> {
           ),
           //botones
           Row(
-            children: const [
+            children: [
               Boton(
                 label: "Salir sin Guardar",
                 width: 200,

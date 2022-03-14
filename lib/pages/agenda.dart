@@ -165,7 +165,7 @@ class _AgendaState extends State<Agenda> {
           ),
           //botones
           Row(
-            children: const [
+            children: [
               Boton(
                 label: "Salir sin Guardar",
                 width: 200,

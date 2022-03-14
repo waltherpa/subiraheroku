@@ -1,19 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:citas1/function/fbase1.dart';
 
 class Boton extends StatefulWidget {
   final String label;
   final double width;
   final double height;
   final String ruta;
+  Future? operacion;
 
 // botones
-  const Boton(
-      {Key? key,
-      this.label = "label",
-      this.width = 10,
-      this.height = 10,
-      this.ruta = ""})
-      : super(key: key);
+  Boton({
+    Key? key,
+    this.label = "label",
+    this.width = 10,
+    this.height = 10,
+    this.ruta = "",
+    this.operacion,
+  }) : super(key: key);
 
   @override
   State<Boton> createState() => _BotonState();
