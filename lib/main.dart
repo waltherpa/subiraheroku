@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:citas1/planner.dart';
-import 'package:citas1/busqueda.dart';
-import 'package:citas1/agenda.dart';
-import 'package:citas1/resumen.dart';
+import 'package:citas1/pages/agenda.dart';
+import 'package:citas1/pages/planner.dart';
+import 'package:citas1/pages/busqueda.dart';
+import 'package:citas1/pages/resumen.dart';
 
 void main() {
   runApp(const MisCitas());

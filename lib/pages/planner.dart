@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'utilities/buttons.dart';
+import 'package:citas1/utilities/buttons.dart';
 
 class Planner extends StatefulWidget {
   const Planner({Key? key}) : super(key: key);

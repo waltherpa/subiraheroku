@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
-import 'Utilities/Buttons.dart';
+import 'package:citas1/utilities/buttons.dart';
 
-class Busqueda extends StatefulWidget {
-  const Busqueda({Key? key}) : super(key: key);
+class Agenda extends StatefulWidget {
+  const Agenda({Key? key}) : super(key: key);
 
   @override
-  _BusquedaState createState() => _BusquedaState();
+  _AgendaState createState() => _AgendaState();
 }
 
-class _BusquedaState extends State<Busqueda> {
+class _AgendaState extends State<Agenda> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Busqueda'),
+        title: const Text('Agenda'),
         leading: IconButton(
             onPressed: () {
               Navigator.pop(context);
@@ -37,11 +37,6 @@ class _BusquedaState extends State<Busqueda> {
               CampodeTexto(
                 label: "Hora",
                 width: 100,
-                height: 50,
-              ),
-              CampodeTexto(
-                label: "Estado de Cita",
-                width: 150,
                 height: 50,
               ),
               CampodeTexto(
@@ -177,7 +172,7 @@ class _BusquedaState extends State<Busqueda> {
                 height: 50,
               ),
               Boton(
-                label: "Editar",
+                label: "Guardar",
                 width: 200,
                 height: 50,
               ),

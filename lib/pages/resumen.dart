@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'Utilities/Buttons.dart';
+import 'package:citas1/utilities/buttons.dart';
 
 class Resumen extends StatefulWidget {
   const Resumen({Key? key}) : super(key: key);
