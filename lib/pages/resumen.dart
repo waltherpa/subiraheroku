@@ -24,7 +24,7 @@ class _ResumenState extends State<Resumen> {
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
-            children: const [
+            children: [
               Boton(
                 label: "Exportar",
                 width: 150,
