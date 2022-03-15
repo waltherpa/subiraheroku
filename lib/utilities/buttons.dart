@@ -8,9 +8,9 @@ class Boton extends StatefulWidget {
   final double height;
   final String ruta;
   final String operacion;
-  TextEditingController? informacion;
+  final TextEditingController? informacion;
 
-  Boton({
+  const Boton({
     Key? key,
     this.label = "label",
     this.width = 10,

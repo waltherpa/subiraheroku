@@ -49,20 +49,20 @@ class _PlannerState extends State<Planner> {
                     informacion: placaController,
                   ),
                   // Boton Agendar
-                  Boton(
+                  const Boton(
                       label: "Agendar",
                       width: 150,
                       height: 50,
                       ruta: "/agenda"),
                   // Botton Resumen
-                  Boton(
+                  const Boton(
                     label: "Resumen",
                     width: 150,
                     height: 50,
                     ruta: "/resumen",
                   ),
                   // Botton Siguiente Semana
-                  Boton(
+                  const Boton(
                     label: "siguiente semana",
                     width: 200,
                     height: 50,

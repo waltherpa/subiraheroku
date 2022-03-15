@@ -11,7 +11,7 @@ class Busqueda extends StatefulWidget {
 class _BusquedaState extends State<Busqueda> {
   @override
   Widget build(BuildContext context) {
-    List Ldata = ModalRoute.of(context)?.settings.arguments as List;
+    List ldata = ModalRoute.of(context)?.settings.arguments as List;
 
     TextEditingController placaCtlr = TextEditingController();
     TextEditingController modeloCtlr = TextEditingController();
@@ -20,13 +20,13 @@ class _BusquedaState extends State<Busqueda> {
     TextEditingController doccliCtlr = TextEditingController();
     TextEditingController mailCtlr = TextEditingController();
     TextEditingController telCtlr = TextEditingController();
-    placaCtlr.text = Ldata[0]['PLACA_VEH_TARJETA'];
-    modeloCtlr.text = Ldata[0]['VERSION_MODELO'];
-    numvehCtlr.text = Ldata[0]['NROMOTOR_VEH'];
-    nombrecliCtlr.text = Ldata[0]['CLIENTE'];
-    doccliCtlr.text = Ldata[0]['COD_CLIENTE'];
-    mailCtlr.text = Ldata[0]['EMAIL'];
-    telCtlr.text = Ldata[0]['TELEFONO1'];
+    placaCtlr.text = ldata[0]['PLACA_VEH_TARJETA'];
+    modeloCtlr.text = ldata[0]['VERSION_MODELO'];
+    numvehCtlr.text = ldata[0]['NROMOTOR_VEH'];
+    nombrecliCtlr.text = ldata[0]['CLIENTE'];
+    doccliCtlr.text = ldata[0]['COD_CLIENTE'];
+    mailCtlr.text = ldata[0]['EMAIL'];
+    telCtlr.text = ldata[0]['TELEFONO1'];
 
     return Scaffold(
       appBar: AppBar(
@@ -202,7 +202,7 @@ class _BusquedaState extends State<Busqueda> {
           ),
           //botones
           Row(
-            children: [
+            children: const [
               Boton(
                 label: "Salir sin Guardar",
                 width: 200,
