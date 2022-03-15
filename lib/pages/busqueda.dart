@@ -11,9 +11,9 @@ class Busqueda extends StatefulWidget {
 class _BusquedaState extends State<Busqueda> {
   @override
   Widget build(BuildContext context) {
-    List Ldata = ModalRoute.of(context)!.settings.arguments as List;
+    List Ldata = ModalRoute.of(context)?.settings.arguments as List;
     TextEditingController placaCtlr = TextEditingController();
-    placaCtlr.text == Ldata[0]['PLACA_VEH_TARJETA'];
+    placaCtlr.text = Ldata[0]['PLACA_VEH_TARJETA'];
     return Scaffold(
       appBar: AppBar(
         title: const Text('Busqueda'),

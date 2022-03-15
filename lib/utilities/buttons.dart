@@ -63,7 +63,7 @@ class _BotonState extends State<Boton> {
 }
 
 // campo de texto
-class CampodeTexto extends StatelessWidget {
+class CampodeTexto extends StatefulWidget {
   final String label;
   final double width;
   final double height;
@@ -78,18 +78,23 @@ class CampodeTexto extends StatelessWidget {
       : super(key: key);
 
   @override
+  State<CampodeTexto> createState() => _CampodeTextoState();
+}
+
+class _CampodeTextoState extends State<CampodeTexto> {
+  @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(5.0),
       child: SizedBox(
-        width: width,
-        height: height,
+        width: widget.width,
+        height: widget.height,
         child: TextField(
           decoration: InputDecoration(
             border: const OutlineInputBorder(),
-            labelText: label,
+            labelText: widget.label,
           ),
-          controller: controller,
+          controller: widget.controller,
         ),
       ),
     );
