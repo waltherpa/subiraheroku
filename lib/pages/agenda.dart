@@ -23,7 +23,7 @@ class _AgendaState extends State<Agenda> {
       body: Column(
         children: [
           Row(
-            children: [
+            children: const [
               CampodeTexto(
                 label: "Quien Agenda",
                 width: 200,
@@ -47,7 +47,7 @@ class _AgendaState extends State<Agenda> {
             ],
           ),
           Row(
-            children: [
+            children: const [
               CampodeTexto(
                 label: "Placa",
                 width: 100,
@@ -63,7 +63,7 @@ class _AgendaState extends State<Agenda> {
                 width: 100,
                 height: 50,
               ),
-              const Desplegable(
+              Desplegable(
                 pista: "Tipo de Problema",
                 opciones: [
                   "MEC Garantía",
@@ -72,7 +72,7 @@ class _AgendaState extends State<Agenda> {
                   "MEC Reparaciones Generales"
                 ],
               ),
-              const Desplegable(
+              Desplegable(
                 pista: "Subtipo de problema",
                 opciones: [
                   "MEC Garantía",
@@ -86,7 +86,7 @@ class _AgendaState extends State<Agenda> {
                   "MEC Reparaciones Generales",
                 ],
               ),
-              const Desplegable(
+              Desplegable(
                 pista: "Tipo de llamada",
                 opciones: [
                   "MOT - SERV. -MANT 500",
@@ -121,7 +121,7 @@ class _AgendaState extends State<Agenda> {
             ],
           ),
           Row(
-            children: [
+            children: const [
               CampodeTexto(
                 label: "Nombre de Cliente",
                 width: 200,
@@ -145,7 +145,7 @@ class _AgendaState extends State<Agenda> {
             ],
           ),
           Row(
-            children: [
+            children: const [
               CampodeTexto(
                 label: "Asesor",
                 width: 200,

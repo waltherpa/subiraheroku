@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:citas1/function/fbase1.dart';
 
+// botones
 class Boton extends StatefulWidget {
   final String label;
   final double width;
   final double height;
   final String ruta;
   final String operacion;
-  final String informacion;
+  TextEditingController? informacion;
 
-// botones
   Boton({
     Key? key,
     this.label = "label",
@@ -17,7 +17,7 @@ class Boton extends StatefulWidget {
     this.height = 10,
     this.ruta = "",
     this.operacion = "",
-    this.informacion = "",
+    this.informacion,
   }) : super(key: key);
 
   @override
@@ -25,6 +25,8 @@ class Boton extends StatefulWidget {
 }
 
 class _BotonState extends State<Boton> {
+  List<dynamic>? l;
+
   @override
   Widget build(BuildContext context) {
     return Flexible(
@@ -34,13 +36,12 @@ class _BotonState extends State<Boton> {
           width: widget.width,
           height: widget.height,
           child: ElevatedButton(
-            onPressed: () {
+            onPressed: () async {
               if (widget.ruta != "") {
-                Navigator.pushNamed(context, widget.ruta);
-
                 if (widget.operacion == "op1") {
-                  print(' -- ' * 10);
-                  print(buscarrequest(widget.informacion));
+                  var l =
+                      await buscarrequest(widget.informacion!.text) as List?;
+                  Navigator.pushNamed(context, widget.ruta, arguments: l);
                 }
               }
             },
@@ -66,9 +67,9 @@ class CampodeTexto extends StatelessWidget {
   final String label;
   final double width;
   final double height;
-  TextEditingController? controller;
+  final TextEditingController? controller;
 
-  CampodeTexto(
+  const CampodeTexto(
       {Key? key,
       this.label = "label",
       this.width = 10,

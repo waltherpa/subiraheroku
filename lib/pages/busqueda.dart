@@ -11,6 +11,9 @@ class Busqueda extends StatefulWidget {
 class _BusquedaState extends State<Busqueda> {
   @override
   Widget build(BuildContext context) {
+    List Ldata = ModalRoute.of(context)!.settings.arguments as List;
+    TextEditingController placaCtlr = TextEditingController();
+    placaCtlr.text == Ldata[0]['PLACA_VEH_TARJETA'];
     return Scaffold(
       appBar: AppBar(
         title: const Text('Busqueda'),
@@ -23,7 +26,7 @@ class _BusquedaState extends State<Busqueda> {
       body: Column(
         children: [
           Row(
-            children: [
+            children: const [
               CampodeTexto(
                 label: "Quien Agenda",
                 width: 200,
@@ -53,22 +56,26 @@ class _BusquedaState extends State<Busqueda> {
           ),
           Row(
             children: [
+              // placa
               CampodeTexto(
                 label: "Placa",
                 width: 100,
                 height: 50,
+                controller: placaCtlr,
               ),
+              // modelo
               CampodeTexto(
                 label: "Modelo",
                 width: 150,
                 height: 50,
               ),
+              // numero veh
               CampodeTexto(
                 label: "N Veh",
                 width: 100,
                 height: 50,
               ),
-              const Desplegable(
+              Desplegable(
                 pista: "Tipo de Problema",
                 opciones: [
                   "MEC Garantía",
@@ -77,7 +84,7 @@ class _BusquedaState extends State<Busqueda> {
                   "MEC Reparaciones Generales"
                 ],
               ),
-              const Desplegable(
+              Desplegable(
                 pista: "Subtipo de problema",
                 opciones: [
                   "MEC Garantía",
@@ -91,7 +98,7 @@ class _BusquedaState extends State<Busqueda> {
                   "MEC Reparaciones Generales",
                 ],
               ),
-              const Desplegable(
+              Desplegable(
                 pista: "Tipo de llamada",
                 opciones: [
                   "MOT - SERV. -MANT 500",
@@ -126,22 +133,26 @@ class _BusquedaState extends State<Busqueda> {
             ],
           ),
           Row(
-            children: [
+            children: const [
+              // nombre cliente
               CampodeTexto(
                 label: "Nombre de Cliente",
                 width: 200,
                 height: 50,
               ),
+              // documento
               CampodeTexto(
                 label: "Doc/Ruc/DNI",
                 width: 100,
                 height: 50,
               ),
+              // correo
               CampodeTexto(
                 label: "Correo",
                 width: 150,
                 height: 50,
               ),
+              // telefono
               CampodeTexto(
                 label: "Telefono",
                 width: 100,
@@ -150,7 +161,7 @@ class _BusquedaState extends State<Busqueda> {
             ],
           ),
           Row(
-            children: [
+            children: const [
               CampodeTexto(
                 label: "Asesor",
                 width: 200,

@@ -9,7 +9,7 @@ class Planner extends StatefulWidget {
 }
 
 class _PlannerState extends State<Planner> {
-  TextEditingController placaController = TextEditingController();
+  final placaController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -39,14 +39,14 @@ class _PlannerState extends State<Planner> {
                     height: 50,
                     controller: placaController,
                   ),
-                  // Botton Buscar por Paaca
+                  // Botton Buscar por Placa
                   Boton(
                     label: "Buscar Placa",
                     width: 150,
                     height: 50,
                     ruta: "/busqueda",
                     operacion: "op1",
-                    informacion: placaController.text,
+                    informacion: placaController,
                   ),
                   // Boton Agendar
                   Boton(

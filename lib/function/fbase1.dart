@@ -7,7 +7,7 @@ Future buscarrequest(String arg) async {
     var url = Uri.parse('https://walther-function-3.azurewebsites.net/dato/');
     var response = await http.post(
       url,
-      body: convert.jsonEncode({'data': arg}),
+      body: convert.jsonEncode({'data': '$arg'}),
       headers: {"Content-Type": "application/json"},
     );
     if (response.statusCode == 200) {
