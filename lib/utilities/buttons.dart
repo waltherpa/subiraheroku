@@ -27,6 +27,8 @@ class Boton extends StatefulWidget {
 class _BotonState extends State<Boton> {
   List<dynamic>? l;
 
+  // op1: buscar datos de cliente de base 1
+
   @override
   Widget build(BuildContext context) {
     return Flexible(

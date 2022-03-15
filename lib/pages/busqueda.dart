@@ -12,8 +12,22 @@ class _BusquedaState extends State<Busqueda> {
   @override
   Widget build(BuildContext context) {
     List Ldata = ModalRoute.of(context)?.settings.arguments as List;
+
     TextEditingController placaCtlr = TextEditingController();
+    TextEditingController modeloCtlr = TextEditingController();
+    TextEditingController numvehCtlr = TextEditingController();
+    TextEditingController nombrecliCtlr = TextEditingController();
+    TextEditingController doccliCtlr = TextEditingController();
+    TextEditingController mailCtlr = TextEditingController();
+    TextEditingController telCtlr = TextEditingController();
     placaCtlr.text = Ldata[0]['PLACA_VEH_TARJETA'];
+    modeloCtlr.text = Ldata[0]['VERSION_MODELO'];
+    numvehCtlr.text = Ldata[0]['NROMOTOR_VEH'];
+    nombrecliCtlr.text = Ldata[0]['CLIENTE'];
+    doccliCtlr.text = Ldata[0]['COD_CLIENTE'];
+    mailCtlr.text = Ldata[0]['EMAIL'];
+    telCtlr.text = Ldata[0]['TELEFONO1'];
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Busqueda'),
@@ -68,14 +82,16 @@ class _BusquedaState extends State<Busqueda> {
                 label: "Modelo",
                 width: 150,
                 height: 50,
+                controller: modeloCtlr,
               ),
               // numero veh
               CampodeTexto(
                 label: "N Veh",
                 width: 100,
                 height: 50,
+                controller: modeloCtlr,
               ),
-              Desplegable(
+              const Desplegable(
                 pista: "Tipo de Problema",
                 opciones: [
                   "MEC Garantía",
@@ -84,7 +100,7 @@ class _BusquedaState extends State<Busqueda> {
                   "MEC Reparaciones Generales"
                 ],
               ),
-              Desplegable(
+              const Desplegable(
                 pista: "Subtipo de problema",
                 opciones: [
                   "MEC Garantía",
@@ -98,7 +114,7 @@ class _BusquedaState extends State<Busqueda> {
                   "MEC Reparaciones Generales",
                 ],
               ),
-              Desplegable(
+              const Desplegable(
                 pista: "Tipo de llamada",
                 opciones: [
                   "MOT - SERV. -MANT 500",
@@ -133,35 +149,40 @@ class _BusquedaState extends State<Busqueda> {
             ],
           ),
           Row(
-            children: const [
+            children: [
               // nombre cliente
               CampodeTexto(
                 label: "Nombre de Cliente",
                 width: 200,
                 height: 50,
+                controller: nombrecliCtlr,
               ),
               // documento
               CampodeTexto(
                 label: "Doc/Ruc/DNI",
                 width: 100,
                 height: 50,
+                controller: doccliCtlr,
               ),
               // correo
               CampodeTexto(
                 label: "Correo",
                 width: 150,
                 height: 50,
+                controller: mailCtlr,
               ),
               // telefono
               CampodeTexto(
                 label: "Telefono",
                 width: 100,
                 height: 50,
+                controller: telCtlr,
               ),
             ],
           ),
           Row(
             children: const [
+              //  asesor
               CampodeTexto(
                 label: "Asesor",
                 width: 200,

@@ -160,7 +160,7 @@ class _PlannerState extends State<Planner> {
   }
 }
 
-// widgets:
+// green empty card widgets:
 
 class CardHead extends StatefulWidget {
   // const CardHead({Key? key}) : super(key: key);
