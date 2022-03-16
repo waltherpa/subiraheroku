@@ -3,6 +3,8 @@ import 'package:citas1/pages/agenda.dart';
 import 'package:citas1/pages/planner.dart';
 import 'package:citas1/pages/busqueda.dart';
 import 'package:citas1/pages/resumen.dart';
+import 'package:citas1/utilities/buttons.dart';
+import 'package:citas1/function/fbase1.dart';
 
 void main() {
   runApp(const MisCitas());
@@ -35,15 +37,16 @@ class LandingScreen extends StatefulWidget {
 }
 
 class _LandingScreenState extends State<LandingScreen> {
-  TextEditingController nameController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+  TextEditingController usuarioCtlr = TextEditingController();
+  TextEditingController claveCtlr = TextEditingController();
+  List? l;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(10),
-        child: ListView(
+        child: Column(
           children: [
             Container(
               alignment: Alignment.center,
@@ -64,34 +67,31 @@ class _LandingScreenState extends State<LandingScreen> {
                 style: TextStyle(fontSize: 20),
               ),
             ),
-            Container(
-              padding: const EdgeInsets.fromLTRB(300, 10, 300, 0),
-              child: TextField(
-                controller: nameController,
-                decoration: const InputDecoration(
-                    border: OutlineInputBorder(), labelText: 'nombre ususario'),
-              ),
+            // nombre usuario
+            CampodeTexto(
+              label: "nombre usuario",
+              width: 300,
+              height: 50,
+              controller: usuarioCtlr,
             ),
-            Container(
-              padding: const EdgeInsets.fromLTRB(300, 10, 300, 0),
-              child: TextField(
-                obscureText: true,
-                controller: passwordController,
-                decoration: const InputDecoration(
-                    border: OutlineInputBorder(), labelText: 'contraseña'),
-              ),
+            // contraseña
+            CampodeTexto(
+              label: "contraseña",
+              width: 300,
+              height: 50,
+              controller: claveCtlr,
             ),
-            TextButton(
-              onPressed: () {
-                // algo pasa aqui
-              },
-              child: const Text('olvidaste contraseña'),
+            const SizedBox(
+              height: 10,
             ),
             Container(
               height: 50,
               padding: const EdgeInsets.fromLTRB(300, 10, 300, 0),
               child: ElevatedButton(
-                onPressed: () {
+                onPressed: () async {
+                  l = await identificarusuario(
+                      usuario: usuarioCtlr, clave: claveCtlr) as List;
+
                   Navigator.pushNamed(context, '/planner');
                 },
                 child: const Text('ingresar'),
