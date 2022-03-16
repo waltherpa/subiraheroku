@@ -91,8 +91,9 @@ class _LandingScreenState extends State<LandingScreen> {
                 onPressed: () async {
                   l = await identificarusuario(
                       usuario: usuarioCtlr, clave: claveCtlr) as List;
-
-                  Navigator.pushNamed(context, '/planner');
+                  if (l![0]['status'] == "ok") {
+                    Navigator.pushNamed(context, '/planner');
+                  }
                 },
                 child: const Text('ingresar'),
               ),
