@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:citas1/utilities/buttons.dart';
+import 'package:intl/intl.dart';
 
 class Agenda extends StatefulWidget {
   const Agenda({Key? key}) : super(key: key);
@@ -9,8 +10,46 @@ class Agenda extends StatefulWidget {
 }
 
 class _AgendaState extends State<Agenda> {
+  TextEditingController timeinput = TextEditingController();
+  TextEditingController dateinput = TextEditingController();
+
+  // function of date
+  void onDateChanged() async {
+    DateTime? pickedDate = await showDatePicker(
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime(
+            2000), //DateTime.now() - not to allow to choose before today.
+        lastDate: DateTime(2101));
+
+    if (pickedDate != null) {
+      print(pickedDate); //pickedDate output format => 2021-03-10 00:00:00.000
+      String formattedDate = DateFormat('dd-MM-yyyy').format(pickedDate);
+      print(
+          formattedDate); //formatted date output using intl package =>  2021-03-16
+      setState(() {
+        dateinput.text = formattedDate; //set output date to TextField value.
+      });
+    } else {
+      print("Date is not selected");
+    }
+  }
+
+  // clearing values
+  @override
+  void initState() {
+    timeinput.text = ""; //set the initial value of text field
+    super.initState();
+
+    dateinput.text = ""; //set the initial value of text field
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
+    TextEditingController user =
+        ModalRoute.of(context)?.settings.arguments as TextEditingController;
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Agenda'),
@@ -22,24 +61,31 @@ class _AgendaState extends State<Agenda> {
       ),
       body: Column(
         children: [
+          // campos
           Row(
-            children: const [
+            children: [
+              // quien agenda
               CampodeTexto(
                 label: "Quien Agenda",
                 width: 200,
                 height: 50,
+                controller: user,
               ),
-              CampodeTexto(
+              // fehca
+              CampoFechaHora(
                 label: "Fecha",
                 width: 150,
                 height: 50,
+                myfunction: onDateChanged,
               ),
-              CampodeTexto(
+              // hora
+              const CampodeTexto(
                 label: "Hora",
                 width: 100,
                 height: 50,
               ),
-              CampodeTexto(
+              // numero de cita
+              const CampodeTexto(
                 label: "N Cita",
                 width: 100,
                 height: 50,
@@ -48,21 +94,25 @@ class _AgendaState extends State<Agenda> {
           ),
           Row(
             children: const [
+              // placa
               CampodeTexto(
                 label: "Placa",
                 width: 100,
                 height: 50,
               ),
+              // modelo
               CampodeTexto(
                 label: "Modelo",
                 width: 150,
                 height: 50,
               ),
+              // numero de vehiculo
               CampodeTexto(
                 label: "N Veh",
                 width: 100,
                 height: 50,
               ),
+              // tipo de problema
               Desplegable(
                 pista: "Tipo de Problema",
                 opciones: [
@@ -72,6 +122,7 @@ class _AgendaState extends State<Agenda> {
                   "MEC Reparaciones Generales"
                 ],
               ),
+              // subtipo de problema
               Desplegable(
                 pista: "Subtipo de problema",
                 opciones: [
@@ -86,6 +137,7 @@ class _AgendaState extends State<Agenda> {
                   "MEC Reparaciones Generales",
                 ],
               ),
+              // tipo de llamada
               Desplegable(
                 pista: "Tipo de llamada",
                 opciones: [
@@ -122,21 +174,25 @@ class _AgendaState extends State<Agenda> {
           ),
           Row(
             children: const [
+              // nombre de cliente
               CampodeTexto(
                 label: "Nombre de Cliente",
                 width: 200,
                 height: 50,
               ),
+              // documento
               CampodeTexto(
                 label: "Doc/Ruc/DNI",
                 width: 100,
                 height: 50,
               ),
+              // correo
               CampodeTexto(
                 label: "Correo",
                 width: 150,
                 height: 50,
               ),
+              // telefono
               CampodeTexto(
                 label: "Telefono",
                 width: 100,
@@ -166,11 +222,13 @@ class _AgendaState extends State<Agenda> {
           //botones
           Row(
             children: const [
+              // salir sin guardar
               Boton(
                 label: "Salir sin Guardar",
                 width: 200,
                 height: 50,
               ),
+              // guardar
               Boton(
                 label: "Guardar",
                 width: 200,

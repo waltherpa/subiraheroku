@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:citas1/utilities/buttons.dart';
 
+// planner page
 class Planner extends StatefulWidget {
   const Planner({Key? key}) : super(key: key);
 
@@ -13,6 +14,9 @@ class _PlannerState extends State<Planner> {
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController user =
+        ModalRoute.of(context)!.settings.arguments as TextEditingController;
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('PLANNER'),
@@ -32,6 +36,15 @@ class _PlannerState extends State<Planner> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
+                  // Boton Agendar
+                  Boton(
+                    label: "Agendar",
+                    width: 150,
+                    height: 50,
+                    ruta: "/agenda",
+                    operacion: "op2",
+                    informacion: user,
+                  ),
                   // Text Field Placa
                   CampodeTexto(
                     label: "placa",
@@ -48,12 +61,7 @@ class _PlannerState extends State<Planner> {
                     operacion: "op1",
                     informacion: placaController,
                   ),
-                  // Boton Agendar
-                  const Boton(
-                      label: "Agendar",
-                      width: 150,
-                      height: 50,
-                      ruta: "/agenda"),
+
                   // Botton Resumen
                   const Boton(
                     label: "Resumen",

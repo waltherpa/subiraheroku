@@ -28,6 +28,7 @@ class _BotonState extends State<Boton> {
   List<dynamic>? l;
 
   // op1: buscar datos de cliente de base 1
+  // op2: agendar
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +44,9 @@ class _BotonState extends State<Boton> {
                 if (widget.operacion == "op1") {
                   var l =
                       await buscarrequest(widget.informacion!.text) as List?;
+                  Navigator.pushNamed(context, widget.ruta, arguments: l);
+                } else if (widget.operacion == "op2") {
+                  var l = widget.informacion;
                   Navigator.pushNamed(context, widget.ruta, arguments: l);
                 }
               }
@@ -166,6 +170,47 @@ class _DesplegableState extends State<Desplegable> {
                 op = value as String;
               });
             }),
+      ),
+    );
+  }
+}
+
+// campo de texto para fecha y hora
+class CampoFechaHora extends StatefulWidget {
+  final String label;
+  final double width;
+  final double height;
+  final TextEditingController? controller;
+  final Function myfunction;
+
+  const CampoFechaHora({
+    Key? key,
+    this.label = "label",
+    this.width = 10,
+    this.height = 10,
+    this.controller,
+    required this.myfunction,
+  }) : super(key: key);
+
+  @override
+  State<CampoFechaHora> createState() => _CampoFechaHoraState();
+}
+
+class _CampoFechaHoraState extends State<CampoFechaHora> {
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(5.0),
+      child: SizedBox(
+        width: widget.width,
+        height: widget.height,
+        child: TextField(
+          decoration: InputDecoration(
+              border: const OutlineInputBorder(), labelText: widget.label),
+          controller: widget.controller,
+          readOnly: true,
+          onTap: widget.myfunction(),
+        ),
       ),
     );
   }

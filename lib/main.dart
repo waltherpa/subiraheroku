@@ -36,6 +36,7 @@ class LandingScreen extends StatefulWidget {
   State<LandingScreen> createState() => _LandingScreenState();
 }
 
+// login page
 class _LandingScreenState extends State<LandingScreen> {
   TextEditingController usuarioCtlr = TextEditingController();
   TextEditingController claveCtlr = TextEditingController();
@@ -92,7 +93,8 @@ class _LandingScreenState extends State<LandingScreen> {
                   l = await identificarusuario(
                       usuario: usuarioCtlr, clave: claveCtlr) as List;
                   if (l![0]['status'] == "ok") {
-                    Navigator.pushNamed(context, '/planner');
+                    Navigator.pushNamed(context, '/planner',
+                        arguments: usuarioCtlr);
                   }
                 },
                 child: const Text('ingresar'),
