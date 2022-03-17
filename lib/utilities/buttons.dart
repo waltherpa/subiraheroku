@@ -181,7 +181,7 @@ class CampoFechaHora extends StatefulWidget {
   final double width;
   final double height;
   final TextEditingController? controller;
-  final Function myfunction;
+  final VoidCallback myfunction;
 
   const CampoFechaHora({
     Key? key,
@@ -209,7 +209,7 @@ class _CampoFechaHoraState extends State<CampoFechaHora> {
               border: const OutlineInputBorder(), labelText: widget.label),
           controller: widget.controller,
           readOnly: true,
-          onTap: widget.myfunction(),
+          onTap: widget.myfunction,
         ),
       ),
     );

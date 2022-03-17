@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:citas1/utilities/buttons.dart';
 import 'package:intl/intl.dart';
+import 'package:citas1/function/fbase1.dart';
 
 class Agenda extends StatefulWidget {
   const Agenda({Key? key}) : super(key: key);
@@ -12,28 +13,6 @@ class Agenda extends StatefulWidget {
 class _AgendaState extends State<Agenda> {
   TextEditingController timeinput = TextEditingController();
   TextEditingController dateinput = TextEditingController();
-
-  // function of date
-  void onDateChanged() async {
-    DateTime? pickedDate = await showDatePicker(
-        context: context,
-        initialDate: DateTime.now(),
-        firstDate: DateTime(
-            2000), //DateTime.now() - not to allow to choose before today.
-        lastDate: DateTime(2101));
-
-    if (pickedDate != null) {
-      print(pickedDate); //pickedDate output format => 2021-03-10 00:00:00.000
-      String formattedDate = DateFormat('dd-MM-yyyy').format(pickedDate);
-      print(
-          formattedDate); //formatted date output using intl package =>  2021-03-16
-      setState(() {
-        dateinput.text = formattedDate; //set output date to TextField value.
-      });
-    } else {
-      print("Date is not selected");
-    }
-  }
 
   // clearing values
   @override
@@ -76,13 +55,16 @@ class _AgendaState extends State<Agenda> {
                 label: "Fecha",
                 width: 150,
                 height: 50,
-                myfunction: onDateChanged,
+                myfunction: () => onDateChanged(context, dateinput),
+                controller: dateinput,
               ),
               // hora
-              const CampodeTexto(
+              CampoFechaHora(
                 label: "Hora",
-                width: 100,
+                width: 150,
                 height: 50,
+                myfunction: () => onTimeChanged(context, dateinput),
+                controller: timeinput,
               ),
               // numero de cita
               const CampodeTexto(
