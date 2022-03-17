@@ -89,7 +89,7 @@ class _BusquedaState extends State<Busqueda> {
                 label: "N Veh",
                 width: 100,
                 height: 50,
-                controller: modeloCtlr,
+                controller: numvehCtlr,
               ),
               const Desplegable(
                 pista: "Tipo de Problema",

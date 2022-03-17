@@ -61,7 +61,6 @@ class _PlannerState extends State<Planner> {
                     operacion: "op1",
                     informacion: placaController,
                   ),
-
                   // Botton Resumen
                   const Boton(
                     label: "Resumen",

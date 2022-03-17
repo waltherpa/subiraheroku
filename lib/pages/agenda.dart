@@ -10,16 +10,28 @@ class Agenda extends StatefulWidget {
 }
 
 class _AgendaState extends State<Agenda> {
-  TextEditingController timeinput = TextEditingController();
-  TextEditingController dateinput = TextEditingController();
+  TextEditingController timeinputCtlr = TextEditingController();
+  TextEditingController dateinputCtlr = TextEditingController();
+  TextEditingController placaCtlr = TextEditingController();
+  TextEditingController modeloCtlr = TextEditingController();
+  TextEditingController nvehCtlr = TextEditingController();
+  TextEditingController dropbox1Ctlr = TextEditingController();
+  TextEditingController dropbox2Ctlr = TextEditingController();
+  TextEditingController dropbox3Ctlr = TextEditingController();
+  TextEditingController nombreCtlr = TextEditingController();
+  TextEditingController ndocCtlr = TextEditingController();
+  TextEditingController correoCtlr = TextEditingController();
+  TextEditingController telefonoCtlr = TextEditingController();
+  TextEditingController asesorCtlr = TextEditingController();
+  TextEditingController comentarioCtlr = TextEditingController();
 
   // clearing values
   @override
   void initState() {
-    timeinput.text = ""; //set the initial value of text field
+    timeinputCtlr.text = ""; //set the initial value of text field
     super.initState();
 
-    dateinput.text = ""; //set the initial value of text field
+    dateinputCtlr.text = ""; //set the initial value of text field
     super.initState();
   }
 
@@ -49,49 +61,47 @@ class _AgendaState extends State<Agenda> {
                 height: 50,
                 controller: user,
               ),
-              // fehca
+              // fecha
               CampoFechaHora(
                 label: "Fecha",
                 width: 150,
                 height: 50,
-                myfunction: () => onDateChanged(context, dateinput),
-                controller: dateinput,
+                myfunction: () => onDateChanged(context, dateinputCtlr),
+                controller: dateinputCtlr,
               ),
               // hora
               CampoFechaHora(
                 label: "Hora",
                 width: 150,
                 height: 50,
-                myfunction: () => onTimeChanged(context, timeinput),
-                controller: timeinput,
+                myfunction: () => onTimeChanged(context, timeinputCtlr),
+                controller: timeinputCtlr,
               ),
               // numero de cita
-              const CampodeTexto(
-                label: "N Cita",
-                width: 100,
-                height: 50,
-              ),
             ],
           ),
           Row(
-            children: const [
+            children: [
               // placa
               CampodeTexto(
                 label: "Placa",
                 width: 100,
                 height: 50,
+                controller: placaCtlr,
               ),
               // modelo
               CampodeTexto(
                 label: "Modelo",
                 width: 150,
                 height: 50,
+                controller: modeloCtlr,
               ),
               // numero de vehiculo
               CampodeTexto(
                 label: "N Veh",
                 width: 100,
                 height: 50,
+                controller: nvehCtlr,
               ),
               // tipo de problema
               Desplegable(
@@ -154,49 +164,55 @@ class _AgendaState extends State<Agenda> {
             ],
           ),
           Row(
-            children: const [
+            children: [
               // nombre de cliente
               CampodeTexto(
                 label: "Nombre de Cliente",
                 width: 200,
                 height: 50,
+                controller: nombreCtlr,
               ),
               // documento
               CampodeTexto(
                 label: "Doc/Ruc/DNI",
                 width: 100,
                 height: 50,
+                controller: ndocCtlr,
               ),
               // correo
               CampodeTexto(
                 label: "Correo",
                 width: 150,
                 height: 50,
+                controller: correoCtlr,
               ),
               // telefono
               CampodeTexto(
                 label: "Telefono",
                 width: 100,
                 height: 50,
+                controller: telefonoCtlr,
               ),
             ],
           ),
           Row(
-            children: const [
-              CampodeTexto(
-                label: "Asesor",
-                width: 200,
-                height: 50,
+            children: [
+              // asesor
+              Desplegable(
+                pista: "Asesor",
+                opciones: ["asesor1", "asesor2"],
               ),
             ],
           ),
           //comentarios
           Row(
-            children: const [
+            children: [
+              // comentarios
               CampodeComentario(
                 label: "comentario",
                 width: 580,
                 height: 100,
+                controller: comentarioCtlr,
               )
             ],
           ),

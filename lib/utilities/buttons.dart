@@ -108,27 +108,39 @@ class _CampodeTextoState extends State<CampodeTexto> {
 }
 
 //campo de comentarios
-class CampodeComentario extends StatelessWidget {
+class CampodeComentario extends StatefulWidget {
   final String label;
   final double width;
   final double height;
+  final TextEditingController? controller;
 
   const CampodeComentario(
-      {Key? key, this.label = "", this.width = 10, this.height = 10})
+      {Key? key,
+      this.label = "",
+      this.width = 10,
+      this.height = 10,
+      this.controller})
       : super(key: key);
 
+  @override
+  State<CampodeComentario> createState() => _CampodeComentarioState();
+}
+
+class _CampodeComentarioState extends State<CampodeComentario> {
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(5.0),
       child: SizedBox(
-        width: width,
-        height: height,
+        width: widget.width,
+        height: widget.height,
         child: TextField(
-            keyboardType: TextInputType.multiline,
-            maxLines: 4,
-            decoration: InputDecoration(
-                border: const OutlineInputBorder(), labelText: label)),
+          keyboardType: TextInputType.multiline,
+          maxLines: 4,
+          decoration: InputDecoration(
+              border: const OutlineInputBorder(), labelText: widget.label),
+          controller: widget.controller,
+        ),
       ),
     );
   }
@@ -168,6 +180,7 @@ class _DesplegableState extends State<Desplegable> {
             onChanged: (value) {
               setState(() {
                 op = value as String;
+                print("el valor seleccionado es: $op");
               });
             }),
       ),
