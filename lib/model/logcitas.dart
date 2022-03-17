@@ -22,18 +22,31 @@ class LogCitas {
     this.Comentarios,
   );
 
+  // ignore: non_constant_identifier_names
   int id_lg;
+  // ignore: non_constant_identifier_names
   Sedes sedes;
+  // ignore: non_constant_identifier_names
   String Fecha;
+  // ignore: non_constant_identifier_names
   String Hora;
+  // ignore: non_constant_identifier_names
   String Ncita;
+  // ignore: non_constant_identifier_names
   String EstadoCita;
+  // ignore: non_constant_identifier_names
   Base1 base1;
+  // ignore: non_constant_identifier_names
   String TipoProblema;
+  // ignore: non_constant_identifier_names
   String SubtipoProblema;
+  // ignore: non_constant_identifier_names
   String TipoLlamada;
+  // ignore: non_constant_identifier_names
   Usuarios usuarios;
+  // ignore: non_constant_identifier_names
   String Asesor;
+  // ignore: non_constant_identifier_names
   String Comentarios;
 
   factory LogCitas.fromJson(Map<String, dynamic> json) =>

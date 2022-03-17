@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:citas1/utilities/buttons.dart';
-import 'package:intl/intl.dart';
 import 'package:citas1/function/fbase1.dart';
 
 class Agenda extends StatefulWidget {
@@ -63,7 +62,7 @@ class _AgendaState extends State<Agenda> {
                 label: "Hora",
                 width: 150,
                 height: 50,
-                myfunction: () => onTimeChanged(context, dateinput),
+                myfunction: () => onTimeChanged(context, timeinput),
                 controller: timeinput,
               ),
               // numero de cita

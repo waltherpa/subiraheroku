@@ -13,11 +13,17 @@ class Calendar {
     this.Idlog,
   );
 
+  // ignore: non_constant_identifier_names
   int id_cal;
+  // ignore: non_constant_identifier_names
   String Fecha;
+  // ignore: non_constant_identifier_names
   String Hora;
+  // ignore: non_constant_identifier_names
   int Slot1;
+  // ignore: non_constant_identifier_names
   int Slot2;
+  // ignore: non_constant_identifier_names
   LogCitas Idlog;
 
   factory Calendar.fromJson(Map<String, dynamic> json) =>

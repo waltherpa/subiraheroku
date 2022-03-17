@@ -10,9 +10,13 @@ class Usuarios {
     this.Categoria,
   );
 
+  // ignore: non_constant_identifier_names
   int id_us;
+  // ignore: non_constant_identifier_names
   String Nombre;
+  // ignore: non_constant_identifier_names
   String Clave;
+  // ignore: non_constant_identifier_names
   String Categoria;
 
   factory Usuarios.fromJson(Map<String, dynamic> json) =>

@@ -2,7 +2,6 @@ import 'dart:convert' as convert;
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:citas1/model/base1.dart';
-import 'package:citas1/model/usuarios.dart';
 import 'package:intl/intl.dart';
 
 Future buscarrequest(String arg) async {

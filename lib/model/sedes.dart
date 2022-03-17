@@ -8,7 +8,9 @@ class Sedes {
     this.Sede,
   );
 
+  // ignore: non_constant_identifier_names
   int id_sd;
+  // ignore: non_constant_identifier_names
   String Sede;
 
   factory Sedes.fromJson(Map<String, dynamic> json) => _$SedesFromJson(json);
