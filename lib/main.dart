@@ -3,8 +3,9 @@ import 'package:citas1/pages/agenda.dart';
 import 'package:citas1/pages/planner.dart';
 import 'package:citas1/pages/busqueda.dart';
 import 'package:citas1/pages/resumen.dart';
-import 'package:citas1/utilities/buttons.dart';
 import 'package:citas1/function/fbase1.dart';
+import 'pages/planner.dart';
+import './common/widgets.dart';
 
 void main() {
   runApp(const MisCitas());
@@ -19,8 +20,8 @@ class MisCitas extends StatelessWidget {
       title: 'Mis Citas',
       initialRoute: '/',
       routes: {
-        '/': (context) => const LandingScreen(),
-        '/planner': (context) => const Planner(),
+        '/': (context) => LandingScreen(),
+        '/planner': (context) => Planner(),
         '/agenda': (context) => const Agenda(),
         '/busqueda': (context) => const Busqueda(),
         '/resumen': (context) => const Resumen(),
@@ -29,15 +30,11 @@ class MisCitas extends StatelessWidget {
   }
 }
 
-class LandingScreen extends StatefulWidget {
-  const LandingScreen({Key? key}) : super(key: key);
+// ingreso login
 
-  @override
-  State<LandingScreen> createState() => _LandingScreenState();
-}
+class LandingScreen extends StatelessWidget {
+  LandingScreen({Key? key}) : super(key: key);
 
-// login page
-class _LandingScreenState extends State<LandingScreen> {
   TextEditingController usuarioCtlr = TextEditingController();
   TextEditingController claveCtlr = TextEditingController();
   List? l;
@@ -69,18 +66,18 @@ class _LandingScreenState extends State<LandingScreen> {
               ),
             ),
             // nombre usuario
-            CampodeTexto(
+            CampoDeTexto(
               label: "nombre usuario",
               width: 300,
               height: 50,
-              controller: usuarioCtlr,
+              controlador: usuarioCtlr,
             ),
             // contraseña
-            CampodeTexto(
+            CampoDeTexto(
               label: "contraseña",
               width: 300,
               height: 50,
-              controller: claveCtlr,
+              controlador: claveCtlr,
             ),
             const SizedBox(
               height: 10,

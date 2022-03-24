@@ -49,7 +49,7 @@ Future identificarusuario(
 }
 
 // function of date
-onDateChanged(context, TextEditingController dateinput) async {
+void onDateChanged(context, TextEditingController dateinput) async {
   DateTime? pickedDate = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
