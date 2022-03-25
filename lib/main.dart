@@ -1,14 +1,16 @@
+import 'package:citas1/provider/globalvariables.dart';
 import 'package:flutter/material.dart';
-import 'package:citas1/pages/agenda.dart';
-import 'package:citas1/pages/planner.dart';
-import 'package:citas1/pages/busqueda.dart';
-import 'package:citas1/pages/resumen.dart';
-import 'package:citas1/function/fbase1.dart';
-import 'pages/planner.dart';
+import './pages/agenda.dart';
+import './pages/busqueda.dart';
+import './pages/planner.dart';
+import './pages/resumen.dart';
+import './function/fbase1.dart';
 import './common/widgets.dart';
+import 'provider/river_clases.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() {
-  runApp(const MisCitas());
+  runApp(const ProviderScope(child: MisCitas()));
 }
 
 class MisCitas extends StatelessWidget {
@@ -22,8 +24,8 @@ class MisCitas extends StatelessWidget {
       routes: {
         '/': (context) => LandingScreen(),
         '/planner': (context) => Planner(),
-        '/agenda': (context) => const Agenda(),
-        '/busqueda': (context) => const Busqueda(),
+        '/agenda': (context) => Agenda(),
+        '/busqueda': (context) => Busqueda(),
         '/resumen': (context) => const Resumen(),
       },
     );
@@ -31,8 +33,7 @@ class MisCitas extends StatelessWidget {
 }
 
 // ingreso login
-
-class LandingScreen extends StatelessWidget {
+class LandingScreen extends ConsumerWidget {
   LandingScreen({Key? key}) : super(key: key);
 
   TextEditingController usuarioCtlr = TextEditingController();
@@ -40,7 +41,7 @@ class LandingScreen extends StatelessWidget {
   List? l;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(10),
@@ -90,8 +91,23 @@ class LandingScreen extends StatelessWidget {
                   l = await identificarusuario(
                       usuario: usuarioCtlr, clave: claveCtlr) as List;
                   if (l![0]['status'] == "ok") {
+                    ref
+                        .read(riverUsuario.notifier)
+                        .identifyUser(usuarioCtlr.text);
                     Navigator.pushNamed(context, '/planner',
                         arguments: usuarioCtlr);
+                  } else {
+                    final sanck = SnackBar(
+                      content:
+                          const Text('Clave incorrecta, intente nuevamente'),
+                      action: SnackBarAction(
+                        label: 'Ok',
+                        onPressed: () {
+                          //
+                        },
+                      ),
+                    );
+                    ScaffoldMessenger.of(context).showSnackBar(sanck);
                   }
                 },
                 child: const Text('ingresar'),

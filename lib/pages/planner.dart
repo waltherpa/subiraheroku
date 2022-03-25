@@ -9,7 +9,7 @@ class Planner extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Planner 2'),
+        title: const Text('Planner'),
         leading: IconButton(
             onPressed: () {
               Navigator.pop(context);
@@ -66,13 +66,10 @@ class Planner extends StatelessWidget {
                 ],
               ),
             ),
-
             // table time planner
             const Expanded(
-              flex: 1,
-              child: Center(
-                child: TatblaPlanner(),
-              ),
+              flex: 5,
+              child: TatblaPlanner(),
             ),
           ],
         ),
