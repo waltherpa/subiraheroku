@@ -13,3 +13,6 @@ final riverhora = ChangeNotifierProvider((ref) => Hora());
 
 // change notifier
 final drop1 = ChangeNotifierProvider((ref) => Dd1());
+
+// change notifier agendamiento
+final agen = ChangeNotifierProvider((ref) => Agendamiento());

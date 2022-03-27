@@ -8,24 +8,26 @@ import '../provider/globalvariables.dart';
 import '../provider/river_clases.dart';
 
 class Agenda extends ConsumerWidget {
-  Agenda({Key? key}) : super(key: key);
-  TextEditingController ctlr_usuario = TextEditingController(); //provided
-  TextEditingController ctlr_fecha = TextEditingController(); //provided
-  TextEditingController ctlr_hora = TextEditingController(); //provided
-  TextEditingController ctlr_placa = TextEditingController();
-  TextEditingController ctlr_modelo = TextEditingController();
-  TextEditingController ctlr_nveh = TextEditingController();
-  // desplegable 1 //provided
-  // desplegable 2 //provided
-  // desplegable 3 //provided
-  TextEditingController ctlr_nombre = TextEditingController();
-  TextEditingController ctlr_doc = TextEditingController();
-  TextEditingController ctlr_correo = TextEditingController();
-  TextEditingController ctlr_telefono = TextEditingController();
-  TextEditingController ctlr_comentario = TextEditingController();
+  Agenda({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    TextEditingController ctlr_usuario = TextEditingController();
+    TextEditingController ctlr_fecha = TextEditingController();
+    TextEditingController ctlr_hora = TextEditingController();
+    TextEditingController ctlr_placa = TextEditingController();
+    TextEditingController ctlr_modelo = TextEditingController();
+    TextEditingController ctlr_nveh = TextEditingController();
+    String desplegable1 = '';
+    String desplegable2 = '';
+    String desplegable3 = '';
+    TextEditingController ctlr_nombre = TextEditingController();
+    TextEditingController ctlr_doc = TextEditingController();
+    TextEditingController ctlr_correo = TextEditingController();
+    TextEditingController ctlr_telefono = TextEditingController();
+    TextEditingController ctlr_comentario = TextEditingController();
     return Scaffold(
       appBar: AppBar(
         title: const Text('Agendar Cita'),
@@ -45,6 +47,7 @@ class Agenda extends ConsumerWidget {
                 builder: ((context, ref, _) {
                   final val = ref.watch(riverUsuario);
                   ctlr_usuario.text = val.u;
+
                   return CampoDeTexto(
                     label: "Usuario",
                     width: 150,
@@ -101,21 +104,29 @@ class Agenda extends ConsumerWidget {
                 height: 50,
                 controlador: ctlr_nveh,
               ),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
               // tipo de problema
               Consumer(builder: ((context, ref, _) {
                 final val1 = ref.watch(drop1);
+                desplegable1 = val1.inivalue1;
                 return Desplegable(
                     opciones: val1.opciones1, opcioninicial: val1.inivalue1);
               })),
               // subtipo de problema
               Consumer(builder: ((context, ref, _) {
                 final val1 = ref.watch(drop1);
+                desplegable2 = val1.inivalue2;
                 return Desplegable(
                     opciones: val1.opciones2, opcioninicial: val1.inivalue2);
               })),
               // tipo de llamada
               Consumer(builder: ((context, ref, _) {
                 final val1 = ref.watch(drop1);
+                desplegable3 = val1.inivalue3;
                 return Desplegable(
                     opciones: val1.opciones3, opcioninicial: val1.inivalue3);
               })),
@@ -167,20 +178,39 @@ class Agenda extends ConsumerWidget {
             ],
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              Boton(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              const SizedBox(
+                width: 320,
+              ),
+              const Boton(
                 label: 'Salir',
                 width: 150,
                 height: 50,
                 ruta: '/planner',
               ),
-              Boton(
+              GuardarBoton(
                 label: 'Guardar',
                 width: 150,
                 height: 50,
                 ruta: '/planner',
-                funcion: GuardarAgenda,
+                agenda: () {
+                  final val2 = ref.read(agen);
+                  val2.setComentario(ctlr_usuario.text);
+                  val2.setComentario(ctlr_fecha.text);
+                  val2.setComentario(ctlr_hora.text);
+                  val2.setComentario(ctlr_placa.text);
+                  val2.setComentario(ctlr_modelo.text);
+                  val2.setComentario(ctlr_nveh.text);
+                  val2.setComentario(ctlr_nombre.text);
+                  val2.setComentario(ctlr_doc.text);
+                  val2.setComentario(ctlr_correo.text);
+                  val2.setComentario(ctlr_telefono.text);
+                  val2.setComentario(ctlr_comentario.text);
+                  val2.setComentario(desplegable1);
+                  val2.setComentario(desplegable2);
+                  val2.setComentario(desplegable3);
+                },
               ),
             ],
           ),

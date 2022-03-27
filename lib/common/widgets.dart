@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:citas1/provider/globalvariables.dart';
+import 'package:citas1/provider/river_clases.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -18,7 +21,7 @@ class Boton extends StatelessWidget {
   final double height;
   final String? ruta;
   final TextEditingController? controlador;
-  final VoidCallback? funcion;
+  final void Function()? funcion;
 
   @override
   Widget build(BuildContext context) {
@@ -29,9 +32,6 @@ class Boton extends StatelessWidget {
         height: height,
         child: ElevatedButton(
           onPressed: () {
-            if (funcion != null) {
-              funcion;
-            }
             if (ruta != null) {
               Navigator.pushNamed(context, ruta!);
             }
@@ -298,6 +298,54 @@ class _CampoFechaHoraState extends State<CampoFechaHora> {
           controller: widget.controller,
           readOnly: true,
           onTap: widget.myfunction,
+        ),
+      ),
+    );
+  }
+}
+
+// Boton para guardar cambios
+class GuardarBoton extends ConsumerWidget {
+  const GuardarBoton(
+      {Key? key,
+      this.label = "label",
+      this.width = 10,
+      this.height = 10,
+      this.ruta,
+      this.agenda})
+      : super(key: key);
+  final String label;
+  final double width;
+  final double height;
+  final String? ruta;
+  final VoidCallback? agenda;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final miagenda = ref.read(agen);
+
+    return Padding(
+      padding: const EdgeInsets.all(5),
+      child: SizedBox(
+        width: width,
+        height: height,
+        child: ElevatedButton(
+          onPressed: agenda,
+
+          // onPressed: () {
+          //   print(
+          //       'los datos son: usuario:${miagenda.ctlr_usuario} fecha:${miagenda.ctlr_fecha} hora:${miagenda.ctlr_hora} placa:${miagenda.ctlr_placa} modelo:${miagenda.ctlr_modelo} nveh:${miagenda.ctlr_nveh} nombre:${miagenda.ctlr_nombre} doc:${miagenda.ctlr_doc} corre:${miagenda.ctlr_correo} telefono:${miagenda.ctlr_telefono} comentario:${miagenda.ctlr_comentario} desple1:${miagenda.deplegalbe1} desple2:${miagenda.deplegalbe2} desple3:${miagenda.deplegalbe3}');
+          // },
+          child: Text(
+            label,
+            style: const TextStyle(
+              color: Colors.blue,
+              fontSize: 15,
+            ),
+          ),
+          style: ElevatedButton.styleFrom(
+            primary: Colors.white,
+          ),
         ),
       ),
     );

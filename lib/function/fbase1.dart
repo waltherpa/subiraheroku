@@ -1,9 +1,10 @@
 import 'dart:convert' as convert;
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 import 'package:citas1/model/base1.dart';
 import 'package:intl/intl.dart';
-import 'dart:math';
+import '../provider/globalvariables.dart';
 
 Future buscarrequest(String arg) async {
   if (arg != "") {
@@ -84,21 +85,4 @@ void onTimeChanged(context, TextEditingController timeinput) async {
   } else {
     timeinput.text = "seleccione hora";
   }
-}
-
-// save agenda
-void GuardarAgenda(
-//   TextEditingController ctlr_usuario,
-//   TextEditingController ctlr_fecha,
-//   TextEditingController ctlr_hora,
-//   TextEditingController ctlr_placa,
-//   TextEditingController ctlr_modelo,
-//   TextEditingController ctlr_nveh,
-//   TextEditingController ctlr_nombre,
-//   TextEditingController ctlr_doc,
-//   TextEditingController ctlr_correo,
-//   TextEditingController ctlr_telefono,
-//   TextEditingController ctlr_comentario,
-    ) {
-  print('este es el dato de y d');
 }

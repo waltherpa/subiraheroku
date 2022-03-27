@@ -203,3 +203,123 @@ class Dd1 with ChangeNotifier {
     notifyListeners();
   }
 }
+
+// Class de datos para agendamiento
+class Agendamiento with ChangeNotifier {
+  late String _ctlr_usuario;
+  late String _ctlr_fecha;
+  late String _ctlr_hora;
+  late String _ctlr_placa;
+  late String _ctlr_modelo;
+  late String _ctlr_nveh;
+  late String _ctlr_nombre;
+  late String _ctlr_doc;
+  late String _ctlr_correo;
+  late String _ctlr_telefono;
+  late String _ctlr_comentario;
+  late String _deplegalbe1;
+  late String _deplegalbe2;
+  late String _deplegalbe3;
+
+  Agendamiento() {
+    _ctlr_usuario = '';
+    _ctlr_fecha = '';
+    _ctlr_hora = '';
+    _ctlr_placa = '';
+    _ctlr_modelo = '';
+    _ctlr_nveh = '';
+    _ctlr_nombre = '';
+    _ctlr_doc = '';
+    _ctlr_correo = '';
+    _ctlr_telefono = '';
+    _ctlr_comentario = '';
+    _deplegalbe1 = '';
+    _deplegalbe2 = '';
+    _deplegalbe3 = '';
+  }
+
+  get ctlr_usuario => _ctlr_usuario;
+  get ctlr_fecha => _ctlr_fecha;
+  get ctlr_hora => _ctlr_hora;
+  get ctlr_placa => _ctlr_placa;
+  get ctlr_modelo => _ctlr_modelo;
+  get ctlr_nveh => _ctlr_nveh;
+  get ctlr_nombre => _ctlr_nombre;
+  get ctlr_doc => _ctlr_doc;
+  get ctlr_correo => _ctlr_correo;
+  get ctlr_telefono => _ctlr_telefono;
+  get ctlr_comentario => _ctlr_comentario;
+  get deplegalbe1 => _deplegalbe1;
+  get deplegalbe2 => _deplegalbe2;
+  get deplegalbe3 => _deplegalbe3;
+
+  void setUsuario(String usuario) {
+    _ctlr_usuario = usuario;
+    notifyListeners();
+  }
+
+  void setFecha(String fecha) {
+    _ctlr_fecha = fecha;
+    notifyListeners();
+  }
+
+  void setHora(String hora) {
+    _ctlr_hora = hora;
+    notifyListeners();
+  }
+
+  void setPlaca(String placa) {
+    _ctlr_placa = placa;
+    notifyListeners();
+  }
+
+  void setModelo(String modelo) {
+    _ctlr_modelo = modelo;
+    notifyListeners();
+  }
+
+  void setNveh(String nveh) {
+    _ctlr_nveh = nveh;
+    notifyListeners();
+  }
+
+  void setNombre(String nombre) {
+    _ctlr_nombre = nombre;
+    notifyListeners();
+  }
+
+  void setDoc(String doc) {
+    _ctlr_doc = doc;
+    notifyListeners();
+  }
+
+  void setCorreo(String correo) {
+    _ctlr_correo = correo;
+    notifyListeners();
+  }
+
+  void setTelefono(String telefono) {
+    _ctlr_telefono = telefono;
+    notifyListeners();
+  }
+
+  void setComentario(String comentario) {
+    _ctlr_comentario = comentario;
+    notifyListeners();
+  }
+
+  void setDesplegable1(String deplegalbe1) {
+    _deplegalbe1 = deplegalbe1;
+    notifyListeners();
+  }
+
+  void setDesplegable2(String deplegalbe2) {
+    _deplegalbe2 = deplegalbe2;
+    notifyListeners();
+  }
+
+  void setDesplegable3(String deplegalbe3) {
+    _deplegalbe3 = deplegalbe3;
+    notifyListeners();
+  }
+}

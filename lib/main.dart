@@ -98,8 +98,8 @@ class LandingScreen extends ConsumerWidget {
                         arguments: usuarioCtlr);
                   } else {
                     final sanck = SnackBar(
-                      content:
-                          const Text('Clave incorrecta, intente nuevamente'),
+                      content: const Text(
+                          'Clave o contraseña incorrecta, intente nuevamente'),
                       action: SnackBarAction(
                         label: 'Ok',
                         onPressed: () {
