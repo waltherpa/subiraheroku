@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:citas1/model/base1.dart';
 import 'package:intl/intl.dart';
 import '../provider/globalvariables.dart';
+import '../provider/river_clases.dart';
 
 Future buscarrequest(String arg) async {
   if (arg != "") {
@@ -85,4 +86,55 @@ void onTimeChanged(context, TextEditingController timeinput) async {
   } else {
     timeinput.text = "seleccione hora";
   }
+}
+
+// guardar datos
+Future<List?> guardaragenda(
+    {String? usuario,
+    String? fecha,
+    String? hora,
+    String? placa,
+    String? modelo,
+    String? nveh,
+    String? nombre,
+    String? doc,
+    String? correo,
+    String? telefono,
+    String? comentario,
+    String? desple1,
+    String? desple2,
+    String? desple3}) async {
+  if (usuario != "" || fecha != "" || hora != "") {
+    var url =
+        Uri.parse('https://walther-function-3.azurewebsites.net/agendar/');
+    var response = await http.post(
+      url,
+      body: convert.jsonEncode({
+        'usuario': '$usuario',
+        'fecha': '$fecha',
+        'hora': '$hora',
+        'placa': '$placa',
+        'modelo': '$modelo',
+        'nveh': '$nveh',
+        'nombre': '$nombre',
+        'doc': '$doc',
+        'correo': '$correo',
+        'telefono': '$telefono',
+        'comentario': '$comentario',
+        'des1': '$desple1',
+        'des2': '$desple2',
+        'des3': '$desple3'
+      }),
+      headers: {"Content-Type": "application/json"},
+    );
+    if (response.statusCode == 200) {
+      var l = convert.jsonDecode(response.body);
+      List results = [];
+      results.add(l);
+      return results;
+    }
+  } else {
+    throw Exception("error en la api");
+  }
+  return [];
 }

@@ -28,6 +28,7 @@ class Agenda extends ConsumerWidget {
     TextEditingController ctlr_correo = TextEditingController();
     TextEditingController ctlr_telefono = TextEditingController();
     TextEditingController ctlr_comentario = TextEditingController();
+    var l;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Agendar Cita'),
@@ -194,22 +195,52 @@ class Agenda extends ConsumerWidget {
                 width: 150,
                 height: 50,
                 ruta: '/planner',
-                agenda: () {
+                agenda: () async {
                   final val2 = ref.read(agen);
-                  val2.setComentario(ctlr_usuario.text);
-                  val2.setComentario(ctlr_fecha.text);
-                  val2.setComentario(ctlr_hora.text);
-                  val2.setComentario(ctlr_placa.text);
-                  val2.setComentario(ctlr_modelo.text);
-                  val2.setComentario(ctlr_nveh.text);
-                  val2.setComentario(ctlr_nombre.text);
-                  val2.setComentario(ctlr_doc.text);
-                  val2.setComentario(ctlr_correo.text);
-                  val2.setComentario(ctlr_telefono.text);
-                  val2.setComentario(ctlr_comentario.text);
-                  val2.setComentario(desplegable1);
-                  val2.setComentario(desplegable2);
-                  val2.setComentario(desplegable3);
+
+                  l = await guardaragenda(
+                      usuario: ctlr_usuario.text,
+                      fecha: ctlr_fecha.text,
+                      hora: ctlr_hora.text,
+                      placa: ctlr_placa.text,
+                      modelo: ctlr_modelo.text,
+                      nveh: ctlr_nveh.text,
+                      nombre: ctlr_nombre.text,
+                      doc: ctlr_doc.text,
+                      correo: ctlr_correo.text,
+                      telefono: ctlr_telefono.text,
+                      comentario: ctlr_comentario.text,
+                      desple1: desplegable1,
+                      desple2: desplegable2,
+                      desple3: desplegable3) as List;
+                  if (l != null && l.length > 0 && l![0]['status'] == "ok") {
+                    val2.setComentario(ctlr_usuario.text);
+                    val2.setComentario(ctlr_fecha.text);
+                    val2.setComentario(ctlr_hora.text);
+                    val2.setComentario(ctlr_placa.text);
+                    val2.setComentario(ctlr_modelo.text);
+                    val2.setComentario(ctlr_nveh.text);
+                    val2.setComentario(ctlr_nombre.text);
+                    val2.setComentario(ctlr_doc.text);
+                    val2.setComentario(ctlr_correo.text);
+                    val2.setComentario(ctlr_telefono.text);
+                    val2.setComentario(ctlr_comentario.text);
+                    val2.setComentario(desplegable1);
+                    val2.setComentario(desplegable2);
+                    val2.setComentario(desplegable3);
+                    Navigator.pushNamed(context, '/planner');
+                  } else {
+                    final sanck = SnackBar(
+                      content: const Text('Error en registro de agendamiento'),
+                      action: SnackBarAction(
+                        label: 'Ok',
+                        onPressed: () {
+                          //
+                        },
+                      ),
+                    );
+                    ScaffoldMessenger.of(context).showSnackBar(sanck);
+                  }
                 },
               ),
             ],

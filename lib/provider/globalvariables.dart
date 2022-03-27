@@ -16,3 +16,14 @@ final drop1 = ChangeNotifierProvider((ref) => Dd1());
 
 // change notifier agendamiento
 final agen = ChangeNotifierProvider((ref) => Agendamiento());
+
+// future notifier
+// final gagen = Provider((ref) => GuardarAgenda());
+// final respuestaf = FutureProvider<String>((ref) async {
+//   final r = ref.read(gagen);
+//   return r.get('sth');
+// });
+
+// final ffutureProvider = FutureProvider<String>((ref) async {
+//   return GuardarAgenda().get('ss');
+// });
