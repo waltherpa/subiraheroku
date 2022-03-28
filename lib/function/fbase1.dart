@@ -89,21 +89,24 @@ void onTimeChanged(context, TextEditingController timeinput) async {
 }
 
 // guardar datos
-Future<List?> guardaragenda(
-    {String? usuario,
-    String? fecha,
-    String? hora,
-    String? placa,
-    String? modelo,
-    String? nveh,
-    String? nombre,
-    String? doc,
-    String? correo,
-    String? telefono,
-    String? comentario,
-    String? desple1,
-    String? desple2,
-    String? desple3}) async {
+Future<List?> guardaragenda({
+  String? usuario,
+  String? fecha,
+  String? hora,
+  String? placa,
+  String? modelo,
+  String? nveh,
+  String? nombre,
+  String? doc,
+  String? correo,
+  String? telefono,
+  String? desple1,
+  String? desple2,
+  String? desple3,
+  String? sede,
+  String? estadocita,
+  String? comentario,
+}) async {
   if (usuario != "" || fecha != "" || hora != "") {
     var url =
         Uri.parse('https://walther-function-3.azurewebsites.net/agendar/');
@@ -120,10 +123,12 @@ Future<List?> guardaragenda(
         'doc': '$doc',
         'correo': '$correo',
         'telefono': '$telefono',
-        'comentario': '$comentario',
         'des1': '$desple1',
         'des2': '$desple2',
-        'des3': '$desple3'
+        'des3': '$desple3',
+        'sede': '$sede',
+        'estadocita': '$estadocita',
+        'comentario': '$comentario',
       }),
       headers: {"Content-Type": "application/json"},
     );

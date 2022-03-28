@@ -27,3 +27,6 @@ final agen = ChangeNotifierProvider((ref) => Agendamiento());
 // final ffutureProvider = FutureProvider<String>((ref) async {
 //   return GuardarAgenda().get('ss');
 // });
+
+// change notifier drops2
+final drop2 = ChangeNotifierProvider((ref) => Dd2());

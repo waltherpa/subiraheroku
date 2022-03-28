@@ -125,7 +125,7 @@ class Comentarios extends StatelessWidget {
   }
 }
 
-// desplegable
+// desplegable1
 class Desplegable extends ConsumerWidget {
   Desplegable({
     Key? key,
@@ -151,6 +151,38 @@ class Desplegable extends ConsumerWidget {
             .toList(),
         onChanged: (String? y) {
           ref.watch(drop1).setOptions(y!);
+        },
+      ),
+    );
+  }
+}
+
+// desplegable1
+class Desplegable2 extends ConsumerWidget {
+  Desplegable2({
+    Key? key,
+    required this.opciones,
+    required this.opcioninicial,
+  }) : super(key: key);
+  late List opciones;
+  late String opcioninicial;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: DropdownButton(
+        value: opcioninicial,
+        items: opciones
+            .map<DropdownMenuItem<String>>(
+              (e) => DropdownMenuItem<String>(
+                child: Text(e),
+                value: e,
+              ),
+            )
+            .toList(),
+        onChanged: (String? y) {
+          ref.watch(drop2).setop(y!);
         },
       ),
     );
@@ -331,11 +363,6 @@ class GuardarBoton extends ConsumerWidget {
         height: height,
         child: ElevatedButton(
           onPressed: agenda,
-
-          // onPressed: () {
-          //   print(
-          //       'los datos son: usuario:${miagenda.ctlr_usuario} fecha:${miagenda.ctlr_fecha} hora:${miagenda.ctlr_hora} placa:${miagenda.ctlr_placa} modelo:${miagenda.ctlr_modelo} nveh:${miagenda.ctlr_nveh} nombre:${miagenda.ctlr_nombre} doc:${miagenda.ctlr_doc} corre:${miagenda.ctlr_correo} telefono:${miagenda.ctlr_telefono} comentario:${miagenda.ctlr_comentario} desple1:${miagenda.deplegalbe1} desple2:${miagenda.deplegalbe2} desple3:${miagenda.deplegalbe3}');
-          // },
           child: Text(
             label,
             style: const TextStyle(

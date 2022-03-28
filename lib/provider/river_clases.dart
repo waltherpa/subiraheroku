@@ -216,10 +216,12 @@ class Agendamiento with ChangeNotifier {
   late String _ctlr_doc;
   late String _ctlr_correo;
   late String _ctlr_telefono;
-  late String _ctlr_comentario;
   late String _deplegalbe1;
   late String _deplegalbe2;
   late String _deplegalbe3;
+  late String _sede;
+  late String _estadocita;
+  late String _ctlr_comentario;
 
   Agendamiento() {
     _ctlr_usuario = '';
@@ -236,6 +238,9 @@ class Agendamiento with ChangeNotifier {
     _deplegalbe1 = '';
     _deplegalbe2 = '';
     _deplegalbe3 = '';
+    _sede = '';
+    _estadocita = '';
+    _ctlr_comentario = '';
   }
 
   get ctlr_usuario => _ctlr_usuario;
@@ -248,10 +253,12 @@ class Agendamiento with ChangeNotifier {
   get ctlr_doc => _ctlr_doc;
   get ctlr_correo => _ctlr_correo;
   get ctlr_telefono => _ctlr_telefono;
-  get ctlr_comentario => _ctlr_comentario;
   get deplegalbe1 => _deplegalbe1;
   get deplegalbe2 => _deplegalbe2;
   get deplegalbe3 => _deplegalbe3;
+  get sede => _sede;
+  get estadocita => _estadocita;
+  get ctlr_comentario => _ctlr_comentario;
 
   void setUsuario(String usuario) {
     _ctlr_usuario = usuario;
@@ -303,11 +310,6 @@ class Agendamiento with ChangeNotifier {
     notifyListeners();
   }
 
-  void setComentario(String comentario) {
-    _ctlr_comentario = comentario;
-    notifyListeners();
-  }
-
   void setDesplegable1(String deplegalbe1) {
     _deplegalbe1 = deplegalbe1;
     notifyListeners();
@@ -321,5 +323,48 @@ class Agendamiento with ChangeNotifier {
   void setDesplegable3(String deplegalbe3) {
     _deplegalbe3 = deplegalbe3;
     notifyListeners();
+  }
+
+  void setSede(String sede) {
+    _sede = sede;
+    notifyListeners();
+  }
+
+  void setEstadoCita(String estadocita) {
+    _estadocita = estadocita;
+    notifyListeners();
+  }
+
+  void setComentario(String comentario) {
+    _ctlr_comentario = comentario;
+    notifyListeners();
+  }
+}
+
+// segundo nivel de desplegables
+class Dd2 with ChangeNotifier {
+  final _op1 = ['cita activa', 'cita vencida'];
+  final _op2 = ['Suquillo', 'San Miguel'];
+  late String _initvalue1;
+  late String _initvalue2;
+  Dd2() {
+    _initvalue1 = _op1[0];
+    _initvalue2 = _op2[0];
+  }
+
+  List get opciones1 => _op1;
+  List get opciones2 => _op2;
+  String get inivalue1 => _initvalue1;
+  String get inivalue2 => _initvalue2;
+
+  void setop(String w) {
+    if (_op1.contains(w)) {
+      _initvalue1 = w;
+      notifyListeners();
+    }
+    if (_op2.contains(w)) {
+      _initvalue2 = w;
+      notifyListeners();
+    }
   }
 }

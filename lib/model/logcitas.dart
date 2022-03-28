@@ -1,52 +1,44 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'base1.dart';
-import 'usuarios.dart';
-import 'sedes.dart';
 part 'logcitas.g.dart';
 
 @JsonSerializable()
 class LogCitas {
   LogCitas(
     this.id_lg,
-    this.sedes,
+    this.Usuario,
     this.Fecha,
     this.Hora,
-    this.Ncita,
-    this.EstadoCita,
-    this.base1,
+    this.Placa,
+    this.Modelo,
+    this.Nveh,
+    this.Nombre,
+    this.Documento,
+    this.Correo,
+    this.Telefono,
     this.TipoProblema,
-    this.SubtipoProblema,
+    this.SuptipoProblema,
     this.TipoLlamada,
-    this.usuarios,
-    this.Asesor,
+    this.Sede,
+    this.EstadoCita,
     this.Comentarios,
   );
 
-  // ignore: non_constant_identifier_names
   int id_lg;
-  // ignore: non_constant_identifier_names
-  Sedes sedes;
-  // ignore: non_constant_identifier_names
+  String Usuario;
   String Fecha;
-  // ignore: non_constant_identifier_names
   String Hora;
-  // ignore: non_constant_identifier_names
-  String Ncita;
-  // ignore: non_constant_identifier_names
-  String EstadoCita;
-  // ignore: non_constant_identifier_names
-  Base1 base1;
-  // ignore: non_constant_identifier_names
+  String Placa;
+  String Modelo;
+  String Nveh;
+  String Nombre;
+  String Documento;
+  String Correo;
+  String Telefono;
   String TipoProblema;
-  // ignore: non_constant_identifier_names
-  String SubtipoProblema;
-  // ignore: non_constant_identifier_names
+  String SuptipoProblema;
   String TipoLlamada;
-  // ignore: non_constant_identifier_names
-  Usuarios usuarios;
-  // ignore: non_constant_identifier_names
-  String Asesor;
-  // ignore: non_constant_identifier_names
+  String Sede;
+  String EstadoCita;
   String Comentarios;
 
   factory LogCitas.fromJson(Map<String, dynamic> json) =>
