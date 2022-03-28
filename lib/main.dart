@@ -8,6 +8,7 @@ import './function/fbase1.dart';
 import './common/widgets.dart';
 import 'provider/river_clases.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import './pages/descargas.dart';
 
 void main() {
   runApp(const ProviderScope(child: MisCitas()));
@@ -27,6 +28,7 @@ class MisCitas extends StatelessWidget {
         '/agenda': (context) => Agenda(),
         '/busqueda': (context) => Busqueda(),
         '/resumen': (context) => const Resumen(),
+        '/descarga': (context) => const Descarga(),
       },
     );
   }

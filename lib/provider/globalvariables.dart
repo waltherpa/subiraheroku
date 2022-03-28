@@ -1,5 +1,8 @@
+import 'package:citas1/model/base1.dart';
+import 'package:citas1/model/logcitas.dart';
 import 'package:citas1/provider/river_clases.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:http/http.dart';
 import '../function/fbase1.dart';
 
 // recordar usuario
@@ -17,16 +20,19 @@ final drop1 = ChangeNotifierProvider((ref) => Dd1());
 // change notifier agendamiento
 final agen = ChangeNotifierProvider((ref) => Agendamiento());
 
-// future notifier
-// final gagen = Provider((ref) => GuardarAgenda());
-// final respuestaf = FutureProvider<String>((ref) async {
-//   final r = ref.read(gagen);
-//   return r.get('sth');
-// });
-
-// final ffutureProvider = FutureProvider<String>((ref) async {
-//   return GuardarAgenda().get('ss');
-// });
-
 // change notifier drops2
 final drop2 = ChangeNotifierProvider((ref) => Dd2());
+
+// future notifier mi resumen
+final FMiResumen = Provider((ref) => FutureResumen());
+final resf = FutureProvider<List<LogCitas>>((ref) async {
+  final r = ref.read(FMiResumen);
+  return r.miresumen();
+});
+
+// future notifier mi resumen
+final FMiPlaca = Provider((ref) => BuscarPlaca());
+final presf = FutureProvider.family<List<Base1>, String>((ref, placa) async {
+  final r = ref.read(FMiPlaca);
+  return r.buscarrequest(placa);
+});

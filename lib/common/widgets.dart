@@ -203,67 +203,68 @@ class TatblaPlanner extends StatelessWidget {
         //   0: FractionColumnWidth(0.4),
         //   2: FractionColumnWidth(0.3),
         // },
-        border: TableBorder.all(),
+        border: TableBorder(
+          verticalInside: BorderSide(color: Colors.blue.shade200),
+          horizontalInside: BorderSide(color: Colors.blue.shade200),
+        ),
         children: [
           TableRow(
             children: [
-              CardHead(argument: "Hora"),
-              CardHead(argument: "Lunes"),
-              CardHead(argument: "Martes"),
-              CardHead(argument: "Miercoles"),
-              CardHead(argument: "Jueves"),
-              CardHead(argument: "Viernes"),
-              CardHead(argument: "Sabado"),
+              const Card(
+                margin: EdgeInsets.all(0),
+                shape: RoundedRectangleBorder(
+                    borderRadius:
+                        BorderRadius.only(topLeft: Radius.circular(10))),
+                color: Colors.blue,
+                child: SizedBox(
+                  height: 30,
+                  child: Center(
+                    child: Text(
+                      '----',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ),
+              ),
+              CardHeader(label: 'Lunes', color: Colors.blue),
+              CardHeader(label: 'Martes', color: Colors.blue),
+              CardHeader(label: 'Miercoles', color: Colors.blue),
+              CardHeader(label: 'Jueves', color: Colors.blue),
+              CardHeader(label: 'Viernes', color: Colors.blue),
+              const Card(
+                margin: EdgeInsets.all(0),
+                shape: RoundedRectangleBorder(
+                    borderRadius:
+                        BorderRadius.only(topRight: Radius.circular(10))),
+                color: Colors.blue,
+                child: SizedBox(
+                  height: 30,
+                  child: Center(
+                    child: Text(
+                      'Sabado',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ),
+              ),
             ],
           ),
           TableRow(
             children: [
-              CardHead(argument: "----"),
-              CardHead(argument: "1/4/22"),
-              CardHead(argument: "2/4/22"),
-              CardHead(argument: "3/4/22"),
-              CardHead(argument: "4/4/22"),
-              CardHead(argument: "5/4/22"),
-              CardHead(argument: "6/4/22"),
+              CardHeader(label: '-', color: Colors.blue.shade200),
+              CardHeader(label: '28/03/2022', color: Colors.blue.shade200),
+              CardHeader(label: '29/03/2022', color: Colors.blue.shade200),
+              CardHeader(label: '30/03/2022', color: Colors.blue.shade200),
+              CardHeader(label: '31/03/2022', color: Colors.blue.shade200),
+              CardHeader(label: '01/04/2022', color: Colors.blue.shade200),
+              CardHeader(label: '02/04/2022', color: Colors.blue.shade200),
             ],
           ),
           TableRow(
             children: [
-              CardHead(argument: "7:00-7:10"),
-              CardHead(argument: "data 1"),
-              CardHead(argument: "data 2"),
-              CardHead(argument: "data 3"),
-              CardHead(argument: "data 4"),
-              CardHead(argument: "data 5"),
-              CardHead(argument: "data 6"),
-            ],
-          ),
-          TableRow(
-            children: [
-              CardHead(argument: "7:10-7:20"),
-              CardHead(argument: "data 1"),
-              CardHead(argument: "data 2"),
-              CardHead(argument: "data 3"),
-              CardHead(argument: "data 4"),
-              CardHead(argument: "data 5"),
-              CardHead(argument: "data 6"),
-            ],
-          ),
-          TableRow(
-            children: [
-              CardHead(argument: "7:20-7:30"),
-              CardHead(argument: "data 1"),
-              CardHead(argument: "data 2"),
-              CardHead(argument: "data 3"),
-              CardHead(argument: "data 4"),
-              CardHead(argument: "data 5"),
-              CardHead(argument: "data 6"),
-            ],
-          ),
-          TableRow(
-            children: [
-              CardHead(argument: "7:30-7:40"),
-              CardHead(argument: "data 1"),
+              CardHeader(
+                  label: "7:00-7:10", color: Colors.blue.shade200, altura: 20),
+              CardData(slot1: "8630EU", slot2: "2"),
               CardHead(argument: "data 2"),
               CardHead(argument: "data 3"),
               CardHead(argument: "data 4"),
@@ -273,6 +274,91 @@ class TatblaPlanner extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class CardHeader extends StatelessWidget {
+  CardHeader({Key? key, required this.label, this.color, this.altura = 30})
+      : super(key: key);
+  String label;
+  Color? color;
+  double altura;
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero),
+      margin: EdgeInsets.only(left: 0, right: 0, top: 0),
+      color: color,
+      child: SizedBox(
+        height: altura,
+        child: Center(
+          child: Text(
+            label,
+            style: const TextStyle(color: Colors.white),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class CardData extends StatelessWidget {
+  CardData({Key? key, this.slot1, this.slot2}) : super(key: key);
+  String? slot1;
+  String? slot2;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Expanded(
+          flex: 1,
+          child: GestureDetector(
+            onDoubleTap: () {
+              Navigator.pushNamed(context, '/busqueda', arguments: slot1);
+            },
+            child: Card(
+              shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.only(
+                      bottomRight: Radius.circular(2),
+                      bottomLeft: Radius.circular(2))),
+              margin: const EdgeInsets.only(left: 0, right: 0, top: 0),
+              color: (slot1 != '-') ? Colors.grey.shade300 : Colors.white,
+              child: Center(
+                child: Text(
+                  slot1 ?? "",
+                  style: const TextStyle(color: Colors.black),
+                ),
+              ),
+            ),
+          ),
+        ),
+        Expanded(
+          flex: 1,
+          child: GestureDetector(
+            onDoubleTap: () {
+              Navigator.pushNamed(context, '/busqueda', arguments: slot2);
+            },
+            child: Card(
+              shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.only(
+                      bottomRight: Radius.circular(2),
+                      bottomLeft: Radius.circular(2))),
+              margin: const EdgeInsets.only(left: 0, right: 0, top: 0),
+              color: (slot2 != '-') ? Colors.green.shade300 : Colors.white,
+              child: Center(
+                child: Text(
+                  slot2 ?? "",
+                  style: const TextStyle(color: Colors.black),
+                ),
+              ),
+            ),
+          ),
+        )
+      ],
     );
   }
 }
@@ -336,7 +422,7 @@ class _CampoFechaHoraState extends State<CampoFechaHora> {
   }
 }
 
-// Boton para guardar cambios
+// Boton con funcion
 class GuardarBoton extends ConsumerWidget {
   const GuardarBoton(
       {Key? key,
@@ -375,6 +461,26 @@ class GuardarBoton extends ConsumerWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+//  mis text formes
+class MiTexto extends StatelessWidget {
+  MiTexto({Key? key, this.eltexto}) : super(key: key);
+  String? eltexto;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 150,
+      height: 50,
+      decoration: BoxDecoration(
+        color: Colors.blue.shade100,
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: Colors.blue.shade400),
+      ),
+      child: Text(eltexto ?? ""),
     );
   }
 }

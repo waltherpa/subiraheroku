@@ -1,4 +1,5 @@
 import 'dart:convert' as convert;
+import 'package:citas1/model/logcitas.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
@@ -7,24 +8,25 @@ import 'package:intl/intl.dart';
 import '../provider/globalvariables.dart';
 import '../provider/river_clases.dart';
 
-Future buscarrequest(String arg) async {
-  if (arg != "") {
-    var url = Uri.parse('https://walther-function-3.azurewebsites.net/dato/');
-    var response = await http.post(
-      url,
-      body: convert.jsonEncode({'data': '$arg'}),
-      headers: {"Content-Type": "application/json"},
-    );
-    if (response.statusCode == 200) {
-      List l = convert.jsonDecode(response.body);
-      List<Base1> results = [];
-      for (final e in l) {
-        results.add(Base1.fromJson(e));
+class BuscarPlaca {
+  Future<List<Base1>> buscarrequest(String arg) async {
+    if (arg != "") {
+      var url = Uri.parse('https://walther-function-3.azurewebsites.net/dato/');
+      var response = await http.post(
+        url,
+        body: convert.jsonEncode({'data': '$arg'}),
+        headers: {"Content-Type": "application/json"},
+      );
+      if (response.statusCode == 200) {
+        List<dynamic> data = convert.jsonDecode(response.body);
+        List<Base1> Placas = data.map((e) => Base1.fromJson(e)).toList();
+        return Placas;
+      } else {
+        throw Exception("error en la api");
       }
-      return l.toList();
+    } else {
+      throw Exception("error en la api");
     }
-  } else {
-    throw Exception("error en la api");
   }
 }
 
@@ -142,4 +144,24 @@ Future<List?> guardaragenda({
     throw Exception("error en la api");
   }
   return [];
+}
+
+// funcion envuelta en una clase --- resumen
+class FutureResumen {
+  Future<List<LogCitas>> miresumen() async {
+    var url =
+        Uri.parse('https://walther-function-3.azurewebsites.net/miresumen/');
+    var response = await http.post(
+      url,
+      headers: {"Content-Type": "application/json"},
+    );
+    if (response.statusCode == 200) {
+      List<dynamic> data = convert.jsonDecode(response.body);
+      List<LogCitas> Citas = data.map((d) => LogCitas.fromJson(d)).toList();
+      print(Citas[1].Placa);
+      return Citas;
+    } else {
+      throw Exception("error en la api");
+    }
+  }
 }
