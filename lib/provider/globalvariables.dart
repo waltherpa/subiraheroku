@@ -36,3 +36,6 @@ final presf = FutureProvider.family<List<Base1>, String>((ref, placa) async {
   final r = ref.read(FMiPlaca);
   return r.buscarrequest(placa);
 });
+
+// change notifier thema
+final SedeProv = ChangeNotifierProvider((ref) => MiSede());

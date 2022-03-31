@@ -204,6 +204,34 @@ class Dd1 with ChangeNotifier {
   }
 }
 
+// segundo nivel de desplegables
+class Dd2 with ChangeNotifier {
+  final _op1 = ['cita activa', 'cita vencida'];
+  final _op2 = ['Surquillo', 'San Miguel'];
+  late String _initvalue1;
+  late String _initvalue2;
+  Dd2() {
+    _initvalue1 = _op1[0];
+    _initvalue2 = _op2[0];
+  }
+
+  List get opciones1 => _op1;
+  List get opciones2 => _op2;
+  String get inivalue1 => _initvalue1;
+  String get inivalue2 => _initvalue2;
+
+  void setop(String w) {
+    if (_op1.contains(w)) {
+      _initvalue1 = w;
+      notifyListeners();
+    }
+    if (_op2.contains(w)) {
+      _initvalue2 = w;
+      notifyListeners();
+    }
+  }
+}
+
 // Class de datos para agendamiento
 class Agendamiento with ChangeNotifier {
   late String _ctlr_usuario;
@@ -341,30 +369,17 @@ class Agendamiento with ChangeNotifier {
   }
 }
 
-// segundo nivel de desplegables
-class Dd2 with ChangeNotifier {
-  final _op1 = ['cita activa', 'cita vencida'];
-  final _op2 = ['Suquillo', 'San Miguel'];
-  late String _initvalue1;
-  late String _initvalue2;
-  Dd2() {
-    _initvalue1 = _op1[0];
-    _initvalue2 = _op2[0];
-  }
+// Class color theme
+class MiSede with ChangeNotifier {
+  String _sede = 'Surquillo';
+  String get sede => _sede;
 
-  List get opciones1 => _op1;
-  List get opciones2 => _op2;
-  String get inivalue1 => _initvalue1;
-  String get inivalue2 => _initvalue2;
-
-  void setop(String w) {
-    if (_op1.contains(w)) {
-      _initvalue1 = w;
-      notifyListeners();
+  void cambiosede() {
+    if (_sede == "San Miguel") {
+      _sede = 'Surquillo';
+    } else if (_sede == "Surquillo") {
+      _sede = 'San Miguel';
     }
-    if (_op2.contains(w)) {
-      _initvalue2 = w;
-      notifyListeners();
-    }
+    notifyListeners();
   }
 }

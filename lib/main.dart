@@ -14,11 +14,13 @@ void main() {
   runApp(const ProviderScope(child: MisCitas()));
 }
 
-class MisCitas extends StatelessWidget {
+class MisCitas extends ConsumerWidget {
   const MisCitas({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final sede = ref.watch(SedeProv);
+
     return MaterialApp(
       title: 'Mis Citas',
       initialRoute: '/',

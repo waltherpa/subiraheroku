@@ -81,9 +81,13 @@ void onTimeChanged(context, TextEditingController timeinput) async {
     int minute = pickedTime.minute;
     minute = (minute / 10).round() * 10;
     if (hour >= 7 && hour < 19) {
-      timeinput.text = '$hour:$minute';
+      if (minute == 0) {
+        timeinput.text = '$hour:$minute$minute';
+      } else {
+        timeinput.text = '$hour:$minute';
+      }
     } else {
-      timeinput.text = "hora inabilitada";
+      timeinput.text = "hora inhabilitada";
     }
   } else {
     timeinput.text = "seleccione hora";

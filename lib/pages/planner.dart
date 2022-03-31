@@ -1,15 +1,21 @@
+import 'package:citas1/provider/globalvariables.dart';
+import 'package:citas1/provider/river_clases.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../common/widgets.dart';
 
-class Planner extends StatelessWidget {
+class Planner extends ConsumerWidget {
   Planner({Key? key}) : super(key: key);
   TextEditingController placaCtrl = TextEditingController();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final sede = ref.watch(SedeProv);
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Planner'),
+        backgroundColor:
+            (sede.sede == "Surquillo") ? Colors.blue : Colors.green,
+        title: Text('Planner: ${sede.sede}'),
         leading: IconButton(
             onPressed: () {
               Navigator.pop(context);
@@ -46,7 +52,7 @@ class Planner extends StatelessWidget {
                     label: "buscar Placa",
                     width: 150,
                     height: 50,
-                    ruta: "/busqueda",
+                    ruta: "/",
                     controlador: placaCtrl,
                   ),
                   // boton resumen
@@ -58,10 +64,19 @@ class Planner extends StatelessWidget {
                   ),
                   // boton seguiente semana
                   const Boton(
-                    label: "Resumen",
-                    width: 150,
+                    label: "<",
+                    width: 50,
                     height: 50,
-                    ruta: "/resumen",
+                    ruta: "/",
+                  ),
+                  BotonCallback(
+                    label: ">",
+                    width: 50,
+                    height: 50,
+                    // ruta: "/",
+                    callback: () {
+                      ref.watch(SedeProv).cambiosede();
+                    },
                   ),
                 ],
               ),
