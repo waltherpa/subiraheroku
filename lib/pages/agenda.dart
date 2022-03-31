@@ -14,6 +14,7 @@ class Agenda extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final sede = ref.watch(SedeProv);
     TextEditingController ctlr_usuario = TextEditingController();
     TextEditingController ctlr_fecha = TextEditingController();
     TextEditingController ctlr_hora = TextEditingController();
@@ -27,13 +28,15 @@ class Agenda extends ConsumerWidget {
     String desplegable1 = '';
     String desplegable2 = '';
     String desplegable3 = '';
-    String sede = '';
     String estadocita = '';
     TextEditingController ctlr_comentario = TextEditingController();
     var l;
+    ctlr_fecha.text = fechaDeHoy();
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Agendar Cita'),
+        backgroundColor:
+            (sede.sede == "Surquillo") ? Colors.blue : Colors.green,
+        title: Text('Agendar Cita - Sede: ${sede.sede}'),
         leading: IconButton(
             onPressed: () {
               Navigator.pop(context);
@@ -171,23 +174,6 @@ class Agenda extends ConsumerWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Consumer(builder: ((context, ref, _) {
-                final val3 = ref.watch(drop2);
-                estadocita = val3.inivalue1;
-                return Desplegable2(
-                    opciones: val3.opciones1, opcioninicial: val3.inivalue1);
-              })),
-              Consumer(builder: ((context, ref, _) {
-                final val3 = ref.watch(drop2);
-                sede = val3.inivalue2;
-                return Desplegable(
-                    opciones: val3.opciones2, opcioninicial: val3.inivalue2);
-              })),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
               // comentarios
               Comentarios(
                 label: 'Comentarios',
@@ -230,7 +216,7 @@ class Agenda extends ConsumerWidget {
                     desple1: desplegable1,
                     desple2: desplegable2,
                     desple3: desplegable3,
-                    sede: sede,
+                    sede: sede.sede,
                     estadocita: estadocita,
                     comentario: ctlr_comentario.text,
                   ) as List;
@@ -249,7 +235,7 @@ class Agenda extends ConsumerWidget {
                     val2.setDesplegable1(desplegable1);
                     val2.setDesplegable2(desplegable2);
                     val2.setDesplegable3(desplegable3);
-                    val2.setSede(sede);
+                    val2.setSede(sede.sede);
                     val2.setEstadoCita(estadocita);
                     val2.setComentario(ctlr_comentario.text);
                     Navigator.pushNamed(context, '/resumen');

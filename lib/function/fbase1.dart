@@ -169,3 +169,14 @@ class FutureResumen {
     }
   }
 }
+
+// function of date
+String fechaDeHoy() {
+  DateTime? pickedDate = DateTime.now();
+  if (pickedDate != null) {
+    String formattedDate = DateFormat('dd-MM-yyyy').format(pickedDate);
+    return formattedDate;
+  } else {
+    return "seleccione fecha";
+  }
+}

@@ -17,10 +17,19 @@ class Planner extends ConsumerWidget {
             (sede.sede == "Surquillo") ? Colors.blue : Colors.green,
         title: Text('Planner: ${sede.sede}'),
         leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: const Icon(Icons.arrow_back),
+        ),
+        actions: [
+          IconButton(
             onPressed: () {
-              Navigator.pop(context);
+              ref.watch(SedeProv).cambiosede();
             },
-            icon: const Icon(Icons.arrow_back)),
+            icon: const Icon(Icons.home),
+          )
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(10),
@@ -75,7 +84,7 @@ class Planner extends ConsumerWidget {
                     height: 50,
                     // ruta: "/",
                     callback: () {
-                      ref.watch(SedeProv).cambiosede();
+                      //
                     },
                   ),
                 ],

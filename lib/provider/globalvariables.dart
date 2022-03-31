@@ -11,7 +11,7 @@ final riverUsuario = ChangeNotifierProvider((ref) => User());
 //selecctor de fecha
 final riverfecha = ChangeNotifierProvider((ref) => Fecha());
 
-//selecctor de fecha
+//selecctor de hora
 final riverhora = ChangeNotifierProvider((ref) => Hora());
 
 // change notifier
@@ -22,6 +22,9 @@ final agen = ChangeNotifierProvider((ref) => Agendamiento());
 
 // change notifier drops2
 final drop2 = ChangeNotifierProvider((ref) => Dd2());
+
+// change notifier drops3 : horas diponibles
+final drop3 = ChangeNotifierProvider((ref) => Dd3());
 
 // future notifier mi resumen
 final FMiResumen = Provider((ref) => FutureResumen());

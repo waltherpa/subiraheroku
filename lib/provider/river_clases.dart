@@ -232,6 +232,26 @@ class Dd2 with ChangeNotifier {
   }
 }
 
+// desplegable horas diponibles
+class Dd3 with ChangeNotifier {
+  final _op1 = ['vacio'];
+  late String _initvalue1;
+
+  Dd3() {
+    _initvalue1 = _op1[0];
+  }
+
+  List get opciones1 => _op1;
+  String get inivalue1 => _initvalue1;
+
+  void setop(String w) {
+    if (_op1.contains(w)) {
+      _initvalue1 = w;
+      notifyListeners();
+    }
+  }
+}
+
 // Class de datos para agendamiento
 class Agendamiento with ChangeNotifier {
   late String _ctlr_usuario;

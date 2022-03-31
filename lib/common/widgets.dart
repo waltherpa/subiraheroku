@@ -189,6 +189,38 @@ class Desplegable2 extends ConsumerWidget {
   }
 }
 
+// desplegable 3: fechas disponibles
+class Desplegable3 extends ConsumerWidget {
+  Desplegable3({
+    Key? key,
+    required this.opciones,
+    required this.opcioninicial,
+  }) : super(key: key);
+  late List opciones;
+  late String opcioninicial;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: DropdownButton(
+        value: opcioninicial,
+        items: opciones
+            .map<DropdownMenuItem<String>>(
+              (e) => DropdownMenuItem<String>(
+                child: Text(e),
+                value: e,
+              ),
+            )
+            .toList(),
+        onChanged: (String? y) {
+          ref.watch(drop2).setop(y!);
+        },
+      ),
+    );
+  }
+}
+
 // tabla de planeamiento
 class TatblaPlanner extends StatelessWidget {
   const TatblaPlanner({Key? key}) : super(key: key);
