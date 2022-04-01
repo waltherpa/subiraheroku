@@ -29,7 +29,7 @@ final drop3 = ChangeNotifierProvider((ref) => Dd3());
 
 // future notifier mi LogCitas
 final FMiResumen = Provider((ref) => FutureResumen());
-final resf = FutureProvider<List<LogCitas>>((ref) async {
+final resf = FutureProvider.autoDispose<List<LogCitas>>((ref) async {
   final r = ref.read(FMiResumen);
   return r.miresumen();
 });

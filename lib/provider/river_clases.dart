@@ -281,8 +281,8 @@ class Agendamiento with ChangeNotifier {
   late String _deplegalbe2;
   late String _deplegalbe3;
   late String _sede;
-  late String _estadocita;
   late String _ctlr_comentario;
+  late String _fecharegistro;
 
   Agendamiento() {
     _ctlr_usuario = '';
@@ -300,8 +300,8 @@ class Agendamiento with ChangeNotifier {
     _deplegalbe2 = '';
     _deplegalbe3 = '';
     _sede = '';
-    _estadocita = '';
     _ctlr_comentario = '';
+    _fecharegistro = '';
   }
 
   get ctlr_usuario => _ctlr_usuario;
@@ -318,8 +318,8 @@ class Agendamiento with ChangeNotifier {
   get deplegalbe2 => _deplegalbe2;
   get deplegalbe3 => _deplegalbe3;
   get sede => _sede;
-  get estadocita => _estadocita;
   get ctlr_comentario => _ctlr_comentario;
+  get fecharegistro => _fecharegistro;
 
   void setUsuario(String usuario) {
     _ctlr_usuario = usuario;
@@ -391,13 +391,13 @@ class Agendamiento with ChangeNotifier {
     notifyListeners();
   }
 
-  void setEstadoCita(String estadocita) {
-    _estadocita = estadocita;
+  void setComentario(String comentario) {
+    _ctlr_comentario = comentario;
     notifyListeners();
   }
 
-  void setComentario(String comentario) {
-    _ctlr_comentario = comentario;
+  void setFechaRegistro(String fecharegistro) {
+    _fecharegistro = fecharegistro;
     notifyListeners();
   }
 }

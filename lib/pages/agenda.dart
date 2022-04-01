@@ -18,7 +18,7 @@ class Agenda extends ConsumerWidget {
     final sede = ref.read(SedeProv);
     TextEditingController ctlr_usuario = TextEditingController();
     TextEditingController ctlr_fecha = TextEditingController();
-    TextEditingController ctlr_hora = TextEditingController();
+    String hora_selecionada = '';
     TextEditingController ctlr_placa = TextEditingController();
     TextEditingController ctlr_modelo = TextEditingController();
     TextEditingController ctlr_nveh = TextEditingController();
@@ -33,7 +33,7 @@ class Agenda extends ConsumerWidget {
     var l;
     var data;
     ctlr_fecha.text = fechaDeHoy();
-
+    String fecharegistro = fechaDeHoy();
     return Scaffold(
       appBar: AppBar(
         backgroundColor:
@@ -88,18 +88,9 @@ class Agenda extends ConsumerWidget {
                 },
               ),
               // hora
-              // CampoFechaHora(
-              //   label: 'Hora',
-              //   width: 150,
-              //   height: 50,
-              //   controller: ctlr_hora,
-              //   myfunction: () {
-              //     onTimeChanged(context, ctlr_hora);
-              //     ref.read(riverhora.notifier).setHora(ctlr_hora.text);
-              //   },
-              // ),
               Consumer(builder: ((context, ref, _) {
                 final val3 = ref.watch(drop3);
+                hora_selecionada = val3.inivalue1;
                 return Desplegable3(
                     opciones: val3.opciones1, opcioninicial: val3.inivalue1);
               }))
@@ -225,7 +216,7 @@ class Agenda extends ConsumerWidget {
                   l = await guardaragenda(
                     usuario: ctlr_usuario.text,
                     fecha: ctlr_fecha.text,
-                    hora: ctlr_hora.text,
+                    hora: hora_selecionada,
                     placa: ctlr_placa.text,
                     modelo: ctlr_modelo.text,
                     nveh: ctlr_nveh.text,
@@ -238,12 +229,13 @@ class Agenda extends ConsumerWidget {
                     desple3: desplegable3,
                     sede: sede.sede,
                     comentario: ctlr_comentario.text,
+                    fecharegistro: fecharegistro,
                   ) as List;
 
                   if (l != null && l.length > 0 && l![0]['status'] == "ok") {
                     val2.setUsuario(ctlr_usuario.text);
                     val2.setFecha(ctlr_fecha.text);
-                    val2.setHora(ctlr_hora.text);
+                    val2.setHora(hora_selecionada);
                     val2.setPlaca(ctlr_placa.text);
                     val2.setModelo(ctlr_modelo.text);
                     val2.setNveh(ctlr_nveh.text);
@@ -256,6 +248,7 @@ class Agenda extends ConsumerWidget {
                     val2.setDesplegable3(desplegable3);
                     val2.setSede(sede.sede);
                     val2.setComentario(ctlr_comentario.text);
+                    val2.setFechaRegistro(fecharegistro);
                     Navigator.pushNamed(context, '/resumen');
                   } else {
                     final sanck = SnackBar(

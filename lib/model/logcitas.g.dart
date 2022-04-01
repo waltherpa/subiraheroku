@@ -22,8 +22,8 @@ LogCitas _$LogCitasFromJson(Map<String, dynamic> json) => LogCitas(
       json['SuptipoProblema'] as String,
       json['TipoLlamada'] as String,
       json['Sede'] as String,
-      json['EstadoCita'] as String,
       json['Comentarios'] as String,
+      json['FechaRegistro'] as String,
     );
 
 Map<String, dynamic> _$LogCitasToJson(LogCitas instance) => <String, dynamic>{
@@ -42,6 +42,6 @@ Map<String, dynamic> _$LogCitasToJson(LogCitas instance) => <String, dynamic>{
       'SuptipoProblema': instance.SuptipoProblema,
       'TipoLlamada': instance.TipoLlamada,
       'Sede': instance.Sede,
-      'EstadoCita': instance.EstadoCita,
       'Comentarios': instance.Comentarios,
+      'FechaRegistro': instance.FechaRegistro,
     };

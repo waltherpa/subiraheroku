@@ -83,8 +83,8 @@ class Resumen extends ConsumerWidget {
                         DataColumn(label: Text('Llamada'), tooltip: 'Llamada'),
                         DataColumn(label: Text('Sede'), tooltip: 'Sede'),
                         DataColumn(
-                            label: Text('Estado'),
-                            tooltip: 'Estado de la Cita'),
+                            label: Text('Fecha Registro'),
+                            tooltip: 'Fecha Registro de la Cita'),
                       ],
                       rows: _.value
                           .map((e) => DataRow(cells: [
@@ -103,7 +103,7 @@ class Resumen extends ConsumerWidget {
                                 DataCell(Text(e.SuptipoProblema)),
                                 DataCell(Text(e.TipoLlamada)),
                                 DataCell(Text(e.Sede)),
-                                DataCell(Text(e.EstadoCita)),
+                                DataCell(Text(e.FechaRegistro)),
                               ]))
                           .toList(),
                     ),

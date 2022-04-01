@@ -39,37 +39,54 @@ class Descarga extends ConsumerWidget {
                   //Accessing via index
                   final Worksheet sheet = workbook.worksheets[0];
                   sheet.showGridlines = true;
+                  sheet.getRangeByIndex(1, 1).setText('Id');
+                  sheet.getRangeByIndex(1, 2).setText('Usuario');
+                  sheet.getRangeByIndex(1, 3).setText('Fecha');
+                  sheet.getRangeByIndex(1, 4).setText('Hora');
+                  sheet.getRangeByIndex(1, 5).setText('Placa');
+                  sheet.getRangeByIndex(1, 6).setText('Modelo');
+                  sheet.getRangeByIndex(1, 7).setText('Nveh');
+                  sheet.getRangeByIndex(1, 8).setText('Nombre');
+                  sheet.getRangeByIndex(1, 9).setText('Documento');
+                  sheet.getRangeByIndex(1, 10).setText('Correo');
+                  sheet.getRangeByIndex(1, 11).setText('Telefono');
+                  sheet.getRangeByIndex(1, 12).setText('Tipo Problema');
+                  sheet.getRangeByIndex(1, 13).setText('Sub TIpo');
+                  sheet.getRangeByIndex(1, 14).setText('Llamada');
+                  sheet.getRangeByIndex(1, 15).setText('Sede');
+                  sheet.getRangeByIndex(1, 16).setText('Fecha Registro');
+
                   for (int i = 0; i < _.value.length; i++) {
                     sheet
-                        .getRangeByIndex(i + 1, 1)
+                        .getRangeByIndex(i + 2, 1)
                         .setText(_.value[i].id_lg.toString());
-                    sheet.getRangeByIndex(i + 1, 2).setText(_.value[i].Usuario);
-                    sheet.getRangeByIndex(i + 1, 3).setText(_.value[i].Fecha);
-                    sheet.getRangeByIndex(i + 1, 4).setText(_.value[i].Hora);
-                    sheet.getRangeByIndex(i + 1, 5).setText(_.value[i].Placa);
-                    sheet.getRangeByIndex(i + 1, 6).setText(_.value[i].Modelo);
-                    sheet.getRangeByIndex(i + 1, 7).setText(_.value[i].Nveh);
-                    sheet.getRangeByIndex(i + 1, 8).setText(_.value[i].Nombre);
+                    sheet.getRangeByIndex(i + 2, 2).setText(_.value[i].Usuario);
+                    sheet.getRangeByIndex(i + 2, 3).setText(_.value[i].Fecha);
+                    sheet.getRangeByIndex(i + 2, 4).setText(_.value[i].Hora);
+                    sheet.getRangeByIndex(i + 2, 5).setText(_.value[i].Placa);
+                    sheet.getRangeByIndex(i + 2, 6).setText(_.value[i].Modelo);
+                    sheet.getRangeByIndex(i + 2, 7).setText(_.value[i].Nveh);
+                    sheet.getRangeByIndex(i + 2, 8).setText(_.value[i].Nombre);
                     sheet
-                        .getRangeByIndex(i + 1, 9)
+                        .getRangeByIndex(i + 2, 9)
                         .setText(_.value[i].Documento);
-                    sheet.getRangeByIndex(i + 1, 10).setText(_.value[i].Correo);
+                    sheet.getRangeByIndex(i + 2, 10).setText(_.value[i].Correo);
                     sheet
-                        .getRangeByIndex(i + 1, 11)
+                        .getRangeByIndex(i + 2, 11)
                         .setText(_.value[i].Telefono);
                     sheet
-                        .getRangeByIndex(i + 1, 12)
+                        .getRangeByIndex(i + 2, 12)
                         .setText(_.value[i].TipoProblema);
                     sheet
-                        .getRangeByIndex(i + 1, 13)
+                        .getRangeByIndex(i + 2, 13)
                         .setText(_.value[i].SuptipoProblema);
                     sheet
-                        .getRangeByIndex(i + 1, 14)
+                        .getRangeByIndex(i + 2, 14)
                         .setText(_.value[i].TipoLlamada);
-                    sheet.getRangeByIndex(i + 1, 15).setText(_.value[i].Sede);
+                    sheet.getRangeByIndex(i + 2, 15).setText(_.value[i].Sede);
                     sheet
-                        .getRangeByIndex(i + 1, 16)
-                        .setText(_.value[i].EstadoCita);
+                        .getRangeByIndex(i + 2, 16)
+                        .setText(_.value[i].FechaRegistro);
                   }
                   //Save and launch the excel.
                   final List<int> bytes = workbook.saveAsStream();

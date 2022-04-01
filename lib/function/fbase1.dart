@@ -89,10 +89,10 @@ Future<List?> guardaragenda({
   String? desple2,
   String? desple3,
   String? sede,
-  String? estadocita,
   String? comentario,
+  String? fecharegistro,
 }) async {
-  if (usuario != "" || fecha != "" || hora != "") {
+  if (usuario != "" || fecha != "" || hora != "" || hora != "vacio") {
     var url =
         Uri.parse('https://walther-function-3.azurewebsites.net/agendar/');
     var response = await http.post(
@@ -112,8 +112,8 @@ Future<List?> guardaragenda({
         'des2': '$desple2',
         'des3': '$desple3',
         'sede': '$sede',
-        'estadocita': '$estadocita',
         'comentario': '$comentario',
+        'fecharegistro': '$fecharegistro'
       }),
       headers: {"Content-Type": "application/json"},
     );

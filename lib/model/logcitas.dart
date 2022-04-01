@@ -19,8 +19,8 @@ class LogCitas {
     this.SuptipoProblema,
     this.TipoLlamada,
     this.Sede,
-    this.EstadoCita,
     this.Comentarios,
+    this.FechaRegistro,
   );
 
   int id_lg;
@@ -38,8 +38,8 @@ class LogCitas {
   String SuptipoProblema;
   String TipoLlamada;
   String Sede;
-  String EstadoCita;
   String Comentarios;
+  String FechaRegistro;
 
   factory LogCitas.fromJson(Map<String, dynamic> json) =>
       _$LogCitasFromJson(json);
