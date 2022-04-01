@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:citas1/provider/globalvariables.dart';
 import 'package:citas1/provider/river_clases.dart';
 import 'package:flutter/material.dart';
@@ -190,6 +189,8 @@ class Desplegable2 extends ConsumerWidget {
 }
 
 // desplegable 3: fechas disponibles
+// clase future
+// clase seleccionado
 class Desplegable3 extends ConsumerWidget {
   Desplegable3({
     Key? key,
@@ -213,8 +214,8 @@ class Desplegable3 extends ConsumerWidget {
               ),
             )
             .toList(),
-        onChanged: (String? y) {
-          ref.watch(drop2).setop(y!);
+        onChanged: (String? x) {
+          ref.watch(drop3).setop(x!);
         },
       ),
     );

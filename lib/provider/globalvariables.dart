@@ -4,6 +4,7 @@ import 'package:citas1/provider/river_clases.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart';
 import '../function/fbase1.dart';
+import '../model/horas.dart';
 
 // recordar usuario
 final riverUsuario = ChangeNotifierProvider((ref) => User());
@@ -23,17 +24,25 @@ final agen = ChangeNotifierProvider((ref) => Agendamiento());
 // change notifier drops2
 final drop2 = ChangeNotifierProvider((ref) => Dd2());
 
-// change notifier drops3 : horas diponibles
+// change notifier drop3---- horas disponibles
 final drop3 = ChangeNotifierProvider((ref) => Dd3());
 
-// future notifier mi resumen
+// future notifier mi LogCitas
 final FMiResumen = Provider((ref) => FutureResumen());
 final resf = FutureProvider<List<LogCitas>>((ref) async {
   final r = ref.read(FMiResumen);
   return r.miresumen();
 });
 
-// future notifier mi resumen
+// Future notifier drops3 : horas diponibles // entra en un loop y no suelta la información
+// final FMishoras = Provider((ref) => FutureHoraDisponible());
+// final horasf =
+//     FutureProvider.family<List<Horas>, List<String>>((ref, data) async {
+//   final r = ref.read(FMishoras);
+//   return r.mishoras(data);
+// });
+
+// future notifier mi placa
 final FMiPlaca = Provider((ref) => BuscarPlaca());
 final presf = FutureProvider.family<List<Base1>, String>((ref, placa) async {
   final r = ref.read(FMiPlaca);

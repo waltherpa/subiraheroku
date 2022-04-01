@@ -1,3 +1,4 @@
+import 'package:citas1/model/horas.dart';
 import 'package:citas1/pages/planner.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +15,7 @@ class Agenda extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final sede = ref.watch(SedeProv);
+    final sede = ref.read(SedeProv);
     TextEditingController ctlr_usuario = TextEditingController();
     TextEditingController ctlr_fecha = TextEditingController();
     TextEditingController ctlr_hora = TextEditingController();
@@ -28,10 +29,11 @@ class Agenda extends ConsumerWidget {
     String desplegable1 = '';
     String desplegable2 = '';
     String desplegable3 = '';
-    String estadocita = '';
     TextEditingController ctlr_comentario = TextEditingController();
     var l;
+    var data;
     ctlr_fecha.text = fechaDeHoy();
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor:
@@ -40,6 +42,7 @@ class Agenda extends ConsumerWidget {
         leading: IconButton(
             onPressed: () {
               Navigator.pop(context);
+              ref.read(drop3).descartame();
             },
             icon: const Icon(Icons.arrow_back)),
       ),
@@ -73,17 +76,33 @@ class Agenda extends ConsumerWidget {
                   ref.read(riverfecha.notifier).setFecha(ctlr_fecha.text);
                 },
               ),
-              // hora
-              CampoFechaHora(
-                label: 'Hora',
-                width: 150,
+              // cargar las fechas
+              BotonCallback(
+                label: '>',
+                width: 50,
                 height: 50,
-                controller: ctlr_hora,
-                myfunction: () {
-                  onTimeChanged(context, ctlr_hora);
-                  ref.read(riverhora.notifier).setHora(ctlr_hora.text);
+                callback: () async {
+                  List<Horas> data = await FutureHoraDisponible()
+                      .mishoras([sede.sede, ctlr_fecha.text]);
+                  ref.read(drop3).setlist(data);
                 },
-              )
+              ),
+              // hora
+              // CampoFechaHora(
+              //   label: 'Hora',
+              //   width: 150,
+              //   height: 50,
+              //   controller: ctlr_hora,
+              //   myfunction: () {
+              //     onTimeChanged(context, ctlr_hora);
+              //     ref.read(riverhora.notifier).setHora(ctlr_hora.text);
+              //   },
+              // ),
+              Consumer(builder: ((context, ref, _) {
+                final val3 = ref.watch(drop3);
+                return Desplegable3(
+                    opciones: val3.opciones1, opcioninicial: val3.inivalue1);
+              }))
             ],
           ),
           Row(
@@ -133,6 +152,7 @@ class Agenda extends ConsumerWidget {
               Consumer(builder: ((context, ref, _) {
                 final val1 = ref.watch(drop1);
                 desplegable3 = val1.inivalue3;
+
                 return Desplegable(
                     opciones: val1.opciones3, opcioninicial: val1.inivalue3);
               })),
@@ -217,7 +237,6 @@ class Agenda extends ConsumerWidget {
                     desple2: desplegable2,
                     desple3: desplegable3,
                     sede: sede.sede,
-                    estadocita: estadocita,
                     comentario: ctlr_comentario.text,
                   ) as List;
 
@@ -236,7 +255,6 @@ class Agenda extends ConsumerWidget {
                     val2.setDesplegable2(desplegable2);
                     val2.setDesplegable3(desplegable3);
                     val2.setSede(sede.sede);
-                    val2.setEstadoCita(estadocita);
                     val2.setComentario(ctlr_comentario.text);
                     Navigator.pushNamed(context, '/resumen');
                   } else {

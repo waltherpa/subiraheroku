@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import '../model/horas.dart';
 
 // capturar la información del usuario
 class User with ChangeNotifier {
@@ -232,13 +233,19 @@ class Dd2 with ChangeNotifier {
   }
 }
 
-// desplegable horas diponibles
+// para el desplegable desplegable -future horas diponibles
 class Dd3 with ChangeNotifier {
-  final _op1 = ['vacio'];
+  List<String?> _op1 = ['vacio'];
   late String _initvalue1;
 
   Dd3() {
-    _initvalue1 = _op1[0];
+    _initvalue1 = _op1[0]!;
+  }
+
+  void setlist(List<Horas> w) {
+    _op1 = w.map((e) => e.Rh).toList();
+    _initvalue1 = _op1[0]!;
+    notifyListeners();
   }
 
   List get opciones1 => _op1;
@@ -249,6 +256,12 @@ class Dd3 with ChangeNotifier {
       _initvalue1 = w;
       notifyListeners();
     }
+  }
+
+  void descartame() {
+    _op1 = ['vacio'];
+    _initvalue1 = _op1[0]!;
+    notifyListeners();
   }
 }
 

@@ -1,4 +1,5 @@
 import 'dart:convert' as convert;
+import 'package:citas1/model/horas.dart';
 import 'package:citas1/model/logcitas.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -7,28 +8,6 @@ import 'package:citas1/model/base1.dart';
 import 'package:intl/intl.dart';
 import '../provider/globalvariables.dart';
 import '../provider/river_clases.dart';
-
-class BuscarPlaca {
-  Future<List<Base1>> buscarrequest(String arg) async {
-    if (arg != "") {
-      var url = Uri.parse('https://walther-function-3.azurewebsites.net/dato/');
-      var response = await http.post(
-        url,
-        body: convert.jsonEncode({'data': '$arg'}),
-        headers: {"Content-Type": "application/json"},
-      );
-      if (response.statusCode == 200) {
-        List<dynamic> data = convert.jsonDecode(response.body);
-        List<Base1> Placas = data.map((e) => Base1.fromJson(e)).toList();
-        return Placas;
-      } else {
-        throw Exception("error en la api");
-      }
-    } else {
-      throw Exception("error en la api");
-    }
-  }
-}
 
 // login
 Future identificarusuario(
@@ -162,7 +141,6 @@ class FutureResumen {
     if (response.statusCode == 200) {
       List<dynamic> data = convert.jsonDecode(response.body);
       List<LogCitas> Citas = data.map((d) => LogCitas.fromJson(d)).toList();
-      print(Citas[1].Placa);
       return Citas;
     } else {
       throw Exception("error en la api");
@@ -178,5 +156,49 @@ String fechaDeHoy() {
     return formattedDate;
   } else {
     return "seleccione fecha";
+  }
+}
+
+// funcion envuelta en una clase --- horas disponibles
+class FutureHoraDisponible {
+  Future<List<Horas>> mishoras(List<String> listadedatos) async {
+    var url =
+        Uri.parse('https://walther-function-3.azurewebsites.net/horalibre/');
+    var response = await http.post(
+      url,
+      body: convert.jsonEncode(
+          {'sede': '${listadedatos[0]}', 'fecha': '${listadedatos[1]}'}),
+      headers: {"Content-Type": "application/json"},
+    );
+    if (response.statusCode == 200) {
+      List<dynamic> data = convert.jsonDecode(response.body);
+      List<Horas> TheHoras = data.map((d) => Horas.fromJson(d)).toList();
+      return TheHoras;
+    } else {
+      throw Exception("error en la api");
+    }
+  }
+}
+
+// buscar placa
+class BuscarPlaca {
+  Future<List<Base1>> buscarrequest(String arg) async {
+    if (arg != "") {
+      var url = Uri.parse('https://walther-function-3.azurewebsites.net/dato/');
+      var response = await http.post(
+        url,
+        body: convert.jsonEncode({'data': '$arg'}),
+        headers: {"Content-Type": "application/json"},
+      );
+      if (response.statusCode == 200) {
+        List<dynamic> data = convert.jsonDecode(response.body);
+        List<Base1> Placas = data.map((e) => Base1.fromJson(e)).toList();
+        return Placas;
+      } else {
+        throw Exception("error en la api");
+      }
+    } else {
+      throw Exception("error en la api");
+    }
   }
 }
