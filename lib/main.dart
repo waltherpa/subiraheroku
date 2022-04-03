@@ -6,7 +6,7 @@ import './pages/planner.dart';
 import './pages/resumen.dart';
 import './function/fbase1.dart';
 import './common/widgets.dart';
-import 'provider/river_clases.dart';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import './pages/descargas.dart';
 
@@ -28,7 +28,7 @@ class MisCitas extends ConsumerWidget {
         '/': (context) => LandingScreen(),
         '/planner': (context) => Planner(),
         '/agenda': (context) => Agenda(),
-        '/busqueda': (context) => Busqueda(),
+        '/busqueda': (context) => const Busqueda(),
         '/resumen': (context) => const Resumen(),
         '/descarga': (context) => const Descarga(),
       },

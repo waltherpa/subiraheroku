@@ -1,7 +1,7 @@
 import 'package:citas1/provider/globalvariables.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
-import '../model/logcitas.dart';
+
 import '../common/widgets.dart';
 
 class Resumen extends ConsumerWidget {

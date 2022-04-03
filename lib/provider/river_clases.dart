@@ -267,20 +267,31 @@ class Dd3 with ChangeNotifier {
 
 // Class de datos para agendamiento
 class Agendamiento with ChangeNotifier {
+  // ignore: non_constant_identifier_names
   late String _ctlr_usuario;
+  // ignore: non_constant_identifier_names
   late String _ctlr_fecha;
+  // ignore: non_constant_identifier_names
   late String _ctlr_hora;
+  // ignore: non_constant_identifier_names
   late String _ctlr_placa;
+  // ignore: non_constant_identifier_names
   late String _ctlr_modelo;
+  // ignore: non_constant_identifier_names
   late String _ctlr_nveh;
+  // ignore: non_constant_identifier_names
   late String _ctlr_nombre;
+  // ignore: non_constant_identifier_names
   late String _ctlr_doc;
+  // ignore: non_constant_identifier_names
   late String _ctlr_correo;
+  // ignore: non_constant_identifier_names
   late String _ctlr_telefono;
   late String _deplegalbe1;
   late String _deplegalbe2;
   late String _deplegalbe3;
   late String _sede;
+  // ignore: non_constant_identifier_names
   late String _ctlr_comentario;
   late String _fecharegistro;
 
@@ -304,20 +315,31 @@ class Agendamiento with ChangeNotifier {
     _fecharegistro = '';
   }
 
+  // ignore: non_constant_identifier_names
   get ctlr_usuario => _ctlr_usuario;
+  // ignore: non_constant_identifier_names
   get ctlr_fecha => _ctlr_fecha;
+  // ignore: non_constant_identifier_names
   get ctlr_hora => _ctlr_hora;
+  // ignore: non_constant_identifier_names
   get ctlr_placa => _ctlr_placa;
+  // ignore: non_constant_identifier_names
   get ctlr_modelo => _ctlr_modelo;
+  // ignore: non_constant_identifier_names
   get ctlr_nveh => _ctlr_nveh;
+  // ignore: non_constant_identifier_names
   get ctlr_nombre => _ctlr_nombre;
+  // ignore: non_constant_identifier_names
   get ctlr_doc => _ctlr_doc;
+  // ignore: non_constant_identifier_names
   get ctlr_correo => _ctlr_correo;
+  // ignore: non_constant_identifier_names
   get ctlr_telefono => _ctlr_telefono;
   get deplegalbe1 => _deplegalbe1;
   get deplegalbe2 => _deplegalbe2;
   get deplegalbe3 => _deplegalbe3;
   get sede => _sede;
+  // ignore: non_constant_identifier_names
   get ctlr_comentario => _ctlr_comentario;
   get fecharegistro => _fecharegistro;
 

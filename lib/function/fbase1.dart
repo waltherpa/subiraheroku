@@ -2,12 +2,10 @@ import 'dart:convert' as convert;
 import 'package:citas1/model/horas.dart';
 import 'package:citas1/model/logcitas.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:http/http.dart' as http;
 import 'package:citas1/model/base1.dart';
 import 'package:intl/intl.dart';
-import '../provider/globalvariables.dart';
-import '../provider/river_clases.dart';
 
 // login
 Future identificarusuario(
@@ -140,6 +138,7 @@ class FutureResumen {
     );
     if (response.statusCode == 200) {
       List<dynamic> data = convert.jsonDecode(response.body);
+      // ignore: non_constant_identifier_names
       List<LogCitas> Citas = data.map((d) => LogCitas.fromJson(d)).toList();
       return Citas;
     } else {
@@ -172,6 +171,27 @@ class FutureHoraDisponible {
     );
     if (response.statusCode == 200) {
       List<dynamic> data = convert.jsonDecode(response.body);
+      // ignore: non_constant_identifier_names
+      List<Horas> TheHoras = data.map((d) => Horas.fromJson(d)).toList();
+      return TheHoras;
+    } else {
+      throw Exception("error en la api");
+    }
+  }
+}
+
+// funcion envuelta en una clase --- horas disponibles
+class RangoDeHora {
+  Future<List<Horas>> mishoras() async {
+    var url =
+        Uri.parse('https://walther-function-3.azurewebsites.net/horarios/');
+    var response = await http.post(
+      url,
+      headers: {"Content-Type": "application/json"},
+    );
+    if (response.statusCode == 200) {
+      List<dynamic> data = convert.jsonDecode(response.body);
+      // ignore: non_constant_identifier_names
       List<Horas> TheHoras = data.map((d) => Horas.fromJson(d)).toList();
       return TheHoras;
     } else {
@@ -192,6 +212,7 @@ class BuscarPlaca {
       );
       if (response.statusCode == 200) {
         List<dynamic> data = convert.jsonDecode(response.body);
+        // ignore: non_constant_identifier_names
         List<Base1> Placas = data.map((e) => Base1.fromJson(e)).toList();
         return Placas;
       } else {
@@ -201,4 +222,34 @@ class BuscarPlaca {
       throw Exception("error en la api");
     }
   }
+}
+
+// ---------------------------------------------------------------
+//                        planner table
+// ---------------------------------------------------------------
+//lista de rango de 15 fechas como texto
+List<String> listadefechas() {
+  DateTime date1 = DateTime.now();
+  List<String> dias = [];
+  dias.add(DateFormat('dd-MM-yyyy').format(date1));
+  for (int i = 0; i < 14; i++) {
+    dias.add(DateFormat('dd-MM-yyyy').format(date1.add(Duration(days: i + 1))));
+  }
+  return dias;
+}
+
+// trasforma string in dia de la semana
+String diadelasemana(String _data) {
+  List<String> _dl = _data.split("-");
+  DateTime dt = DateTime.parse('${_dl[2]}-${_dl[1]}-${_dl[0]}');
+  Map<int, String> semana = {
+    1: "Lunes",
+    2: "Martes",
+    3: "Miercoles",
+    4: "Jueves",
+    5: "Viernes",
+    6: "Sabado",
+    7: "Domingo"
+  };
+  return semana[dt.weekday]!;
 }

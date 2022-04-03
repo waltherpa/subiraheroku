@@ -1,6 +1,5 @@
-import 'dart:async';
 import 'package:citas1/provider/globalvariables.dart';
-import 'package:citas1/provider/river_clases.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -871,8 +870,8 @@ class CardHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero),
-      margin: EdgeInsets.only(left: 0, right: 0, top: 0),
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
+      margin: const EdgeInsets.only(left: 0, right: 0, top: 0),
       color: color,
       child: SizedBox(
         height: altura,

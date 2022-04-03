@@ -22,7 +22,7 @@ class Busqueda extends ConsumerWidget {
           final respuesta = ref.watch(presf(placa));
           return respuesta.map(
               error: (_) => Text(_.error.toString()),
-              loading: (_) => CircularProgressIndicator(),
+              loading: (_) => const CircularProgressIndicator(),
               data: (_) => Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [

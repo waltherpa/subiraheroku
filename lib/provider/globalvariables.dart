@@ -2,7 +2,7 @@ import 'package:citas1/model/base1.dart';
 import 'package:citas1/model/logcitas.dart';
 import 'package:citas1/provider/river_clases.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:http/http.dart';
+
 import '../function/fbase1.dart';
 import '../model/horas.dart';
 
@@ -28,21 +28,23 @@ final drop2 = ChangeNotifierProvider((ref) => Dd2());
 final drop3 = ChangeNotifierProvider((ref) => Dd3());
 
 // future notifier mi LogCitas
+// ignore: non_constant_identifier_names
 final FMiResumen = Provider((ref) => FutureResumen());
 final resf = FutureProvider.autoDispose<List<LogCitas>>((ref) async {
   final r = ref.read(FMiResumen);
   return r.miresumen();
 });
 
-// Future notifier drops3 : horas diponibles // entra en un loop y no suelta la información
-// final FMishoras = Provider((ref) => FutureHoraDisponible());
-// final horasf =
-//     FutureProvider.family<List<Horas>, List<String>>((ref, data) async {
-//   final r = ref.read(FMishoras);
-//   return r.mishoras(data);
-// });
+// Future horas de trabajo:
+// ignore: non_constant_identifier_names
+final FHorasT = Provider((ref) => RangoDeHora());
+final horasf = FutureProvider<List<Horas>>((ref) async {
+  final r = ref.read(FHorasT);
+  return r.mishoras();
+});
 
 // future notifier mi placa
+// ignore: non_constant_identifier_names
 final FMiPlaca = Provider((ref) => BuscarPlaca());
 final presf = FutureProvider.family<List<Base1>, String>((ref, placa) async {
   final r = ref.read(FMiPlaca);
@@ -50,4 +52,5 @@ final presf = FutureProvider.family<List<Base1>, String>((ref, placa) async {
 });
 
 // change notifier thema
+// ignore: non_constant_identifier_names
 final SedeProv = ChangeNotifierProvider((ref) => MiSede());

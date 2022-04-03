@@ -1,34 +1,44 @@
 import 'package:citas1/model/horas.dart';
-import 'package:citas1/pages/planner.dart';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 
 import '../common/widgets.dart';
 import '../function/fbase1.dart';
 import '../provider/globalvariables.dart';
-import '../provider/river_clases.dart';
 
 class Agenda extends ConsumerWidget {
-  Agenda({
+  const Agenda({
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final sede = ref.read(SedeProv);
+    // ignore: non_constant_identifier_names
     TextEditingController ctlr_usuario = TextEditingController();
+    // ignore: non_constant_identifier_names
     TextEditingController ctlr_fecha = TextEditingController();
+    // ignore: non_constant_identifier_names
     String hora_selecionada = '';
+    // ignore: non_constant_identifier_names
     TextEditingController ctlr_placa = TextEditingController();
+    // ignore: non_constant_identifier_names
     TextEditingController ctlr_modelo = TextEditingController();
+    // ignore: non_constant_identifier_names
     TextEditingController ctlr_nveh = TextEditingController();
+    // ignore: non_constant_identifier_names
     TextEditingController ctlr_nombre = TextEditingController();
+    // ignore: non_constant_identifier_names
     TextEditingController ctlr_doc = TextEditingController();
+    // ignore: non_constant_identifier_names
     TextEditingController ctlr_correo = TextEditingController();
+    // ignore: non_constant_identifier_names
     TextEditingController ctlr_telefono = TextEditingController();
     String desplegable1 = '';
     String desplegable2 = '';
     String desplegable3 = '';
+    // ignore: non_constant_identifier_names
     TextEditingController ctlr_comentario = TextEditingController();
     var l;
     var data;
@@ -42,7 +52,7 @@ class Agenda extends ConsumerWidget {
         leading: IconButton(
             onPressed: () {
               Navigator.pop(context);
-              ref.read(drop3).descartame();
+              ref.read(drop3).descartame(); // reiniciar horario
             },
             icon: const Icon(Icons.arrow_back)),
       ),
@@ -249,6 +259,7 @@ class Agenda extends ConsumerWidget {
                     val2.setSede(sede.sede);
                     val2.setComentario(ctlr_comentario.text);
                     val2.setFechaRegistro(fecharegistro);
+                    ref.read(drop3).descartame(); // reiniciar horario
                     Navigator.pushNamed(context, '/resumen');
                   } else {
                     final sanck = SnackBar(

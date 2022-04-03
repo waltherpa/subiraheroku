@@ -1,8 +1,9 @@
 import 'package:citas1/provider/globalvariables.dart';
-import 'package:citas1/provider/river_clases.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../common/widgets.dart';
+import '../common/widgetplanner.dart';
 
 class Planner extends ConsumerWidget {
   Planner({Key? key}) : super(key: key);
@@ -91,9 +92,50 @@ class Planner extends ConsumerWidget {
               ),
             ),
             // table time planner
-            const Expanded(
+            Expanded(
               flex: 5,
-              child: TatblaPlanner(),
+              child: SingleChildScrollView(
+                child: Row(
+                  children: [
+                    // table fixed part
+                    Consumer(builder: (((context, ref, child) {
+                      final horarios = ref.watch(horasf);
+                      return horarios.map(
+                          error: (_) => Text(_.error.toString()),
+                          loading: (_) => Container(
+                                width: 100,
+                                child: const LinearProgressIndicator(),
+                              ),
+                          data: (_) => TatblaHorarios(
+                                datos: _.value,
+                              ));
+                    }))),
+                    // table moving part
+                    Expanded(
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Container(
+                          child: Consumer(
+                            builder: (((context, ref, child) {
+                              final resumen = ref.watch(resf);
+                              return resumen.map(
+                                error: (_) => Text(_.error.toString()),
+                                loading: (_) => Container(
+                                  child: const LinearProgressIndicator(),
+                                  width: 100,
+                                ),
+                                data: (_) => TatblaPlanner2(
+                                  datos: _.value,
+                                ),
+                              );
+                            })),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ),
           ],
         ),

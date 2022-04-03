@@ -4,7 +4,6 @@ import 'package:syncfusion_flutter_xlsio/xlsio.dart';
 import '../common/widgets.dart';
 import '../function/mobile.dart' if (dart.library.html) '../function/web.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../function/fbase1.dart';
 
 class Descarga extends ConsumerWidget {
   const Descarga({Key? key}) : super(key: key);
@@ -26,7 +25,7 @@ class Descarga extends ConsumerWidget {
         builder: (((context, ref, child) {
           return data.map(
             error: (_) => Text(_.error.toString()),
-            loading: (_) => CircularProgressIndicator(),
+            loading: (_) => const CircularProgressIndicator(),
             data: (_) => Center(
               child: GuardarBoton(
                 label: 'Descarga',
