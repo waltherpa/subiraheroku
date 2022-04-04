@@ -12,10 +12,10 @@ class Planner extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final sede = ref.watch(SedeProv);
+    // final resumen = ref.watch(resf);
     return Scaffold(
       appBar: AppBar(
-        backgroundColor:
-            (sede.sede == "Surquillo") ? Colors.blue : Colors.green,
+        backgroundColor: (sede.sede == "Surquillo") ? Colors.blue : Colors.green,
         title: Text('Planner: ${sede.sede}'),
         leading: IconButton(
           onPressed: () {
@@ -44,7 +44,7 @@ class Planner extends ConsumerWidget {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   // boton agendar
-                  const Boton(
+                  Boton(
                     label: "Agendar",
                     width: 150,
                     height: 50,
@@ -66,18 +66,22 @@ class Planner extends ConsumerWidget {
                     controlador: placaCtrl,
                   ),
                   // boton resumen
-                  const Boton(
+                  Boton(
                     label: "Resumen",
                     width: 150,
                     height: 50,
                     ruta: "/resumen",
                   ),
                   // boton seguiente semana
-                  const Boton(
-                    label: "<",
+                  BotonCallback(
+                    label: "A",
                     width: 50,
                     height: 50,
-                    ruta: "/",
+                    callback: () async {
+                      final resumen = ref.watch(resf);
+                      ref.read(resf);
+                      // (context as Element).reassemble();
+                    },
                   ),
                   BotonCallback(
                     label: ">",

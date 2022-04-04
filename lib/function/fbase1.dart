@@ -8,8 +8,7 @@ import 'package:citas1/model/base1.dart';
 import 'package:intl/intl.dart';
 
 // login
-Future identificarusuario(
-    {TextEditingController? clave, TextEditingController? usuario}) async {
+Future identificarusuario({TextEditingController? clave, TextEditingController? usuario}) async {
   if (usuario?.text != "" && clave?.text != "") {
     var url = Uri.parse('https://walther-function-3.azurewebsites.net/login/');
     var u = usuario!.text;
@@ -91,8 +90,7 @@ Future<List?> guardaragenda({
   String? fecharegistro,
 }) async {
   if (usuario != "" || fecha != "" || hora != "" || hora != "vacio") {
-    var url =
-        Uri.parse('https://walther-function-3.azurewebsites.net/agendar/');
+    var url = Uri.parse('https://walther-function-3.azurewebsites.net/agendar/');
     var response = await http.post(
       url,
       body: convert.jsonEncode({
@@ -130,8 +128,7 @@ Future<List?> guardaragenda({
 // funcion envuelta en una clase --- resumen
 class FutureResumen {
   Future<List<LogCitas>> miresumen() async {
-    var url =
-        Uri.parse('https://walther-function-3.azurewebsites.net/miresumen/');
+    var url = Uri.parse('https://walther-function-3.azurewebsites.net/miresumen/');
     var response = await http.post(
       url,
       headers: {"Content-Type": "application/json"},
@@ -161,12 +158,10 @@ String fechaDeHoy() {
 // funcion envuelta en una clase --- horas disponibles
 class FutureHoraDisponible {
   Future<List<Horas>> mishoras(List<String> listadedatos) async {
-    var url =
-        Uri.parse('https://walther-function-3.azurewebsites.net/horalibre/');
+    var url = Uri.parse('https://walther-function-3.azurewebsites.net/horalibre/');
     var response = await http.post(
       url,
-      body: convert.jsonEncode(
-          {'sede': '${listadedatos[0]}', 'fecha': '${listadedatos[1]}'}),
+      body: convert.jsonEncode({'sede': '${listadedatos[0]}', 'fecha': '${listadedatos[1]}'}),
       headers: {"Content-Type": "application/json"},
     );
     if (response.statusCode == 200) {
@@ -183,8 +178,7 @@ class FutureHoraDisponible {
 // funcion envuelta en una clase --- horas disponibles
 class RangoDeHora {
   Future<List<Horas>> mishoras() async {
-    var url =
-        Uri.parse('https://walther-function-3.azurewebsites.net/horarios/');
+    var url = Uri.parse('https://walther-function-3.azurewebsites.net/horarios/');
     var response = await http.post(
       url,
       headers: {"Content-Type": "application/json"},

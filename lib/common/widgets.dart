@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 // Boton
 class Boton extends StatelessWidget {
-  const Boton({
+  Boton({
     Key? key,
     this.label = "label",
     this.width = 10,
@@ -13,6 +13,7 @@ class Boton extends StatelessWidget {
     this.ruta,
     this.controlador,
     this.funcion,
+    this.color = Colors.white,
   }) : super(key: key);
   final String label;
   final double width;
@@ -20,6 +21,7 @@ class Boton extends StatelessWidget {
   final String? ruta;
   final TextEditingController? controlador;
   final void Function()? funcion;
+  Color color;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +33,7 @@ class Boton extends StatelessWidget {
         child: ElevatedButton(
           onPressed: () {
             if (ruta != null) {
-              Navigator.pushNamed(context, ruta!);
+              Navigator.of(context).pushNamed(ruta!);
             }
           },
           child: Text(
@@ -42,7 +44,7 @@ class Boton extends StatelessWidget {
             ),
           ),
           style: ElevatedButton.styleFrom(
-            primary: Colors.white,
+            primary: color,
           ),
         ),
       ),
@@ -115,8 +117,7 @@ class Comentarios extends StatelessWidget {
           controller: controller,
           maxLines: 4,
           keyboardType: TextInputType.multiline,
-          decoration: InputDecoration(
-              border: const OutlineInputBorder(), labelText: label),
+          decoration: InputDecoration(border: const OutlineInputBorder(), labelText: label),
         ),
       ),
     );
@@ -246,8 +247,7 @@ class TatblaPlanner extends StatelessWidget {
                 const Card(
                   margin: EdgeInsets.all(0),
                   shape: RoundedRectangleBorder(
-                      borderRadius:
-                          BorderRadius.only(topLeft: Radius.circular(10))),
+                      borderRadius: BorderRadius.only(topLeft: Radius.circular(10))),
                   color: Colors.blue,
                   child: SizedBox(
                     height: 30,
@@ -267,8 +267,7 @@ class TatblaPlanner extends StatelessWidget {
                 const Card(
                   margin: EdgeInsets.all(0),
                   shape: RoundedRectangleBorder(
-                      borderRadius:
-                          BorderRadius.only(topRight: Radius.circular(10))),
+                      borderRadius: BorderRadius.only(topRight: Radius.circular(10))),
                   color: Colors.blue,
                   child: SizedBox(
                     height: 30,
@@ -295,10 +294,7 @@ class TatblaPlanner extends StatelessWidget {
             ),
             TableRow(
               children: [
-                CardHeader(
-                    label: "7:00-7:10",
-                    color: Colors.blue.shade200,
-                    altura: 20),
+                CardHeader(label: "7:00-7:10", color: Colors.blue.shade200, altura: 20),
                 CardData(slot1: "-", slot2: "-"),
                 CardData(slot1: "-", slot2: "-"),
                 CardData(slot1: "354765", slot2: "-"),
@@ -309,10 +305,7 @@ class TatblaPlanner extends StatelessWidget {
             ),
             TableRow(
               children: [
-                CardHeader(
-                    label: "7:00-7:10",
-                    color: Colors.blue.shade200,
-                    altura: 20),
+                CardHeader(label: "7:00-7:10", color: Colors.blue.shade200, altura: 20),
                 CardData(slot1: "4331TB", slot2: "-"),
                 CardData(slot1: "-", slot2: "-"),
                 CardData(slot1: "-", slot2: "-"),
@@ -323,10 +316,7 @@ class TatblaPlanner extends StatelessWidget {
             ),
             TableRow(
               children: [
-                CardHeader(
-                    label: "7:10-7:20",
-                    color: Colors.blue.shade200,
-                    altura: 20),
+                CardHeader(label: "7:10-7:20", color: Colors.blue.shade200, altura: 20),
                 CardData(slot1: "2824JB", slot2: "-"),
                 CardData(slot1: "-", slot2: "-"),
                 CardData(slot1: "-", slot2: "-"),
@@ -337,10 +327,7 @@ class TatblaPlanner extends StatelessWidget {
             ),
             TableRow(
               children: [
-                CardHeader(
-                    label: "7:20-7:30",
-                    color: Colors.blue.shade200,
-                    altura: 20),
+                CardHeader(label: "7:20-7:30", color: Colors.blue.shade200, altura: 20),
                 CardData(slot1: "3305QB", slot2: "4586DB"),
                 CardData(slot1: "-", slot2: "-"),
                 CardData(slot1: "-", slot2: "3444AB"),
@@ -351,10 +338,7 @@ class TatblaPlanner extends StatelessWidget {
             ),
             TableRow(
               children: [
-                CardHeader(
-                    label: "7:30-7:40",
-                    color: Colors.blue.shade200,
-                    altura: 20),
+                CardHeader(label: "7:30-7:40", color: Colors.blue.shade200, altura: 20),
                 CardData(slot1: "6073MB", slot2: "-"),
                 CardData(slot1: "-", slot2: "-"),
                 CardData(slot1: "4944TB", slot2: "7356KB"),
@@ -365,10 +349,7 @@ class TatblaPlanner extends StatelessWidget {
             ),
             TableRow(
               children: [
-                CardHeader(
-                    label: "7:40-7:50",
-                    color: Colors.blue.shade200,
-                    altura: 20),
+                CardHeader(label: "7:40-7:50", color: Colors.blue.shade200, altura: 20),
                 CardData(slot1: "7183EA", slot2: "2423RB"),
                 CardData(slot1: "-", slot2: "-"),
                 CardData(slot1: "-", slot2: "-"),
@@ -379,10 +360,7 @@ class TatblaPlanner extends StatelessWidget {
             ),
             TableRow(
               children: [
-                CardHeader(
-                    label: "7:50-8:00",
-                    color: Colors.blue.shade200,
-                    altura: 20),
+                CardHeader(label: "7:50-8:00", color: Colors.blue.shade200, altura: 20),
                 CardData(slot1: "1379QB", slot2: "6662TB"),
                 CardData(slot1: "8357TB", slot2: "-"),
                 CardData(slot1: "-", slot2: "-"),
@@ -393,10 +371,7 @@ class TatblaPlanner extends StatelessWidget {
             ),
             TableRow(
               children: [
-                CardHeader(
-                    label: "8:00-8:10",
-                    color: Colors.blue.shade200,
-                    altura: 20),
+                CardHeader(label: "8:00-8:10", color: Colors.blue.shade200, altura: 20),
                 CardData(slot1: "1970TB", slot2: "5798PB"),
                 CardData(slot1: "-", slot2: "-"),
                 CardData(slot1: "650203", slot2: "-"),
@@ -407,10 +382,7 @@ class TatblaPlanner extends StatelessWidget {
             ),
             TableRow(
               children: [
-                CardHeader(
-                    label: "8:10-8:20",
-                    color: Colors.blue.shade200,
-                    altura: 20),
+                CardHeader(label: "8:10-8:20", color: Colors.blue.shade200, altura: 20),
                 CardData(slot1: "-", slot2: "9586TB"),
                 CardData(slot1: "-", slot2: "-"),
                 CardData(slot1: "-", slot2: "-"),
@@ -421,10 +393,7 @@ class TatblaPlanner extends StatelessWidget {
             ),
             TableRow(
               children: [
-                CardHeader(
-                    label: "8:20-8:30",
-                    color: Colors.blue.shade200,
-                    altura: 20),
+                CardHeader(label: "8:20-8:30", color: Colors.blue.shade200, altura: 20),
                 CardData(slot1: "-", slot2: "-"),
                 CardData(slot1: "8977QB", slot2: "-"),
                 CardData(slot1: "-", slot2: "-"),
@@ -435,10 +404,7 @@ class TatblaPlanner extends StatelessWidget {
             ),
             TableRow(
               children: [
-                CardHeader(
-                    label: "8:30-8:40",
-                    color: Colors.blue.shade200,
-                    altura: 20),
+                CardHeader(label: "8:30-8:40", color: Colors.blue.shade200, altura: 20),
                 CardData(slot1: "-", slot2: "-"),
                 CardData(slot1: "-", slot2: "-"),
                 CardData(slot1: "0586RB", slot2: "-"),
@@ -449,10 +415,7 @@ class TatblaPlanner extends StatelessWidget {
             ),
             TableRow(
               children: [
-                CardHeader(
-                    label: "8:40-8:50",
-                    color: Colors.blue.shade200,
-                    altura: 20),
+                CardHeader(label: "8:40-8:50", color: Colors.blue.shade200, altura: 20),
                 CardData(slot1: "-", slot2: "1699VB"),
                 CardData(slot1: "-", slot2: "-"),
                 CardData(slot1: "-", slot2: "-"),
@@ -463,10 +426,7 @@ class TatblaPlanner extends StatelessWidget {
             ),
             TableRow(
               children: [
-                CardHeader(
-                    label: "8:50-9:00",
-                    color: Colors.blue.shade200,
-                    altura: 20),
+                CardHeader(label: "8:50-9:00", color: Colors.blue.shade200, altura: 20),
                 CardData(slot1: "-", slot2: "-"),
                 CardData(slot1: "-", slot2: "-"),
                 CardData(slot1: "-", slot2: "-"),
@@ -477,10 +437,7 @@ class TatblaPlanner extends StatelessWidget {
             ),
             TableRow(
               children: [
-                CardHeader(
-                    label: "9:00-9:10",
-                    color: Colors.blue.shade200,
-                    altura: 20),
+                CardHeader(label: "9:00-9:10", color: Colors.blue.shade200, altura: 20),
                 CardData(slot1: "-", slot2: "-"),
                 CardData(slot1: "-", slot2: "-"),
                 CardData(slot1: "-", slot2: "-"),
@@ -491,10 +448,7 @@ class TatblaPlanner extends StatelessWidget {
             ),
             TableRow(
               children: [
-                CardHeader(
-                    label: "9:10-9:20",
-                    color: Colors.blue.shade200,
-                    altura: 20),
+                CardHeader(label: "9:10-9:20", color: Colors.blue.shade200, altura: 20),
                 CardData(slot1: "-", slot2: "-"),
                 CardData(slot1: "-", slot2: "-"),
                 CardData(slot1: "-", slot2: "-"),
@@ -505,10 +459,7 @@ class TatblaPlanner extends StatelessWidget {
             ),
             TableRow(
               children: [
-                CardHeader(
-                    label: "9:20-9:30",
-                    color: Colors.blue.shade200,
-                    altura: 20),
+                CardHeader(label: "9:20-9:30", color: Colors.blue.shade200, altura: 20),
                 CardData(slot1: "-", slot2: "-"),
                 CardData(slot1: "-", slot2: "-"),
                 CardData(slot1: "-", slot2: "-"),
@@ -519,10 +470,7 @@ class TatblaPlanner extends StatelessWidget {
             ),
             TableRow(
               children: [
-                CardHeader(
-                    label: "9:30-9:40",
-                    color: Colors.blue.shade200,
-                    altura: 20),
+                CardHeader(label: "9:30-9:40", color: Colors.blue.shade200, altura: 20),
                 CardData(slot1: "-", slot2: "-"),
                 CardData(slot1: "-", slot2: "-"),
                 CardData(slot1: "-", slot2: "-"),
@@ -533,10 +481,7 @@ class TatblaPlanner extends StatelessWidget {
             ),
             TableRow(
               children: [
-                CardHeader(
-                    label: "9:40-9:50",
-                    color: Colors.blue.shade200,
-                    altura: 20),
+                CardHeader(label: "9:40-9:50", color: Colors.blue.shade200, altura: 20),
                 CardData(slot1: "-", slot2: "-"),
                 CardData(slot1: "-", slot2: "-"),
                 CardData(slot1: "-", slot2: "-"),
@@ -547,10 +492,7 @@ class TatblaPlanner extends StatelessWidget {
             ),
             TableRow(
               children: [
-                CardHeader(
-                    label: "9:50-10:00",
-                    color: Colors.blue.shade200,
-                    altura: 20),
+                CardHeader(label: "9:50-10:00", color: Colors.blue.shade200, altura: 20),
                 CardData(slot1: "-", slot2: "-"),
                 CardData(slot1: "-", slot2: "-"),
                 CardData(slot1: "-", slot2: "-"),
@@ -561,10 +503,7 @@ class TatblaPlanner extends StatelessWidget {
             ),
             TableRow(
               children: [
-                CardHeader(
-                    label: "10:00-10:10",
-                    color: Colors.blue.shade200,
-                    altura: 20),
+                CardHeader(label: "10:00-10:10", color: Colors.blue.shade200, altura: 20),
                 CardData(slot1: "-", slot2: "-"),
                 CardData(slot1: "-", slot2: "-"),
                 CardData(slot1: "-", slot2: "-"),
@@ -575,10 +514,7 @@ class TatblaPlanner extends StatelessWidget {
             ),
             TableRow(
               children: [
-                CardHeader(
-                    label: "10:10-10:20",
-                    color: Colors.blue.shade200,
-                    altura: 20),
+                CardHeader(label: "10:10-10:20", color: Colors.blue.shade200, altura: 20),
                 CardData(slot1: "-", slot2: "-"),
                 CardData(slot1: "-", slot2: "-"),
                 CardData(slot1: "-", slot2: "-"),
@@ -589,10 +525,7 @@ class TatblaPlanner extends StatelessWidget {
             ),
             TableRow(
               children: [
-                CardHeader(
-                    label: "10:20-10:30",
-                    color: Colors.blue.shade200,
-                    altura: 20),
+                CardHeader(label: "10:20-10:30", color: Colors.blue.shade200, altura: 20),
                 CardData(slot1: "-", slot2: "-"),
                 CardData(slot1: "-", slot2: "-"),
                 CardData(slot1: "-", slot2: "-"),
@@ -603,10 +536,7 @@ class TatblaPlanner extends StatelessWidget {
             ),
             TableRow(
               children: [
-                CardHeader(
-                    label: "10:30-10:40",
-                    color: Colors.blue.shade200,
-                    altura: 20),
+                CardHeader(label: "10:30-10:40", color: Colors.blue.shade200, altura: 20),
                 CardData(slot1: "-", slot2: "-"),
                 CardData(slot1: "-", slot2: "-"),
                 CardData(slot1: "-", slot2: "-"),
@@ -617,10 +547,7 @@ class TatblaPlanner extends StatelessWidget {
             ),
             TableRow(
               children: [
-                CardHeader(
-                    label: "10:40-10:50",
-                    color: Colors.blue.shade200,
-                    altura: 20),
+                CardHeader(label: "10:40-10:50", color: Colors.blue.shade200, altura: 20),
                 CardData(slot1: "-", slot2: "-"),
                 CardData(slot1: "-", slot2: "-"),
                 CardData(slot1: "-", slot2: "-"),
@@ -631,10 +558,7 @@ class TatblaPlanner extends StatelessWidget {
             ),
             TableRow(
               children: [
-                CardHeader(
-                    label: "10:50-11:00",
-                    color: Colors.blue.shade200,
-                    altura: 20),
+                CardHeader(label: "10:50-11:00", color: Colors.blue.shade200, altura: 20),
                 CardData(slot1: "-", slot2: "-"),
                 CardData(slot1: "-", slot2: "-"),
                 CardData(slot1: "-", slot2: "-"),
@@ -645,10 +569,7 @@ class TatblaPlanner extends StatelessWidget {
             ),
             TableRow(
               children: [
-                CardHeader(
-                    label: "11:00-11:10",
-                    color: Colors.blue.shade200,
-                    altura: 20),
+                CardHeader(label: "11:00-11:10", color: Colors.blue.shade200, altura: 20),
                 CardData(slot1: "-", slot2: "-"),
                 CardData(slot1: "-", slot2: "-"),
                 CardData(slot1: "-", slot2: "-"),
@@ -659,10 +580,7 @@ class TatblaPlanner extends StatelessWidget {
             ),
             TableRow(
               children: [
-                CardHeader(
-                    label: "11:10-11:20",
-                    color: Colors.blue.shade200,
-                    altura: 20),
+                CardHeader(label: "11:10-11:20", color: Colors.blue.shade200, altura: 20),
                 CardData(slot1: "-", slot2: "-"),
                 CardData(slot1: "-", slot2: "-"),
                 CardData(slot1: "-", slot2: "-"),
@@ -673,10 +591,7 @@ class TatblaPlanner extends StatelessWidget {
             ),
             TableRow(
               children: [
-                CardHeader(
-                    label: "11:20-11:30",
-                    color: Colors.blue.shade200,
-                    altura: 20),
+                CardHeader(label: "11:20-11:30", color: Colors.blue.shade200, altura: 20),
                 CardData(slot1: "-", slot2: "-"),
                 CardData(slot1: "-", slot2: "-"),
                 CardData(slot1: "-", slot2: "-"),
@@ -687,10 +602,7 @@ class TatblaPlanner extends StatelessWidget {
             ),
             TableRow(
               children: [
-                CardHeader(
-                    label: "11:30-11:40",
-                    color: Colors.blue.shade200,
-                    altura: 20),
+                CardHeader(label: "11:30-11:40", color: Colors.blue.shade200, altura: 20),
                 CardData(slot1: "-", slot2: "-"),
                 CardData(slot1: "-", slot2: "-"),
                 CardData(slot1: "-", slot2: "-"),
@@ -701,10 +613,7 @@ class TatblaPlanner extends StatelessWidget {
             ),
             TableRow(
               children: [
-                CardHeader(
-                    label: "11:40-11:50",
-                    color: Colors.blue.shade200,
-                    altura: 20),
+                CardHeader(label: "11:40-11:50", color: Colors.blue.shade200, altura: 20),
                 CardData(slot1: "-", slot2: "-"),
                 CardData(slot1: "-", slot2: "-"),
                 CardData(slot1: "-", slot2: "-"),
@@ -715,10 +624,7 @@ class TatblaPlanner extends StatelessWidget {
             ),
             TableRow(
               children: [
-                CardHeader(
-                    label: "11:50-12:00",
-                    color: Colors.blue.shade200,
-                    altura: 20),
+                CardHeader(label: "11:50-12:00", color: Colors.blue.shade200, altura: 20),
                 CardData(slot1: "-", slot2: "-"),
                 CardData(slot1: "-", slot2: "-"),
                 CardData(slot1: "-", slot2: "-"),
@@ -729,10 +635,7 @@ class TatblaPlanner extends StatelessWidget {
             ),
             TableRow(
               children: [
-                CardHeader(
-                    label: "12:00-12:10",
-                    color: Colors.blue.shade200,
-                    altura: 20),
+                CardHeader(label: "12:00-12:10", color: Colors.blue.shade200, altura: 20),
                 CardData(slot1: "-", slot2: "-"),
                 CardData(slot1: "-", slot2: "-"),
                 CardData(slot1: "-", slot2: "-"),
@@ -743,10 +646,7 @@ class TatblaPlanner extends StatelessWidget {
             ),
             TableRow(
               children: [
-                CardHeader(
-                    label: "12:10-12:20",
-                    color: Colors.blue.shade200,
-                    altura: 20),
+                CardHeader(label: "12:10-12:20", color: Colors.blue.shade200, altura: 20),
                 CardData(slot1: "-", slot2: "-"),
                 CardData(slot1: "-", slot2: "-"),
                 CardData(slot1: "-", slot2: "-"),
@@ -757,10 +657,7 @@ class TatblaPlanner extends StatelessWidget {
             ),
             TableRow(
               children: [
-                CardHeader(
-                    label: "12:20-12:30",
-                    color: Colors.blue.shade200,
-                    altura: 20),
+                CardHeader(label: "12:20-12:30", color: Colors.blue.shade200, altura: 20),
                 CardData(slot1: "-", slot2: "-"),
                 CardData(slot1: "-", slot2: "-"),
                 CardData(slot1: "-", slot2: "-"),
@@ -771,10 +668,7 @@ class TatblaPlanner extends StatelessWidget {
             ),
             TableRow(
               children: [
-                CardHeader(
-                    label: "12:30-12:40",
-                    color: Colors.blue.shade200,
-                    altura: 20),
+                CardHeader(label: "12:30-12:40", color: Colors.blue.shade200, altura: 20),
                 CardData(slot1: "-", slot2: "-"),
                 CardData(slot1: "-", slot2: "-"),
                 CardData(slot1: "-", slot2: "-"),
@@ -785,10 +679,7 @@ class TatblaPlanner extends StatelessWidget {
             ),
             TableRow(
               children: [
-                CardHeader(
-                    label: "12:40-12:50",
-                    color: Colors.blue.shade200,
-                    altura: 20),
+                CardHeader(label: "12:40-12:50", color: Colors.blue.shade200, altura: 20),
                 CardData(slot1: "-", slot2: "-"),
                 CardData(slot1: "-", slot2: "-"),
                 CardData(slot1: "-", slot2: "-"),
@@ -799,10 +690,7 @@ class TatblaPlanner extends StatelessWidget {
             ),
             TableRow(
               children: [
-                CardHeader(
-                    label: "12:50-13:00",
-                    color: Colors.blue.shade200,
-                    altura: 20),
+                CardHeader(label: "12:50-13:00", color: Colors.blue.shade200, altura: 20),
                 CardData(slot1: "-", slot2: "-"),
                 CardData(slot1: "-", slot2: "-"),
                 CardData(slot1: "-", slot2: "-"),
@@ -813,10 +701,7 @@ class TatblaPlanner extends StatelessWidget {
             ),
             TableRow(
               children: [
-                CardHeader(
-                    label: "13:00-13:10",
-                    color: Colors.blue.shade200,
-                    altura: 20),
+                CardHeader(label: "13:00-13:10", color: Colors.blue.shade200, altura: 20),
                 CardData(slot1: "-", slot2: "-"),
                 CardData(slot1: "-", slot2: "-"),
                 CardData(slot1: "-", slot2: "-"),
@@ -827,10 +712,7 @@ class TatblaPlanner extends StatelessWidget {
             ),
             TableRow(
               children: [
-                CardHeader(
-                    label: "13:10-13:20",
-                    color: Colors.blue.shade200,
-                    altura: 20),
+                CardHeader(label: "13:10-13:20", color: Colors.blue.shade200, altura: 20),
                 CardData(slot1: "-", slot2: "-"),
                 CardData(slot1: "-", slot2: "-"),
                 CardData(slot1: "-", slot2: "-"),
@@ -841,10 +723,7 @@ class TatblaPlanner extends StatelessWidget {
             ),
             TableRow(
               children: [
-                CardHeader(
-                    label: "13:20-13:30",
-                    color: Colors.blue.shade200,
-                    altura: 20),
+                CardHeader(label: "13:20-13:30", color: Colors.blue.shade200, altura: 20),
                 CardData(slot1: "-", slot2: "-"),
                 CardData(slot1: "-", slot2: "-"),
                 CardData(slot1: "-", slot2: "-"),
@@ -861,8 +740,7 @@ class TatblaPlanner extends StatelessWidget {
 }
 
 class CardHeader extends StatelessWidget {
-  CardHeader({Key? key, required this.label, this.color, this.altura = 30})
-      : super(key: key);
+  CardHeader({Key? key, required this.label, this.color, this.altura = 30}) : super(key: key);
   String label;
   Color? color;
   double altura;
@@ -905,8 +783,7 @@ class CardData extends StatelessWidget {
             child: Card(
               shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.only(
-                      bottomRight: Radius.circular(2),
-                      bottomLeft: Radius.circular(2))),
+                      bottomRight: Radius.circular(2), bottomLeft: Radius.circular(2))),
               margin: const EdgeInsets.only(left: 0, right: 0, top: 0),
               color: (slot1 != '-') ? Colors.grey.shade300 : Colors.white,
               child: Center(
@@ -927,8 +804,7 @@ class CardData extends StatelessWidget {
             child: Card(
               shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.only(
-                      bottomRight: Radius.circular(2),
-                      bottomLeft: Radius.circular(2))),
+                      bottomRight: Radius.circular(2), bottomLeft: Radius.circular(2))),
               margin: const EdgeInsets.only(left: 0, right: 0, top: 0),
               color: (slot2 != '-') ? Colors.green.shade300 : Colors.white,
               child: Center(
@@ -993,8 +869,7 @@ class _CampoFechaHoraState extends State<CampoFechaHora> {
         width: widget.width,
         height: widget.height,
         child: TextField(
-          decoration: InputDecoration(
-              border: const OutlineInputBorder(), labelText: widget.label),
+          decoration: InputDecoration(border: const OutlineInputBorder(), labelText: widget.label),
           controller: widget.controller,
           readOnly: true,
           onTap: widget.myfunction,
@@ -1007,12 +882,7 @@ class _CampoFechaHoraState extends State<CampoFechaHora> {
 // Boton con funcion
 class GuardarBoton extends ConsumerWidget {
   const GuardarBoton(
-      {Key? key,
-      this.label = "label",
-      this.width = 10,
-      this.height = 10,
-      this.ruta,
-      this.agenda})
+      {Key? key, this.label = "label", this.width = 10, this.height = 10, this.ruta, this.agenda})
       : super(key: key);
   final String label;
   final double width;
@@ -1049,16 +919,18 @@ class GuardarBoton extends ConsumerWidget {
 
 //  mis text formes
 class MiTexto extends StatelessWidget {
-  MiTexto({Key? key, this.eltexto}) : super(key: key);
+  MiTexto({Key? key, this.eltexto, this.width, this.height}) : super(key: key);
   String? eltexto;
+  double? width;
+  double? height;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: Container(
-        width: 250,
-        height: 50,
+        width: width,
+        height: height,
         decoration: BoxDecoration(
           color: Colors.grey.shade200,
           borderRadius: BorderRadius.circular(5),

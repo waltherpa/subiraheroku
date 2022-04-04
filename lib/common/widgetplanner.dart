@@ -115,14 +115,26 @@ class Tablecard extends StatelessWidget {
       color = Colors.green.shade200;
     }
 
-    return Card(
-      child: SizedBox(height: 20, width: 50, child: Center(child: Text(log!.Placa))),
-      color: color,
-      margin: const EdgeInsets.all(0),
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(5),
-          bottomRight: Radius.circular(5),
+    return GestureDetector(
+      onDoubleTap: () {
+        if (log!.Usuario != "-") {
+          // si esta lleno
+          print(log!.Documento);
+          Navigator.of(context).pushNamed('/agenda2', arguments: log);
+        } else {
+          // si está vacio
+          Navigator.of(context).pushNamed('/agenda2', arguments: log);
+        }
+      },
+      child: Card(
+        child: SizedBox(height: 20, width: 50, child: Center(child: Text(log!.Placa))),
+        color: color,
+        margin: const EdgeInsets.all(0),
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(5),
+            bottomRight: Radius.circular(5),
+          ),
         ),
       ),
     );

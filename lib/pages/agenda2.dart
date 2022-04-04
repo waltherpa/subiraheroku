@@ -2,48 +2,59 @@ import 'package:citas1/model/horas.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
-
+import '../model/logcitas.dart';
 import '../common/widgets.dart';
 import '../function/fbase1.dart';
 import '../provider/globalvariables.dart';
 
-class Agenda extends ConsumerWidget {
-  const Agenda({
+class Agenda2 extends ConsumerWidget {
+  const Agenda2({
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final datos = ModalRoute.of(context)!.settings.arguments as LogCitas;
     final sede = ref.read(SedeProv);
     final resumen = ref.watch(resf);
     // ignore: non_constant_identifier_names
     TextEditingController ctlr_usuario = TextEditingController();
     // ignore: non_constant_identifier_names
     TextEditingController ctlr_fecha = TextEditingController();
+    ctlr_fecha.text == datos.Fecha;
     // ignore: non_constant_identifier_names
-    String hora_selecionada = '';
+    String hora_selecionada = datos.Fecha;
     // ignore: non_constant_identifier_names
     TextEditingController ctlr_placa = TextEditingController();
+    ctlr_placa.text = datos.Placa;
     // ignore: non_constant_identifier_names
     TextEditingController ctlr_modelo = TextEditingController();
+    ctlr_modelo.text = datos.Modelo;
     // ignore: non_constant_identifier_names
     TextEditingController ctlr_nveh = TextEditingController();
+    ctlr_nveh.text = datos.Nveh;
     // ignore: non_constant_identifier_names
     TextEditingController ctlr_nombre = TextEditingController();
+    ctlr_nombre.text = datos.Nombre;
     // ignore: non_constant_identifier_names
     TextEditingController ctlr_doc = TextEditingController();
+    ctlr_doc.text = datos.Documento;
     // ignore: non_constant_identifier_names
     TextEditingController ctlr_correo = TextEditingController();
+    ctlr_correo.text = datos.Correo;
     // ignore: non_constant_identifier_names
     TextEditingController ctlr_telefono = TextEditingController();
-    String desplegable1 = '';
-    String desplegable2 = '';
-    String desplegable3 = '';
+    ctlr_telefono.text = datos.Telefono;
+    String desplegable1 = datos.TipoProblema;
+    String desplegable2 = datos.SuptipoProblema;
+    String desplegable3 = datos.SuptipoProblema;
     // ignore: non_constant_identifier_names
     TextEditingController ctlr_comentario = TextEditingController();
+    ctlr_comentario.text = datos.Comentarios;
+
     var l;
     var data;
-    ctlr_fecha.text = fechaDeHoy();
+    // ctlr_fecha.text = fechaDeHoy();
     String fecharegistro = fechaDeHoy();
     return Scaffold(
       appBar: AppBar(
@@ -58,6 +69,24 @@ class Agenda extends ConsumerWidget {
       ),
       body: Column(
         children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              const SizedBox(
+                width: 150,
+              ),
+              MiTexto(
+                eltexto: datos.Fecha,
+                width: 100,
+                height: 20,
+              ),
+              MiTexto(
+                eltexto: datos.Hora,
+                width: 100,
+                height: 20,
+              ),
+            ],
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -102,7 +131,7 @@ class Agenda extends ConsumerWidget {
                 final val3 = ref.watch(drop3);
                 hora_selecionada = val3.inivalue1;
                 return Desplegable3(opciones: val3.opciones1, opcioninicial: val3.inivalue1);
-              }))
+              })),
             ],
           ),
           Row(
@@ -153,6 +182,29 @@ class Agenda extends ConsumerWidget {
 
                 return Desplegable(opciones: val1.opciones3, opcioninicial: val1.inivalue3);
               })),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              const SizedBox(
+                width: 150,
+              ),
+              MiTexto(
+                eltexto: datos.TipoProblema,
+                width: 100,
+                height: 20,
+              ),
+              MiTexto(
+                eltexto: datos.SuptipoProblema,
+                width: 100,
+                height: 20,
+              ),
+              MiTexto(
+                eltexto: datos.TipoLlamada,
+                width: 100,
+                height: 20,
+              ),
             ],
           ),
           Row(
@@ -212,12 +264,26 @@ class Agenda extends ConsumerWidget {
                 height: 50,
                 ruta: '/planner',
               ),
+              Boton(
+                label: 'eliminar',
+                width: 150,
+                height: 50,
+                ruta: '/planner',
+                color: Colors.orange.shade700,
+                funcion: () {
+                  // eliminar
+                  print(datos.id_lg.toString());
+                },
+              ),
               GuardarBoton(
                 label: 'Guardar',
                 width: 150,
                 height: 50,
                 ruta: '/planner',
                 agenda: () async {
+                  // eliminar
+
+                  // guardar
                   final val2 = ref.read(agen);
                   l = await guardaragenda(
                     usuario: ctlr_usuario.text,
@@ -256,7 +322,7 @@ class Agenda extends ConsumerWidget {
                     val2.setComentario(ctlr_comentario.text);
                     val2.setFechaRegistro(fecharegistro);
                     ref.read(drop3).descartame(); // reiniciar horario de desplegable
-                    Navigator.of(context).pushNamed('/planner');
+                    Navigator.of(context).pop('/agenda2');
                   } else {
                     final sanck = SnackBar(
                       content: const Text('Error en registro de agendamiento'),

@@ -27,23 +27,29 @@ final drop2 = ChangeNotifierProvider((ref) => Dd2());
 // change notifier drop3---- horas disponibles
 final drop3 = ChangeNotifierProvider((ref) => Dd3());
 
-// future notifier mi LogCitas
+// future notifier mi LogCitas ---RESUMEN ---PLANNER
 // ignore: non_constant_identifier_names
-final FMiResumen = Provider((ref) => FutureResumen());
+// final FMiResumen = Provider((ref) => FutureResumen());
+// final resf = FutureProvider.autoDispose<List<LogCitas>>((ref) async {
+//   final r = ref.watch(FMiResumen);
+//   return r.miresumen();
+// });
+
+// final FMiResumen = Provider((ref) => FutureResumen());
 final resf = FutureProvider.autoDispose<List<LogCitas>>((ref) async {
-  final r = ref.read(FMiResumen);
-  return r.miresumen();
+  // final r = ref.watch(FMiResumen);
+  return FutureResumen().miresumen();
 });
 
 // Future horas de trabajo:
 // ignore: non_constant_identifier_names
 final FHorasT = Provider((ref) => RangoDeHora());
-final horasf = FutureProvider<List<Horas>>((ref) async {
+final horasf = FutureProvider.autoDispose<List<Horas>>((ref) async {
   final r = ref.read(FHorasT);
   return r.mishoras();
 });
 
-// repositorio de horas de trabajo
+// repositorio de horas de trabajo para armar la tabla
 final horastrabajo = ChangeNotifierProvider((ref) => HorariosdeTRabajo());
 
 // future notifier mi placa

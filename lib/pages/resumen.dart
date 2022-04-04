@@ -24,7 +24,7 @@ class Resumen extends ConsumerWidget {
             flex: 1,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
-              children: const [
+              children: [
                 Boton(
                   label: 'Descargar',
                   width: 150,
@@ -47,44 +47,22 @@ class Resumen extends ConsumerWidget {
                     child: DataTable(
                       columns: const [
                         DataColumn(label: Text('Id'), tooltip: 'Id'),
-                        DataColumn(
-                            label: Text('Usuario'),
-                            tooltip: 'Usuario que registra'),
-                        DataColumn(
-                            label: Text('Fecha'),
-                            tooltip: 'Fecha de la cita acordada'),
-                        DataColumn(
-                            label: Text('Hora'),
-                            tooltip: 'Hora de la cita acordada'),
-                        DataColumn(
-                            label: Text('Placa'), tooltip: 'Placa de la moto'),
-                        DataColumn(
-                            label: Text('Modelo'),
-                            tooltip: 'Modelo de la moto'),
-                        DataColumn(
-                            label: Text('N Veh.'), tooltip: 'Numero de serie'),
-                        DataColumn(
-                            label: Text('Nombre'),
-                            tooltip: 'Nombre del cliente'),
-                        DataColumn(
-                            label: Text('DNI'),
-                            tooltip: 'Numero de documento del cliente'),
-                        DataColumn(
-                            label: Text('Correo'),
-                            tooltip: 'Correo electronico'),
-                        DataColumn(
-                            label: Text('Telefono'),
-                            tooltip: 'Telefono/Celular'),
-                        DataColumn(
-                            label: Text('Tipo Problema'),
-                            tooltip: 'Tipo Problema'),
-                        DataColumn(
-                            label: Text('Sub Tipo'), tooltip: 'Sub Tipo'),
+                        DataColumn(label: Text('Usuario'), tooltip: 'Usuario que registra'),
+                        DataColumn(label: Text('Fecha'), tooltip: 'Fecha de la cita acordada'),
+                        DataColumn(label: Text('Hora'), tooltip: 'Hora de la cita acordada'),
+                        DataColumn(label: Text('Placa'), tooltip: 'Placa de la moto'),
+                        DataColumn(label: Text('Modelo'), tooltip: 'Modelo de la moto'),
+                        DataColumn(label: Text('N Veh.'), tooltip: 'Numero de serie'),
+                        DataColumn(label: Text('Nombre'), tooltip: 'Nombre del cliente'),
+                        DataColumn(label: Text('DNI'), tooltip: 'Numero de documento del cliente'),
+                        DataColumn(label: Text('Correo'), tooltip: 'Correo electronico'),
+                        DataColumn(label: Text('Telefono'), tooltip: 'Telefono/Celular'),
+                        DataColumn(label: Text('Tipo Problema'), tooltip: 'Tipo Problema'),
+                        DataColumn(label: Text('Sub Tipo'), tooltip: 'Sub Tipo'),
                         DataColumn(label: Text('Llamada'), tooltip: 'Llamada'),
                         DataColumn(label: Text('Sede'), tooltip: 'Sede'),
                         DataColumn(
-                            label: Text('Fecha Registro'),
-                            tooltip: 'Fecha Registro de la Cita'),
+                            label: Text('Fecha Registro'), tooltip: 'Fecha Registro de la Cita'),
                       ],
                       rows: _.value
                           .map((e) => DataRow(cells: [
