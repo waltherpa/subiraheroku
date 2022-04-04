@@ -97,7 +97,7 @@ class Planner extends ConsumerWidget {
               child: SingleChildScrollView(
                 child: Row(
                   children: [
-                    // table fixed part
+                    // table fixed part: horarios
                     Consumer(builder: (((context, ref, child) {
                       final horarios = ref.watch(horasf);
                       return horarios.map(
@@ -110,7 +110,7 @@ class Planner extends ConsumerWidget {
                                 datos: _.value,
                               ));
                     }))),
-                    // table moving part
+                    // table moving part: planeamiento
                     Expanded(
                       child: SingleChildScrollView(
                         scrollDirection: Axis.horizontal,

@@ -1,3 +1,4 @@
+import 'package:citas1/model/horas.dart';
 import 'package:citas1/provider/globalvariables.dart';
 import 'package:flutter/material.dart';
 import './pages/agenda.dart';
@@ -92,9 +93,14 @@ class LandingScreen extends ConsumerWidget {
               padding: const EdgeInsets.fromLTRB(300, 10, 300, 0),
               child: ElevatedButton(
                 onPressed: () async {
+                  // login
                   l = await identificarusuario(
                       usuario: usuarioCtlr, clave: claveCtlr) as List;
                   if (l![0]['status'] == "ok") {
+                    // carga de horarios
+                    List<Horas> mishoras = await RangoDeHora().mishoras();
+                    ref.read(horastrabajo).cargadehorarios(mishoras);
+                    // ingreso
                     ref
                         .read(riverUsuario.notifier)
                         .identifyUser(usuarioCtlr.text);

@@ -43,6 +43,9 @@ final horasf = FutureProvider<List<Horas>>((ref) async {
   return r.mishoras();
 });
 
+// repositorio de horas de trabajo
+final horastrabajo = ChangeNotifierProvider((ref) => HorariosdeTRabajo());
+
 // future notifier mi placa
 // ignore: non_constant_identifier_names
 final FMiPlaca = Provider((ref) => BuscarPlaca());

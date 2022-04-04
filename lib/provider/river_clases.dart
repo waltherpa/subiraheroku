@@ -438,3 +438,14 @@ class MiSede with ChangeNotifier {
     notifyListeners();
   }
 }
+
+// Class Horarios de trabajo
+class HorariosdeTRabajo with ChangeNotifier {
+  List<Horas> _x = [];
+  List<Horas> get horarios => _x;
+
+  void cargadehorarios(List<Horas> data) {
+    _x = data;
+    notifyListeners();
+  }
+}
