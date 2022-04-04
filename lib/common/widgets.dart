@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:citas1/provider/globalvariables.dart';
 
 import 'package:flutter/material.dart';
@@ -32,8 +34,10 @@ class Boton extends StatelessWidget {
         height: height,
         child: ElevatedButton(
           onPressed: () {
-            if (ruta != null) {
+            if ((ruta != null) && (controlador == null)) {
               Navigator.of(context).pushNamed(ruta!);
+            } else if ((ruta != null) && (controlador != null)) {
+              Navigator.of(context).pushNamed(ruta!, arguments: controlador);
             }
           },
           child: Text(
@@ -881,13 +885,20 @@ class _CampoFechaHoraState extends State<CampoFechaHora> {
 
 // Boton con funcion
 class GuardarBoton extends ConsumerWidget {
-  const GuardarBoton(
-      {Key? key, this.label = "label", this.width = 10, this.height = 10, this.ruta, this.agenda})
-      : super(key: key);
+  GuardarBoton({
+    Key? key,
+    this.label = "label",
+    this.width = 10,
+    this.height = 10,
+    this.ruta,
+    this.agenda,
+    this.color = Colors.white,
+  }) : super(key: key);
   final String label;
   final double width;
   final double height;
   final String? ruta;
+  Color color;
   final VoidCallback? agenda;
 
   @override
@@ -909,7 +920,7 @@ class GuardarBoton extends ConsumerWidget {
             ),
           ),
           style: ElevatedButton.styleFrom(
-            primary: Colors.white,
+            primary: color,
           ),
         ),
       ),
@@ -982,6 +993,34 @@ class BotonCallback extends StatelessWidget {
             primary: Colors.white,
           ),
         ),
+      ),
+    );
+  }
+}
+
+// simple card
+class SimpleCard extends StatelessWidget {
+  SimpleCard({Key? key, this.label, this.width, this.height}) : super(key: key);
+  String? label;
+  double? width;
+  double? height;
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: SizedBox(
+        child: Center(
+            child: Text(
+          label!,
+          style: TextStyle(color: Colors.white),
+        )),
+        width: width,
+        height: height,
+      ),
+      color: Colors.blue,
+      margin: const EdgeInsets.only(left: 10, top: 10, right: 10),
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(5)),
       ),
     );
   }

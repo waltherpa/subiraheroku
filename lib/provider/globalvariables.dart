@@ -63,3 +63,11 @@ final presf = FutureProvider.family<List<Base1>, String>((ref, placa) async {
 // change notifier thema
 // ignore: non_constant_identifier_names
 final SedeProv = ChangeNotifierProvider((ref) => MiSede());
+
+// future notifier mi cita
+// ignore: non_constant_identifier_names
+final FMiCita = Provider((ref) => BuscarCita());
+final citaf = FutureProvider.family<List<LogCitas>, String>((ref, placa) async {
+  final r = ref.read(FMiCita);
+  return r.buscarrequest(placa);
+});

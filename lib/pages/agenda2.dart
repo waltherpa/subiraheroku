@@ -256,25 +256,42 @@ class Agenda2 extends ConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               const SizedBox(
-                width: 320,
+                width: 160,
               ),
+              // salir
               Boton(
                 label: 'Salir',
                 width: 150,
                 height: 50,
                 ruta: '/planner',
               ),
-              Boton(
+              // eliminar
+              GuardarBoton(
                 label: 'eliminar',
                 width: 150,
                 height: 50,
-                ruta: '/planner',
+                // ruta: '/planner',
                 color: Colors.orange.shade700,
-                funcion: () {
+                agenda: () async {
                   // eliminar
-                  print(datos.id_lg.toString());
+                  l = await borrar(datos.id_lg) as List;
+                  if (l![0]['status'] == "ok") {
+                    Navigator.pushNamed(context, '/planner');
+                  } else {
+                    final sanck = SnackBar(
+                      content: const Text('No se borrró el registro, intente nuevamente'),
+                      action: SnackBarAction(
+                        label: 'Ok',
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/planner');
+                        },
+                      ),
+                    );
+                    ScaffoldMessenger.of(context).showSnackBar(sanck);
+                  }
                 },
               ),
+              // guardar
               GuardarBoton(
                 label: 'Guardar',
                 width: 150,
@@ -282,7 +299,7 @@ class Agenda2 extends ConsumerWidget {
                 ruta: '/planner',
                 agenda: () async {
                   // eliminar
-
+                  l = await borrar(datos.id_lg) as List;
                   // guardar
                   final val2 = ref.read(agen);
                   l = await guardaragenda(

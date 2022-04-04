@@ -62,7 +62,7 @@ class Planner extends ConsumerWidget {
                     label: "buscar Placa",
                     width: 150,
                     height: 50,
-                    ruta: "/",
+                    ruta: "/busqueda",
                     controlador: placaCtrl,
                   ),
                   // boton resumen
@@ -73,25 +73,6 @@ class Planner extends ConsumerWidget {
                     ruta: "/resumen",
                   ),
                   // boton seguiente semana
-                  BotonCallback(
-                    label: "A",
-                    width: 50,
-                    height: 50,
-                    callback: () async {
-                      final resumen = ref.watch(resf);
-                      ref.read(resf);
-                      // (context as Element).reassemble();
-                    },
-                  ),
-                  BotonCallback(
-                    label: ">",
-                    width: 50,
-                    height: 50,
-                    // ruta: "/",
-                    callback: () {
-                      //
-                    },
-                  ),
                 ],
               ),
             ),

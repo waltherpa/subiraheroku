@@ -247,3 +247,43 @@ String diadelasemana(String _data) {
   };
   return semana[dt.weekday]!;
 }
+
+// login
+Future borrar(int id) async {
+  var url = Uri.parse('https://walther-function-3.azurewebsites.net/borrame/');
+  var response = await http.post(
+    url,
+    body: convert.jsonEncode({'id': '$id'}),
+    headers: {"Content-Type": "application/json"},
+  );
+  if (response.statusCode == 200) {
+    var l = convert.jsonDecode(response.body);
+    List results = [];
+    results.add(l);
+    return results;
+  }
+}
+
+// buscar Cita
+class BuscarCita {
+  Future<List<LogCitas>> buscarrequest(String arg) async {
+    if (arg != "") {
+      var url = Uri.parse('https://walther-function-3.azurewebsites.net/buscarcita/');
+      var response = await http.post(
+        url,
+        body: convert.jsonEncode({'data': '$arg'}),
+        headers: {"Content-Type": "application/json"},
+      );
+      if (response.statusCode == 200) {
+        List<dynamic> data = convert.jsonDecode(response.body);
+        // ignore: non_constant_identifier_names
+        List<LogCitas> Placas = data.map((e) => LogCitas.fromJson(e)).toList();
+        return Placas;
+      } else {
+        throw Exception("error en la api");
+      }
+    } else {
+      throw Exception("error en la api");
+    }
+  }
+}

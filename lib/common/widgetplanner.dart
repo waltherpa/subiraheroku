@@ -119,7 +119,6 @@ class Tablecard extends StatelessWidget {
       onDoubleTap: () {
         if (log!.Usuario != "-") {
           // si esta lleno
-          print(log!.Documento);
           Navigator.of(context).pushNamed('/agenda2', arguments: log);
         } else {
           // si está vacio
