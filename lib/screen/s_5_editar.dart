@@ -255,7 +255,7 @@ class Editar extends ConsumerWidget {
               ),
               // eliminar
               BotonCallback(
-                label: 'eliminar',
+                label: 'Eliminar',
                 width: 150,
                 height: 50,
                 color: Colors.orange.shade700,
@@ -279,13 +279,14 @@ class Editar extends ConsumerWidget {
               ),
               // guardar
               BotonCallback(
-                label: 'Guardar',
-                width: 150,
+                label: 'Guardar Edición',
+                width: 160,
                 height: 50,
                 callback: () async {
-                  if (ctlr_fecha.text == null ||
-                      ctlr_fecha.text == '' ||
-                      hora_selecionada == 'vacio') {
+                  if ((ctlr_fecha.text != null ||
+                          ctlr_fecha.text != '' ||
+                          ctlr_fecha.text != 'seleccione fecha') &&
+                      (hora_selecionada != 'vacio')) {
                     // eliminar
                     l = await borrar(datos.id_lg) as List;
                     // guardar
@@ -308,7 +309,6 @@ class Editar extends ConsumerWidget {
                       comentario: ctlr_comentario.text,
                       fecharegistro: fecharegistro,
                     ) as List;
-
                     if (l != null && l.length > 0 && l![0]['status'] == "ok") {
                       val2.setUsuario(ctlr_usuario.text);
                       val2.setFecha(ctlr_fecha.text);

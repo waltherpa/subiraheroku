@@ -234,7 +234,14 @@ class Tablecard extends StatelessWidget {
         }
       },
       child: Card(
-        child: SizedBox(height: 20, width: 50, child: Center(child: Text(log!.Placa))),
+        child: SizedBox(
+            height: 20,
+            width: 50,
+            child: Center(
+                child: Text(
+              log!.Placa,
+              style: const TextStyle(fontSize: 10),
+            ))),
         color: color,
         margin: const EdgeInsets.all(0),
         shape: const RoundedRectangleBorder(
