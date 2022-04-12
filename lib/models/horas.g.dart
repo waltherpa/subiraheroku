@@ -7,9 +7,9 @@ part of 'horas.dart';
 // **************************************************************************
 
 Horas _$HorasFromJson(Map<String, dynamic> json) => Horas(
-      json['Rh'] as String?,
+      json['Ri'] as String?,
     );
 
 Map<String, dynamic> _$HorasToJson(Horas instance) => <String, dynamic>{
-      'Rh': instance.Rh,
+      'Ri': instance.Ri,
     };

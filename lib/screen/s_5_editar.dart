@@ -1,49 +1,46 @@
-import 'package:citas1/model/horas.dart';
-
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:citas_2/functions/p_3_variable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../models/logcitas.dart';
+import '../models/horas.dart';
+import '../functions/f_0_functions.dart';
 import '../common/widgets.dart';
-import '../function/fbase1.dart';
-import '../provider/globalvariables.dart';
 
-class Agenda extends ConsumerWidget {
-  const Agenda({
-    Key? key,
-  }) : super(key: key);
+class Editar extends ConsumerWidget {
+  const Editar({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final sede = ref.read(SedeProv);
-    final resumen = ref.watch(resf);
-    // ignore: non_constant_identifier_names
+    final datos = ModalRoute.of(context)!.settings.arguments as LogCitas;
+    final sede = ref.read(riverSede);
+    final resumen = ref.watch(riverResumen);
     TextEditingController ctlr_usuario = TextEditingController();
-    // ignore: non_constant_identifier_names
     TextEditingController ctlr_fecha = TextEditingController();
-    // ignore: non_constant_identifier_names
-    String hora_selecionada = '';
-    // ignore: non_constant_identifier_names
+    ctlr_fecha.text == datos.Fecha;
+    String hora_selecionada = datos.Fecha;
     TextEditingController ctlr_placa = TextEditingController();
-    // ignore: non_constant_identifier_names
+    ctlr_placa.text = datos.Placa;
     TextEditingController ctlr_modelo = TextEditingController();
-    // ignore: non_constant_identifier_names
+    ctlr_modelo.text = datos.Modelo;
     TextEditingController ctlr_nveh = TextEditingController();
-    // ignore: non_constant_identifier_names
+    ctlr_nveh.text = datos.Nveh;
     TextEditingController ctlr_nombre = TextEditingController();
-    // ignore: non_constant_identifier_names
+    ctlr_nombre.text = datos.Nombre;
     TextEditingController ctlr_doc = TextEditingController();
-    // ignore: non_constant_identifier_names
+    ctlr_doc.text = datos.Documento;
     TextEditingController ctlr_correo = TextEditingController();
-    // ignore: non_constant_identifier_names
+    ctlr_correo.text = datos.Correo;
     TextEditingController ctlr_telefono = TextEditingController();
-    String desplegable1 = '';
-    String desplegable2 = '';
-    String desplegable3 = '';
-    // ignore: non_constant_identifier_names
+    ctlr_telefono.text = datos.Telefono;
+    String desplegable1 = datos.TipoProblema;
+    String desplegable2 = datos.SuptipoProblema;
+    String desplegable3 = datos.SuptipoProblema;
     TextEditingController ctlr_comentario = TextEditingController();
+    ctlr_comentario.text = datos.Comentarios;
+
     var l;
     var data;
-    ctlr_fecha.text = fechaDeHoy();
     String fecharegistro = fechaDeHoy();
     return Scaffold(
       appBar: AppBar(
@@ -58,6 +55,24 @@ class Agenda extends ConsumerWidget {
       ),
       body: Column(
         children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              const SizedBox(
+                width: 150,
+              ),
+              MiTexto(
+                eltexto: datos.Fecha,
+                width: 100,
+                height: 20,
+              ),
+              MiTexto(
+                eltexto: datos.Hora,
+                width: 100,
+                height: 20,
+              ),
+            ],
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -83,7 +98,7 @@ class Agenda extends ConsumerWidget {
                 controller: ctlr_fecha,
                 myfunction: () {
                   onDateChanged(context, ctlr_fecha);
-                  ref.read(riverfecha.notifier).setFecha(ctlr_fecha.text);
+                  ref.read(riverFecha.notifier).setFecha(ctlr_fecha.text);
                 },
               ),
               // cargar las fechas
@@ -102,7 +117,7 @@ class Agenda extends ConsumerWidget {
                 final val3 = ref.watch(drop3);
                 hora_selecionada = val3.inivalue1;
                 return Desplegable3(opciones: val3.opciones1, opcioninicial: val3.inivalue1);
-              }))
+              })),
             ],
           ),
           Row(
@@ -158,6 +173,29 @@ class Agenda extends ConsumerWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
+              const SizedBox(
+                width: 150,
+              ),
+              MiTexto(
+                eltexto: datos.TipoProblema,
+                width: 100,
+                height: 20,
+              ),
+              MiTexto(
+                eltexto: datos.SuptipoProblema,
+                width: 100,
+                height: 20,
+              ),
+              MiTexto(
+                eltexto: datos.TipoLlamada,
+                width: 100,
+                height: 20,
+              ),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
               // nombre cliente
               CampoDeTexto(
                 label: 'Nombre',
@@ -204,70 +242,102 @@ class Agenda extends ConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               const SizedBox(
-                width: 320,
+                width: 160,
               ),
-              Boton(
+              // salir
+              BotonCallback(
                 label: 'Salir',
                 width: 150,
                 height: 50,
-                ruta: '/planner',
+                callback: () {
+                  Navigator.of(context).pushNamedAndRemoveUntil('/splash', (route) => false);
+                },
               ),
-              GuardarBoton(
-                label: 'Guardar',
+              // eliminar
+              BotonCallback(
+                label: 'eliminar',
                 width: 150,
                 height: 50,
-                ruta: '/planner',
-                agenda: () async {
-                  final val2 = ref.read(agen);
-                  l = await guardaragenda(
-                    usuario: ctlr_usuario.text,
-                    fecha: ctlr_fecha.text,
-                    hora: hora_selecionada,
-                    placa: ctlr_placa.text,
-                    modelo: ctlr_modelo.text,
-                    nveh: ctlr_nveh.text,
-                    nombre: ctlr_nombre.text,
-                    doc: ctlr_doc.text,
-                    correo: ctlr_correo.text,
-                    telefono: ctlr_telefono.text,
-                    desple1: desplegable1,
-                    desple2: desplegable2,
-                    desple3: desplegable3,
-                    sede: sede.sede,
-                    comentario: ctlr_comentario.text,
-                    fecharegistro: fecharegistro,
-                  ) as List;
-
-                  if (l != null && l.length > 0 && l![0]['status'] == "ok") {
-                    val2.setUsuario(ctlr_usuario.text);
-                    val2.setFecha(ctlr_fecha.text);
-                    val2.setHora(hora_selecionada);
-                    val2.setPlaca(ctlr_placa.text);
-                    val2.setModelo(ctlr_modelo.text);
-                    val2.setNveh(ctlr_nveh.text);
-                    val2.setNombre(ctlr_nombre.text);
-                    val2.setDoc(ctlr_doc.text);
-                    val2.setCorreo(ctlr_correo.text);
-                    val2.setTelefono(ctlr_telefono.text);
-                    val2.setDesplegable1(desplegable1);
-                    val2.setDesplegable2(desplegable2);
-                    val2.setDesplegable3(desplegable3);
-                    val2.setSede(sede.sede);
-                    val2.setComentario(ctlr_comentario.text);
-                    val2.setFechaRegistro(fecharegistro);
-                    ref.read(drop3).descartame(); // reiniciar horario de desplegable
-                    Navigator.of(context).pushNamed('/planner');
+                color: Colors.orange.shade700,
+                txtcolor: Colors.white,
+                callback: () async {
+                  // eliminar
+                  l = await borrar(datos.id_lg) as List;
+                  if (l![0]['status'] == "ok") {
+                    Navigator.of(context).pushNamedAndRemoveUntil('/splash', (route) => false);
                   } else {
                     final sanck = SnackBar(
-                      content: const Text('Error en registro de agendamiento'),
+                      content: const Text('No se borrró el registro, intente nuevamente'),
                       action: SnackBarAction(
                         label: 'Ok',
-                        onPressed: () {
-                          //
-                        },
+                        onPressed: () {},
                       ),
                     );
                     ScaffoldMessenger.of(context).showSnackBar(sanck);
+                  }
+                },
+              ),
+              // guardar
+              BotonCallback(
+                label: 'Guardar',
+                width: 150,
+                height: 50,
+                callback: () async {
+                  if (ctlr_fecha.text == null ||
+                      ctlr_fecha.text == '' ||
+                      hora_selecionada == 'vacio') {
+                    // eliminar
+                    l = await borrar(datos.id_lg) as List;
+                    // guardar
+                    final val2 = ref.read(riverAgendar);
+                    l = await guardaragenda(
+                      usuario: ctlr_usuario.text,
+                      fecha: ctlr_fecha.text,
+                      hora: hora_selecionada,
+                      placa: ctlr_placa.text,
+                      modelo: ctlr_modelo.text,
+                      nveh: ctlr_nveh.text,
+                      nombre: ctlr_nombre.text,
+                      doc: ctlr_doc.text,
+                      correo: ctlr_correo.text,
+                      telefono: ctlr_telefono.text,
+                      desple1: desplegable1,
+                      desple2: desplegable2,
+                      desple3: desplegable3,
+                      sede: sede.sede,
+                      comentario: ctlr_comentario.text,
+                      fecharegistro: fecharegistro,
+                    ) as List;
+
+                    if (l != null && l.length > 0 && l![0]['status'] == "ok") {
+                      val2.setUsuario(ctlr_usuario.text);
+                      val2.setFecha(ctlr_fecha.text);
+                      val2.setHora(hora_selecionada);
+                      val2.setPlaca(ctlr_placa.text);
+                      val2.setModelo(ctlr_modelo.text);
+                      val2.setNveh(ctlr_nveh.text);
+                      val2.setNombre(ctlr_nombre.text);
+                      val2.setDoc(ctlr_doc.text);
+                      val2.setCorreo(ctlr_correo.text);
+                      val2.setTelefono(ctlr_telefono.text);
+                      val2.setDesplegable1(desplegable1);
+                      val2.setDesplegable2(desplegable2);
+                      val2.setDesplegable3(desplegable3);
+                      val2.setSede(sede.sede);
+                      val2.setComentario(ctlr_comentario.text);
+                      val2.setFechaRegistro(fecharegistro);
+                      ref.read(drop3).descartame(); // reiniciar horario de desplegable
+                      Navigator.of(context).pushNamedAndRemoveUntil('/splash', (route) => false);
+                    } else {
+                      final sanck = SnackBar(
+                        content: const Text('Error en registro de agendamiento'),
+                        action: SnackBarAction(
+                          label: 'Ok',
+                          onPressed: () {},
+                        ),
+                      );
+                      ScaffoldMessenger.of(context).showSnackBar(sanck);
+                    }
                   }
                 },
               ),

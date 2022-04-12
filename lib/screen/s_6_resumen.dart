@@ -1,8 +1,7 @@
-import 'package:citas1/provider/globalvariables.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:citas_2/common/widgets.dart';
+import 'package:citas_2/functions/p_3_variable.dart';
 import 'package:flutter/material.dart';
-
-import '../common/widgets.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class Resumen extends ConsumerWidget {
   const Resumen({Key? key}) : super(key: key);
@@ -25,11 +24,13 @@ class Resumen extends ConsumerWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Boton(
+                BotonCallback(
                   label: 'Descargar',
                   width: 150,
                   height: 50,
-                  ruta: '/descarga',
+                  callback: () {
+                    Navigator.pushNamed(context, '/descarga');
+                  },
                 ),
               ],
             ),
@@ -37,7 +38,7 @@ class Resumen extends ConsumerWidget {
           Expanded(
             flex: 5,
             child: Consumer(builder: (((context, ref, child) {
-              final resumen = ref.watch(resf);
+              final resumen = ref.watch(riverResumen);
               return resumen.map(
                 error: (_) => Text(_.error.toString()),
                 loading: (_) => const LinearProgressIndicator(),
@@ -61,6 +62,7 @@ class Resumen extends ConsumerWidget {
                         DataColumn(label: Text('Sub Tipo'), tooltip: 'Sub Tipo'),
                         DataColumn(label: Text('Llamada'), tooltip: 'Llamada'),
                         DataColumn(label: Text('Sede'), tooltip: 'Sede'),
+                        DataColumn(label: Text('Comentarios'), tooltip: 'Comentarios'),
                         DataColumn(
                             label: Text('Fecha Registro'), tooltip: 'Fecha Registro de la Cita'),
                       ],
@@ -81,6 +83,7 @@ class Resumen extends ConsumerWidget {
                                 DataCell(Text(e.SuptipoProblema)),
                                 DataCell(Text(e.TipoLlamada)),
                                 DataCell(Text(e.Sede)),
+                                DataCell(Text(e.Comentarios)),
                                 DataCell(Text(e.FechaRegistro)),
                               ]))
                           .toList(),

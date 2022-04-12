@@ -4,10 +4,10 @@ part 'horas.g.dart';
 @JsonSerializable()
 class Horas {
   Horas(
-    this.Rh,
+    this.Ri,
   );
   // ignore: non_constant_identifier_names
-  String? Rh;
+  String? Ri;
 
   factory Horas.fromJson(Map<String, dynamic> json) => _$HorasFromJson(json);
   Map<String, dynamic> toJson() => _$HorasToJson(this);

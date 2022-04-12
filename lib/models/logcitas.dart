@@ -58,7 +58,6 @@ class LogCitas {
   // ignore: non_constant_identifier_names
   String FechaRegistro;
 
-  factory LogCitas.fromJson(Map<String, dynamic> json) =>
-      _$LogCitasFromJson(json);
+  factory LogCitas.fromJson(Map<String, dynamic> json) => _$LogCitasFromJson(json);
   Map<String, dynamic> toJson() => _$LogCitasToJson(this);
 }

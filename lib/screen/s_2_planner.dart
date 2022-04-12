@@ -1,108 +1,108 @@
-import 'package:citas1/provider/globalvariables.dart';
-
+import 'package:citas_2/common/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../common/widgets.dart';
-import '../common/widgetplanner.dart';
+
+import '../functions/p_3_variable.dart';
+import '../common/widgets_planner.dart';
 
 class Planner extends ConsumerWidget {
   Planner({Key? key}) : super(key: key);
+
   TextEditingController placaCtrl = TextEditingController();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final sede = ref.watch(SedeProv);
-    // final resumen = ref.watch(resf);
+    final sede = ref.watch(riverSede);
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: (sede.sede == "Surquillo") ? Colors.blue : Colors.green,
-        title: Text('Planner: ${sede.sede}'),
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: const Icon(Icons.arrow_back),
-        ),
+        title: Text('Planner: Sede ${sede.sede}'),
         actions: [
           IconButton(
             onPressed: () {
-              ref.watch(SedeProv).cambiosede();
+              ref.watch(riverSede).cambiosede();
             },
             icon: const Icon(Icons.home),
           )
         ],
       ),
       body: Padding(
-        padding: const EdgeInsets.all(10),
+        padding: EdgeInsets.all(10),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // botones control
             Expanded(
               flex: 1,
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // boton agendar
-                  Boton(
-                    label: "Agendar",
+                  // agendar
+                  BotonCallback(
+                    label: 'Agendar',
                     width: 150,
                     height: 50,
-                    ruta: "/agenda",
+                    callback: () {
+                      Navigator.pushNamed(context, '/agenda');
+                    },
                   ),
-                  // field placa
+                  // campo de placa
                   CampoDeTexto(
                     label: 'Placa',
                     width: 100,
                     height: 50,
                     controlador: placaCtrl,
                   ),
-                  // boton buscar
-                  Boton(
-                    label: "buscar Placa",
+                  // buscar
+                  BotonCallback(
+                    label: 'Buscar',
                     width: 150,
                     height: 50,
-                    ruta: "/busqueda",
-                    controlador: placaCtrl,
+                    callback: () {
+                      if (placaCtrl.text != '') {
+                        Navigator.pushNamed(context, '/busqueda', arguments: placaCtrl);
+                      }
+                    },
                   ),
-                  // boton resumen
-                  Boton(
-                    label: "Resumen",
+                  // resumen
+                  BotonCallback(
+                    label: 'Resumen',
                     width: 150,
                     height: 50,
-                    ruta: "/resumen",
+                    callback: () {
+                      Navigator.pushNamed(context, '/resumen');
+                    },
                   ),
-                  // boton seguiente semana
                 ],
               ),
             ),
-            // table time planner
             Expanded(
               flex: 5,
               child: SingleChildScrollView(
                 child: Row(
                   children: [
-                    // table fixed part: horarios
+                    // Tabla de horarios
                     Consumer(builder: (((context, ref, child) {
-                      final horarios = ref.watch(horasf);
+                      final horarios = ref.watch(riverHoras);
                       return horarios.map(
-                          error: (_) => Text(_.error.toString()),
-                          loading: (_) => Container(
-                                width: 100,
-                                child: const LinearProgressIndicator(),
-                              ),
-                          data: (_) => TatblaHorarios(
-                                datos: _.value,
-                              ));
+                        error: (_) => Text(_.error.toString()),
+                        loading: (_) => Container(
+                          width: 100,
+                          child: LinearProgressIndicator(),
+                        ),
+                        data: (_) => TablaHorarios(
+                          datos: _.value,
+                        ),
+                      );
                     }))),
-                    // table moving part: planeamiento
+                    // Tablas de dias
                     Expanded(
                       child: SingleChildScrollView(
                         scrollDirection: Axis.horizontal,
                         child: Container(
                           child: Consumer(
                             builder: (((context, ref, child) {
-                              final resumen = ref.watch(resf);
+                              final resumen = ref.watch(riverResumen);
                               return resumen.map(
                                 error: (_) => Text(_.error.toString()),
                                 loading: (_) => Container(

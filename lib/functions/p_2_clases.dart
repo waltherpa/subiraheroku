@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
-import '../model/horas.dart';
 
-// capturar la información del usuario
+import '../models/horas.dart';
+
+// class notifier: capturar la información del usuario
 class User with ChangeNotifier {
   String _u = "";
   get u => _u;
@@ -12,27 +12,33 @@ class User with ChangeNotifier {
   }
 }
 
-// capturar la información de la fecha de agendamiento
-class Fecha with ChangeNotifier {
-  String _f = "";
-  get f => _f;
-  void setFecha(data) {
-    _f = data;
+// class notifier: carga horarios genenerales
+class HorariosdeTRabajo with ChangeNotifier {
+  List<Horas> _x = [];
+  List<Horas> get horarios => _x;
+
+  void cargadehorarios(List<Horas> data) {
+    _x = data;
     notifyListeners();
   }
 }
 
-// capturar la información de la hora de agendamiento
-class Hora with ChangeNotifier {
-  String _h = "";
-  get h => _h;
-  void setHora(data) {
-    _h = data;
+// class notifier: Surquillo o San Miguel
+class MiSede with ChangeNotifier {
+  String _sede = 'Surquillo';
+  String get sede => _sede;
+
+  void cambiosede() {
+    if (_sede == "San Miguel") {
+      _sede = 'Surquillo';
+    } else if (_sede == "Surquillo") {
+      _sede = 'San Miguel';
+    }
     notifyListeners();
   }
 }
 
-// Dinamica capturar la información de los desplegables
+// class notifier: para capturar la info de los desplegables de tipo problema
 class Dd1 with ChangeNotifier {
   final List _opciones1 = [
     'MEC Garantía',
@@ -205,35 +211,7 @@ class Dd1 with ChangeNotifier {
   }
 }
 
-// segundo nivel de desplegables
-class Dd2 with ChangeNotifier {
-  final _op1 = ['cita activa', 'cita vencida'];
-  final _op2 = ['Surquillo', 'San Miguel'];
-  late String _initvalue1;
-  late String _initvalue2;
-  Dd2() {
-    _initvalue1 = _op1[0];
-    _initvalue2 = _op2[0];
-  }
-
-  List get opciones1 => _op1;
-  List get opciones2 => _op2;
-  String get inivalue1 => _initvalue1;
-  String get inivalue2 => _initvalue2;
-
-  void setop(String w) {
-    if (_op1.contains(w)) {
-      _initvalue1 = w;
-      notifyListeners();
-    }
-    if (_op2.contains(w)) {
-      _initvalue2 = w;
-      notifyListeners();
-    }
-  }
-}
-
-// para el desplegable desplegable -future horas diponibles
+// class notifier: para el desplegable desplegable -future horas diponibles
 class Dd3 with ChangeNotifier {
   List<String?> _op1 = ['vacio'];
   late String _initvalue1;
@@ -243,7 +221,7 @@ class Dd3 with ChangeNotifier {
   }
 
   void setlist(List<Horas> w) {
-    _op1 = w.map((e) => e.Rh).toList();
+    _op1 = w.map((e) => e.Ri).toList();
     _initvalue1 = _op1[0]!;
     notifyListeners();
   }
@@ -265,7 +243,17 @@ class Dd3 with ChangeNotifier {
   }
 }
 
-// Class de datos para agendamiento
+// class notifier: capturar la información de la fecha de agendamiento
+class Fecha with ChangeNotifier {
+  String _f = "";
+  get f => _f;
+  void setFecha(data) {
+    _f = data;
+    notifyListeners();
+  }
+}
+
+// class notifier: datos para agendamiento
 class Agendamiento with ChangeNotifier {
   // ignore: non_constant_identifier_names
   late String _ctlr_usuario;
@@ -420,32 +408,6 @@ class Agendamiento with ChangeNotifier {
 
   void setFechaRegistro(String fecharegistro) {
     _fecharegistro = fecharegistro;
-    notifyListeners();
-  }
-}
-
-// Class color theme
-class MiSede with ChangeNotifier {
-  String _sede = 'Surquillo';
-  String get sede => _sede;
-
-  void cambiosede() {
-    if (_sede == "San Miguel") {
-      _sede = 'Surquillo';
-    } else if (_sede == "Surquillo") {
-      _sede = 'San Miguel';
-    }
-    notifyListeners();
-  }
-}
-
-// Class Horarios de trabajo
-class HorariosdeTRabajo with ChangeNotifier {
-  List<Horas> _x = [];
-  List<Horas> get horarios => _x;
-
-  void cargadehorarios(List<Horas> data) {
-    _x = data;
     notifyListeners();
   }
 }
