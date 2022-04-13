@@ -55,8 +55,8 @@ final riverPlaca = FutureProvider.family<List<Base1>, String>((ref, placa) async
 
 // future notifier mi cita
 // ignore: non_constant_identifier_names
-final FMiCita = Provider((ref) => BuscarCita());
-final riverCita = FutureProvider.family<List<LogCitas>, String>((ref, placa) async {
+final FMiCita = Provider.autoDispose((ref) => BuscarCita());
+final riverCita = FutureProvider.family.autoDispose<List<LogCitas>, String>((ref, placa) async {
   final r = ref.read(FMiCita);
   return r.buscarrequest(placa);
 });
