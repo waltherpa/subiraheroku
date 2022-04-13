@@ -14,6 +14,7 @@ class Agenda extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final datosbase1 = ModalRoute.of(context)!.settings.arguments as Base1;
+
     final sede = ref.read(riverSede);
     final resumen = ref.watch(riverResumen);
     TextEditingController ctlr_usuario = TextEditingController();
@@ -21,18 +22,25 @@ class Agenda extends ConsumerWidget {
     String hora_selecionada = '';
     TextEditingController ctlr_placa = TextEditingController();
     ctlr_placa.text = datosbase1.PLACA_VEH_TARJETA!;
+
     TextEditingController ctlr_modelo = TextEditingController();
     ctlr_modelo.text = datosbase1.VERSION_MODELO!;
+
     TextEditingController ctlr_nveh = TextEditingController();
     ctlr_nveh.text = datosbase1.SERIE!;
+
     TextEditingController ctlr_nombre = TextEditingController();
     ctlr_nombre.text = datosbase1.CLIENTE!;
+
     TextEditingController ctlr_doc = TextEditingController();
     ctlr_doc.text = datosbase1.COD_CLIENTE!;
+
     TextEditingController ctlr_correo = TextEditingController();
     ctlr_correo.text = datosbase1.EMAIL!;
+
     TextEditingController ctlr_telefono = TextEditingController();
     ctlr_telefono.text = datosbase1.TELEFONO1!;
+
     String desplegable1 = '';
     String desplegable2 = '';
     String desplegable3 = '';

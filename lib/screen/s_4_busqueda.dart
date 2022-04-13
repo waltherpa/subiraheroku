@@ -10,11 +10,13 @@ class Busqueda extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final sede = ref.read(riverSede);
     final datos = ModalRoute.of(context)!.settings.arguments as TextEditingController;
     final busqueda = ref.watch(riverPlaca(datos.text));
     final busquedacita = ref.watch(riverCita(datos.text));
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: (sede.sede == "Surquillo") ? Colors.blue : Colors.green,
         title: const Text('Datos del Cliente'),
         leading: IconButton(
             onPressed: () {
@@ -201,11 +203,45 @@ class Busqueda extends ConsumerWidget {
                                   width: 150,
                                   height: 50,
                                   callback: () {
+                                    Base1 a = _.value[0];
                                     if ((_.value[0].CLIENTE != "-") && (_.value[0].CLIENTE != "")) {
-                                      Navigator.of(context)
-                                          .pushNamed('/agenda', arguments: _.value[0]);
+                                      if (_.value[0].PLACA_VEH_TARJETA == null) {
+                                        a.PLACA_VEH_TARJETA = '';
+                                      }
+                                      ;
+                                      if (_.value[0].VERSION_MODELO == null) {
+                                        a.VERSION_MODELO = '';
+                                      }
+                                      ;
+                                      if (_.value[0].SERIE == null) {
+                                        a.SERIE = '';
+                                      }
+                                      ;
+                                      if (_.value[0].CLIENTE == null) {
+                                        a.CLIENTE = '';
+                                      }
+                                      ;
+                                      if (_.value[0].COD_CLIENTE == null) {
+                                        a.COD_CLIENTE = '';
+                                      }
+                                      ;
+                                      if (_.value[0].EMAIL == null) {
+                                        a.EMAIL = '';
+                                      }
+                                      ;
+                                      if (_.value[0].TELEFONO1 == null) {
+                                        a.TELEFONO1 = '';
+                                      }
+                                      ;
+                                      // print(_.value[0].VERSION_MODELO);
+                                      // print(_.value[0].SERIE);
+                                      // print(_.value[0].CLIENTE);
+                                      // print(_.value[0].COD_CLIENTE);
+                                      // print(_.value[0].EMAIL);
+                                      // print(_.value[0].TELEFONO1);
+                                      Navigator.of(context).pushNamed('/agenda', arguments: a);
                                     } else {
-                                      Navigator.of(context).pushNamed('/agendar',
+                                      Navigator.of(context).pushNamed('/agenda',
                                           arguments: Base1(
                                               0, '', '', '', '', '', '', '', '', '', '', '', ''));
                                     }
