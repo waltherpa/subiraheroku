@@ -1,4 +1,6 @@
 import 'package:citas_2/functions/p_3_variable.dart';
+import 'package:citas_2/models/base1.dart';
+import 'package:citas_2/screen/s_4_busqueda.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -11,18 +13,26 @@ class Agenda extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final datosbase1 = ModalRoute.of(context)!.settings.arguments as Base1;
     final sede = ref.read(riverSede);
     final resumen = ref.watch(riverResumen);
     TextEditingController ctlr_usuario = TextEditingController();
     TextEditingController ctlr_fecha = TextEditingController();
     String hora_selecionada = '';
     TextEditingController ctlr_placa = TextEditingController();
+    ctlr_placa.text = datosbase1.PLACA_VEH_TARJETA!;
     TextEditingController ctlr_modelo = TextEditingController();
+    ctlr_modelo.text = datosbase1.VERSION_MODELO!;
     TextEditingController ctlr_nveh = TextEditingController();
+    ctlr_nveh.text = datosbase1.SERIE!;
     TextEditingController ctlr_nombre = TextEditingController();
+    ctlr_nombre.text = datosbase1.CLIENTE!;
     TextEditingController ctlr_doc = TextEditingController();
+    ctlr_doc.text = datosbase1.COD_CLIENTE!;
     TextEditingController ctlr_correo = TextEditingController();
+    ctlr_correo.text = datosbase1.EMAIL!;
     TextEditingController ctlr_telefono = TextEditingController();
+    ctlr_telefono.text = datosbase1.TELEFONO1!;
     String desplegable1 = '';
     String desplegable2 = '';
     String desplegable3 = '';
@@ -78,9 +88,11 @@ class Agenda extends ConsumerWidget {
                 width: 50,
                 height: 50,
                 callback: () async {
-                  List<Horas> data =
-                      await FutureHoraDisponible().mishoras([sede.sede, ctlr_fecha.text]);
-                  ref.read(drop3).setlist(data);
+                  if ((ctlr_fecha.text != '') && (ctlr_fecha.text != 'seleccione fecha')) {
+                    List<Horas> data =
+                        await FutureHoraDisponible().mishoras([sede.sede, ctlr_fecha.text]);
+                    ref.read(drop3).setlist(data);
+                  }
                 },
               ),
               // hora
@@ -207,56 +219,71 @@ class Agenda extends ConsumerWidget {
                 width: 150,
                 height: 50,
                 callback: () async {
-                  final val2 = ref.read(riverAgendar); // no es necesario
-                  l = await guardaragenda(
-                    usuario: ctlr_usuario.text,
-                    fecha: ctlr_fecha.text,
-                    hora: hora_selecionada,
-                    placa: ctlr_placa.text,
-                    modelo: ctlr_modelo.text,
-                    nveh: ctlr_nveh.text,
-                    nombre: ctlr_nombre.text,
-                    doc: ctlr_doc.text,
-                    correo: ctlr_correo.text,
-                    telefono: ctlr_telefono.text,
-                    desple1: desplegable1,
-                    desple2: desplegable2,
-                    desple3: desplegable3,
-                    sede: sede.sede,
-                    comentario: ctlr_comentario.text,
-                    fecharegistro: fecharegistro,
-                  ) as List;
-
-                  if (l != null && l.length > 0 && l![0]['status'] == "ok") {
-                    val2.setUsuario(ctlr_usuario.text); // no es necesario
-                    val2.setFecha(ctlr_fecha.text); // no es necesario
-                    val2.setHora(hora_selecionada); // no es necesario
-                    val2.setPlaca(ctlr_placa.text); // no es necesario
-                    val2.setModelo(ctlr_modelo.text); // no es necesario
-                    val2.setNveh(ctlr_nveh.text); // no es necesario
-                    val2.setNombre(ctlr_nombre.text); // no es necesario
-                    val2.setDoc(ctlr_doc.text); // no es necesario
-                    val2.setCorreo(ctlr_correo.text); // no es necesario
-                    val2.setTelefono(ctlr_telefono.text); // no es necesario
-                    val2.setDesplegable1(desplegable1); // no es necesario
-                    val2.setDesplegable2(desplegable2); // no es necesario
-                    val2.setDesplegable3(desplegable3); // no es necesario
-                    val2.setSede(sede.sede); // no es necesario
-                    val2.setComentario(ctlr_comentario.text); // no es necesario
-                    val2.setFechaRegistro(fecharegistro); // no es necesario
-                    ref.read(drop3).descartame(); // reiniciar horario de desplegable
-                    Navigator.of(context).pushNamedAndRemoveUntil('/splash', (route) => false);
-                  } else {
+                  if ((ctlr_fecha.text != null ||
+                          ctlr_usuario.text != "" ||
+                          ctlr_fecha.text != "" ||
+                          ctlr_fecha.text != 'seleccione fecha') &&
+                      (hora_selecionada != "" || hora_selecionada != "vacio")) {
+                    // mensaje de guardado
                     final sanck = SnackBar(
-                      content: const Text('Error en registro de agendamiento'),
+                      content: const Text('Guardando'),
                       action: SnackBarAction(
                         label: 'Ok',
-                        onPressed: () {
-                          //
-                        },
+                        onPressed: () {},
                       ),
                     );
                     ScaffoldMessenger.of(context).showSnackBar(sanck);
+                    final val2 = ref.read(riverAgendar); // no es necesario
+                    l = await guardaragenda(
+                      usuario: ctlr_usuario.text,
+                      fecha: ctlr_fecha.text,
+                      hora: hora_selecionada,
+                      placa: ctlr_placa.text,
+                      modelo: ctlr_modelo.text,
+                      nveh: ctlr_nveh.text,
+                      nombre: ctlr_nombre.text,
+                      doc: ctlr_doc.text,
+                      correo: ctlr_correo.text,
+                      telefono: ctlr_telefono.text,
+                      desple1: desplegable1,
+                      desple2: desplegable2,
+                      desple3: desplegable3,
+                      sede: sede.sede,
+                      comentario: ctlr_comentario.text,
+                      fecharegistro: fecharegistro,
+                    ) as List;
+
+                    if (l != null && l.length > 0 && l![0]['status'] == "ok") {
+                      val2.setUsuario(ctlr_usuario.text); // no es necesario
+                      val2.setFecha(ctlr_fecha.text); // no es necesario
+                      val2.setHora(hora_selecionada); // no es necesario
+                      val2.setPlaca(ctlr_placa.text); // no es necesario
+                      val2.setModelo(ctlr_modelo.text); // no es necesario
+                      val2.setNveh(ctlr_nveh.text); // no es necesario
+                      val2.setNombre(ctlr_nombre.text); // no es necesario
+                      val2.setDoc(ctlr_doc.text); // no es necesario
+                      val2.setCorreo(ctlr_correo.text); // no es necesario
+                      val2.setTelefono(ctlr_telefono.text); // no es necesario
+                      val2.setDesplegable1(desplegable1); // no es necesario
+                      val2.setDesplegable2(desplegable2); // no es necesario
+                      val2.setDesplegable3(desplegable3); // no es necesario
+                      val2.setSede(sede.sede); // no es necesario
+                      val2.setComentario(ctlr_comentario.text); // no es necesario
+                      val2.setFechaRegistro(fecharegistro); // no es necesario
+                      ref.read(drop3).descartame(); // reiniciar horario de desplegable
+                      Navigator.of(context).pushNamedAndRemoveUntil('/splash', (route) => false);
+                    } else {
+                      final sanck = SnackBar(
+                        content: const Text('Error en registro de agendamiento'),
+                        action: SnackBarAction(
+                          label: 'Ok',
+                          onPressed: () {
+                            //
+                          },
+                        ),
+                      );
+                      ScaffoldMessenger.of(context).showSnackBar(sanck);
+                    }
                   }
                 },
               )

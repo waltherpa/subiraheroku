@@ -1,6 +1,7 @@
 import 'package:citas_2/common/widgets_planner.dart';
 import 'package:citas_2/models/logcitas.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../functions/p_3_variable.dart';
@@ -19,6 +20,7 @@ class CampoDeTexto extends StatelessWidget {
   final double width;
   final double height;
   final TextEditingController? controlador;
+
   final VoidCallback? funcion;
 
   @override
@@ -290,7 +292,7 @@ class MiTexto extends StatelessWidget {
 
 // simple card 2
 class SimpleCard2 extends StatelessWidget {
-  SimpleCard2({Key? key, required this.datos, this.width = 500, this.height = 120})
+  SimpleCard2({Key? key, required this.datos, this.width = 500, this.height = 150})
       : super(key: key);
   LogCitas datos;
   double width;
@@ -313,6 +315,10 @@ class SimpleCard2 extends StatelessWidget {
                   eltexto: 'Placa: ${datos.Placa}',
                   mypadding: const EdgeInsets.all(3),
                 ),
+              ],
+            ),
+            Row(
+              children: [
                 MiTexto(
                   eltexto: 'Fecha de Cita: ${datos.Fecha}',
                   mypadding: const EdgeInsets.all(3),

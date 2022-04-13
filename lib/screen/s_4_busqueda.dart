@@ -1,3 +1,4 @@
+import 'package:citas_2/models/base1.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -189,6 +190,26 @@ class Busqueda extends ConsumerWidget {
                                   eltexto: _.value[0].BASE,
                                   width: 160,
                                   height: 30,
+                                )
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                BotonCallback(
+                                  label: 'Agendar',
+                                  width: 150,
+                                  height: 50,
+                                  callback: () {
+                                    if ((_.value[0].CLIENTE != "-") && (_.value[0].CLIENTE != "")) {
+                                      Navigator.of(context)
+                                          .pushNamed('/agenda', arguments: _.value[0]);
+                                    } else {
+                                      Navigator.of(context).pushNamed('/agendar',
+                                          arguments: Base1(
+                                              0, '', '', '', '', '', '', '', '', '', '', '', ''));
+                                    }
+                                  },
                                 )
                               ],
                             )

@@ -153,8 +153,12 @@ Table mitabla(String dias, List<LogCitas> datos, MiSede sede, List<Horas> horari
           ),
         ],
       ),
-      ...l2.map((e) => generartableplaneamiento(e)).toList(),
+      //  citas por hora
+      ...l2.map((e) => generartableplaneamiento(e, sede.sede)).toList(),
     ],
+    border: const TableBorder(
+        right: BorderSide(width: 0.5, color: Colors.blue, style: BorderStyle.solid),
+        left: BorderSide(width: 0.5, color: Colors.blue, style: BorderStyle.solid)),
   );
 }
 
@@ -193,35 +197,87 @@ List<List<LogCitas>> filtrodatos(String dias, List<LogCitas> datos, String sede,
 }
 
 // Crea las celdas donde irál los 2 cards de datos con On Tap
-TableRow generartableplaneamiento(List<LogCitas> log) {
-  return TableRow(children: [
-    Container(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Tablecard(log: log[0], slot: 'slot 1'),
-          Tablecard(log: log[1], slot: 'slot 2'),
-        ],
-      ),
-    )
-  ]);
+TableRow generartableplaneamiento(List<LogCitas> log, String sede) {
+  return TableRow(
+    children: [
+      Container(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Tablecard(
+              log: log[0],
+              slot: 'slot 1',
+              sede: sede,
+            ),
+            Tablecard(
+              log: log[1],
+              slot: 'slot 2',
+              sede: sede,
+            ),
+          ],
+        ),
+      )
+    ],
+  );
 }
 
 class Tablecard extends StatelessWidget {
-  Tablecard({Key? key, this.log, this.slot}) : super(key: key);
+  Tablecard({Key? key, this.log, this.slot, required this.sede}) : super(key: key);
   LogCitas? log;
   String? slot;
   Color? color = Colors.greenAccent.shade100;
+  String sede;
+
+  Color ColorCard(LogCitas lo, String slot, String m_sede) {
+    if ((lo.Usuario == "-") || (lo.Usuario == "")) {
+      return ColorAdministrativo(lo.Hora, m_sede);
+    } else if (slot == 'slot 1') {
+      return color = Colors.blue.shade300;
+    } else if (slot == 'slot 2') {
+      return color = Colors.green.shade300;
+    } else {
+      throw color = Colors.greenAccent.shade100;
+    }
+  }
+
+  Color ColorAdministrativo(String mm_hora, String mm_sede) {
+    if ((mm_sede == "Surquillo") &&
+        ((mm_hora == '08:00') ||
+            (mm_hora == '08:15') ||
+            (mm_hora == '08:30') ||
+            (mm_hora == '09:00') ||
+            (mm_hora == '09:15') ||
+            (mm_hora == '09:30') ||
+            (mm_hora == '09:45') ||
+            (mm_hora == '10:00') ||
+            (mm_hora == '11:15'))) {
+      return color = Colors.green.shade100;
+    } else if ((mm_sede == "San Miguel") &&
+        ((mm_hora == '08:00') ||
+            (mm_hora == '08:15') ||
+            (mm_hora == '08:30') ||
+            (mm_hora == '09:00') ||
+            (mm_hora == '09:15') ||
+            (mm_hora == '09:30') ||
+            (mm_hora == '09:45') ||
+            (mm_hora == '10:00') ||
+            (mm_hora == '11:00') ||
+            (mm_hora == '11:15'))) {
+      return color = Colors.green.shade100;
+    } else {
+      return color = Colors.white;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    if (log!.Usuario == "-") {
-      color = Colors.white;
-    } else if (slot == 'slot 1') {
-      color = Colors.blue.shade200;
-    } else if (slot == 'slot 2') {
-      color = Colors.green.shade200;
-    }
+    // if (log!.Usuario == "-") {
+    //   color = Colors.white;
+    // } else if (slot == 'slot 1') {
+    //   color = Colors.blue.shade300;
+    // } else if (slot == 'slot 2') {
+    //   color = Colors.green.shade300;
+    // }
 
     return GestureDetector(
       onDoubleTap: () {
@@ -242,7 +298,8 @@ class Tablecard extends StatelessWidget {
               log!.Placa,
               style: const TextStyle(fontSize: 10),
             ))),
-        color: color,
+        color: ColorCard(log!, slot!, sede),
+        // color: color,
         margin: const EdgeInsets.all(0),
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(

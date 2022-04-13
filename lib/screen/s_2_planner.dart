@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../functions/p_3_variable.dart';
 import '../common/widgets_planner.dart';
+import '../models/base1.dart';
 
 class Planner extends ConsumerWidget {
   Planner({Key? key}) : super(key: key);
@@ -43,7 +44,8 @@ class Planner extends ConsumerWidget {
                     width: 150,
                     height: 50,
                     callback: () {
-                      Navigator.pushNamed(context, '/agenda');
+                      Navigator.of(context).pushNamed('/agenda',
+                          arguments: Base1(0, '', '', '', '', '', '', '', '', '', '', '', ''));
                     },
                   ),
                   // campo de placa

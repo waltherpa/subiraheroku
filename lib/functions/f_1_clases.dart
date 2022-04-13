@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert' as convert;
 import 'package:http/http.dart' as http;
 
@@ -53,13 +54,14 @@ class BuscarPlaca {
         body: convert.jsonEncode({'data': '$arg'}),
         headers: {"Content-Type": "application/json"},
       );
-      if (response.statusCode == 200) {
+      if ((response.statusCode == 200) && ((convert.jsonDecode(response.body) is List<dynamic>))) {
         List<dynamic> data = convert.jsonDecode(response.body);
         // ignore: non_constant_identifier_names
         List<Base1> Placas = data.map((e) => Base1.fromJson(e)).toList();
         return Placas;
       } else {
-        throw Exception("error en la api");
+        List<Base1> Placas = [Base1(0, '', '', '', '', '', '', '', '', '', '', '', '')];
+        return Placas;
       }
     } else {
       throw Exception("error en la api");
@@ -77,7 +79,7 @@ class BuscarCita {
         body: convert.jsonEncode({'data': '$arg'}),
         headers: {"Content-Type": "application/json"},
       );
-      if (response.statusCode == 200) {
+      if ((response.statusCode == 200) && ((convert.jsonDecode(response.body) is List<dynamic>))) {
         List<dynamic> data = convert.jsonDecode(response.body);
         // ignore: non_constant_identifier_names
         List<LogCitas> Placas = data.map((e) => LogCitas.fromJson(e)).toList();

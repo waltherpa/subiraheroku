@@ -28,7 +28,7 @@ class MisCitas extends StatelessWidget {
         '/splash': ((context) => const Splash()),
         '/planner': ((context) => Planner()),
         '/agenda': ((context) => const Agenda()),
-        '/editar': ((context) => const Editar()),
+        '/editar': ((context) => Editar()),
         '/busqueda': ((context) => const Busqueda()),
         '/resumen': ((context) => const Resumen()),
         '/descarga': ((context) => const Descarga()),

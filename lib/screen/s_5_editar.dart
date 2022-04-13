@@ -8,7 +8,18 @@ import '../functions/f_0_functions.dart';
 import '../common/widgets.dart';
 
 class Editar extends ConsumerWidget {
-  const Editar({Key? key}) : super(key: key);
+  Editar({Key? key}) : super(key: key);
+
+  bool _activo_guardar = true;
+  bool _activo_eliminar = true;
+
+  void _desactivame_guardar() {
+    _activo_guardar = false;
+  }
+
+  void _desactivame_eliminar() {
+    _activo_eliminar = false;
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -107,9 +118,11 @@ class Editar extends ConsumerWidget {
                 width: 50,
                 height: 50,
                 callback: () async {
-                  List<Horas> data =
-                      await FutureHoraDisponible().mishoras([sede.sede, ctlr_fecha.text]);
-                  ref.read(drop3).setlist(data);
+                  if ((ctlr_fecha.text != '') && (ctlr_fecha.text != 'seleccione fecha')) {
+                    List<Horas> data =
+                        await FutureHoraDisponible().mishoras([sede.sede, ctlr_fecha.text]);
+                    ref.read(drop3).setlist(data);
+                  }
                 },
               ),
               // hora
@@ -261,19 +274,22 @@ class Editar extends ConsumerWidget {
                 color: Colors.orange.shade700,
                 txtcolor: Colors.white,
                 callback: () async {
-                  // eliminar
-                  l = await borrar(datos.id_lg) as List;
-                  if (l![0]['status'] == "ok") {
-                    Navigator.of(context).pushNamedAndRemoveUntil('/splash', (route) => false);
-                  } else {
-                    final sanck = SnackBar(
-                      content: const Text('No se borrró el registro, intente nuevamente'),
-                      action: SnackBarAction(
-                        label: 'Ok',
-                        onPressed: () {},
-                      ),
-                    );
-                    ScaffoldMessenger.of(context).showSnackBar(sanck);
+                  if (_activo_eliminar == true) {
+                    _desactivame_eliminar();
+                    // eliminar
+                    l = await borrar(datos.id_lg) as List;
+                    if (l![0]['status'] == "ok") {
+                      Navigator.of(context).pushNamedAndRemoveUntil('/splash', (route) => false);
+                    } else {
+                      final sanck = SnackBar(
+                        content: const Text('No se borrró el registro, intente nuevamente'),
+                        action: SnackBarAction(
+                          label: 'Ok',
+                          onPressed: () {},
+                        ),
+                      );
+                      ScaffoldMessenger.of(context).showSnackBar(sanck);
+                    }
                   }
                 },
               ),
@@ -283,60 +299,74 @@ class Editar extends ConsumerWidget {
                 width: 160,
                 height: 50,
                 callback: () async {
-                  if ((ctlr_fecha.text != null ||
-                          ctlr_fecha.text != '' ||
-                          ctlr_fecha.text != 'seleccione fecha') &&
-                      (hora_selecionada != 'vacio')) {
-                    // eliminar
-                    l = await borrar(datos.id_lg) as List;
-                    // guardar
-                    final val2 = ref.read(riverAgendar);
-                    l = await guardaragenda(
-                      usuario: ctlr_usuario.text,
-                      fecha: ctlr_fecha.text,
-                      hora: hora_selecionada,
-                      placa: ctlr_placa.text,
-                      modelo: ctlr_modelo.text,
-                      nveh: ctlr_nveh.text,
-                      nombre: ctlr_nombre.text,
-                      doc: ctlr_doc.text,
-                      correo: ctlr_correo.text,
-                      telefono: ctlr_telefono.text,
-                      desple1: desplegable1,
-                      desple2: desplegable2,
-                      desple3: desplegable3,
-                      sede: sede.sede,
-                      comentario: ctlr_comentario.text,
-                      fecharegistro: fecharegistro,
-                    ) as List;
-                    if (l != null && l.length > 0 && l![0]['status'] == "ok") {
-                      val2.setUsuario(ctlr_usuario.text);
-                      val2.setFecha(ctlr_fecha.text);
-                      val2.setHora(hora_selecionada);
-                      val2.setPlaca(ctlr_placa.text);
-                      val2.setModelo(ctlr_modelo.text);
-                      val2.setNveh(ctlr_nveh.text);
-                      val2.setNombre(ctlr_nombre.text);
-                      val2.setDoc(ctlr_doc.text);
-                      val2.setCorreo(ctlr_correo.text);
-                      val2.setTelefono(ctlr_telefono.text);
-                      val2.setDesplegable1(desplegable1);
-                      val2.setDesplegable2(desplegable2);
-                      val2.setDesplegable3(desplegable3);
-                      val2.setSede(sede.sede);
-                      val2.setComentario(ctlr_comentario.text);
-                      val2.setFechaRegistro(fecharegistro);
-                      ref.read(drop3).descartame(); // reiniciar horario de desplegable
-                      Navigator.of(context).pushNamedAndRemoveUntil('/splash', (route) => false);
-                    } else {
+                  if (_activo_guardar == true) {
+                    _desactivame_guardar();
+                    if ((ctlr_fecha.text != null ||
+                            ctlr_fecha.text != '' ||
+                            ctlr_fecha.text != 'seleccione fecha') &&
+                        (hora_selecionada != 'vacio' || hora_selecionada != '')) {
+                      // mensaje de guardado
                       final sanck = SnackBar(
-                        content: const Text('Error en registro de agendamiento'),
+                        content: const Text('Guardando'),
                         action: SnackBarAction(
                           label: 'Ok',
                           onPressed: () {},
                         ),
                       );
                       ScaffoldMessenger.of(context).showSnackBar(sanck);
+                      // eliminar
+                      l = await borrar(datos.id_lg) as List;
+                      // guardar
+                      final val2 = ref.read(riverAgendar);
+                      l = await guardaragenda(
+                        usuario: ctlr_usuario.text,
+                        fecha: ctlr_fecha.text,
+                        hora: hora_selecionada,
+                        placa: ctlr_placa.text,
+                        modelo: ctlr_modelo.text,
+                        nveh: ctlr_nveh.text,
+                        nombre: ctlr_nombre.text,
+                        doc: ctlr_doc.text,
+                        correo: ctlr_correo.text,
+                        telefono: ctlr_telefono.text,
+                        desple1: desplegable1,
+                        desple2: desplegable2,
+                        desple3: desplegable3,
+                        sede: sede.sede,
+                        comentario: ctlr_comentario.text,
+                        fecharegistro: fecharegistro,
+                      ) as List;
+                      // guardar en repositorio y salir de pagina
+                      if (l != null && l.length > 0 && l![0]['status'] == "ok") {
+                        val2.setUsuario(ctlr_usuario.text);
+                        val2.setFecha(ctlr_fecha.text);
+                        val2.setHora(hora_selecionada);
+                        val2.setPlaca(ctlr_placa.text);
+                        val2.setModelo(ctlr_modelo.text);
+                        val2.setNveh(ctlr_nveh.text);
+                        val2.setNombre(ctlr_nombre.text);
+                        val2.setDoc(ctlr_doc.text);
+                        val2.setCorreo(ctlr_correo.text);
+                        val2.setTelefono(ctlr_telefono.text);
+                        val2.setDesplegable1(desplegable1);
+                        val2.setDesplegable2(desplegable2);
+                        val2.setDesplegable3(desplegable3);
+                        val2.setSede(sede.sede);
+                        val2.setComentario(ctlr_comentario.text);
+                        val2.setFechaRegistro(fecharegistro);
+                        ref.read(drop3).descartame(); // reiniciar horario de desplegable
+                        Navigator.of(context).pushNamedAndRemoveUntil('/splash', (route) => false);
+                      } else {
+                        // mensaje de error
+                        final sanck = SnackBar(
+                          content: const Text('Error en registro de agendamiento'),
+                          action: SnackBarAction(
+                            label: 'Ok',
+                            onPressed: () {},
+                          ),
+                        );
+                        ScaffoldMessenger.of(context).showSnackBar(sanck);
+                      }
                     }
                   }
                 },
