@@ -47,8 +47,8 @@ final riverAgendar = ChangeNotifierProvider((ref) => Agendamiento());
 
 // future notifier mi placa
 // ignore: non_constant_identifier_names
-final FMiPlaca = Provider((ref) => BuscarPlaca());
-final riverPlaca = FutureProvider.family<List<Base1>, String>((ref, placa) async {
+final FMiPlaca = Provider.autoDispose((ref) => BuscarPlaca());
+final riverPlaca = FutureProvider.family.autoDispose<List<Base1>, String>((ref, placa) async {
   final r = ref.read(FMiPlaca);
   return r.buscarrequest(placa);
 });
